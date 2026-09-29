@@ -1,0 +1,59 @@
+@import '@fontsource/fira-sans/latin-400.css';
+@import '@fontsource/fira-sans/latin-400-italic.css';
+@import '@fontsource/fira-sans/latin-500.css';
+@import '@fontsource/fira-sans/latin-600.css';
+@import '@fontsource/fira-sans/latin-700.css';
+@import 'tailwindcss';
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-ink: var(--ink);
+  --color-copy: var(--copy);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-accent: var(--accent);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-green: var(--green);
+  --color-aqua: var(--aqua);
+  --color-sky: var(--sky);
+  --color-cloud: var(--cloud);
+  --color-card-accent: var(--card-accent);
+  --font-sans: 'Fira Sans', sans-serif;
+  --font-mono: 'Fira Sans', sans-serif;
+}
+
+:root {
+  --canvas: #fdfdfd;
+  --ink: #10152a;
+  --copy: #394052;
+  --muted: #6b7280;
+  --line: #d8e5e7;
+  --surface: #f5fbfc;
+  --elevated: #eafbfc;
+  --primary: #1706fa;
+  --primary-hover: #1200d6;
+  --status: #1200d6;
+  --focus-ring: #1706fa;
+  --green: #2c9017;
+  --aqua: #8cf5e9;
+  --sky: #8ce7f5;
+  --cloud: #a6f3ff;
+  --accent: var(--primary);
+  font-family: 'Fira Sans', sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; min-width: 0; overflow-x: clip; background: var(--canvas); }
+a { color: inherit; text-decoration: none; }
+button, select { font: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

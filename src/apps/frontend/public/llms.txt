@@ -1,0 +1,19 @@
+# Sentzunhat Corp.
+
+Sentzunhat Corp. is a founder-led software company based in Winnipeg, Manitoba. It builds focused products and reusable engineering foundations that give people more control over their technology and data.
+
+## Current focus
+
+- [Mochilada](https://sentzunhat.com/#focus): a local-first application for preserving and exploring social archives that people downloaded themselves.
+
+## Selected work
+
+- [HAWP](https://github.com/sentzunhat/human-ai-workflow-protocol): a durable, human-led workflow protocol for building with AI.
+- [Zacatl](https://github.com/sentzunhat/zacatl): a minimal library for practical services.
+
+## Company
+
+- [About Sentzunhat](https://sentzunhat.com/#about)
+- [Vision](https://sentzunhat.com/#vision)
+- [Founder](https://sentzunhat.com/#founder)
+- [GitHub](https://github.com/sentzunhat)

@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/coverage
+.git
+.hawp
+.vscode
+.idea
+.env
+.env.*
+*.log
+src/data/*.sqlite*
+data/*.sqlite*

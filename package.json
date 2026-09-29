@@ -1,35 +1,36 @@
 {
-  "name": "website",
+  "name": "sentzunhat-website-workspace",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "concurrently \"vite\" \"npm run server:dev\"",
-    "server:dev": "node --watch server/index.js",
-    "server:start": "node server/index.js",
-    "build": "vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+  "workspaces": [
+    "src/apps/*"
+  ],
+  "engines": {
+    "node": ">=26.0.0",
+    "npm": ">=11.0.0"
   },
-  "dependencies": {
-    "@sequelize/core": "^7.0.0-alpha.48",
-    "@sequelize/sqlite3": "^7.0.0-alpha.48",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "sequelize": "^6.37.8",
-    "sqlite3": "^6.0.1"
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "npm run dev --workspace=sentzunhat-website-frontend",
+    "dev:backend": "npm run dev --workspace=sentzunhat-website-backend",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "npm run build --workspace=sentzunhat-website-frontend",
+    "build:backend": "npm run build --workspace=sentzunhat-website-backend",
+    "start": "npm run start --workspace=sentzunhat-website-backend",
+    "logo:generate": "node scripts/generate-sentzunhat-logo.mjs",
+    "lint": "eslint src/apps",
+    "typecheck": "npm run typecheck --workspace=sentzunhat-website-frontend && npm run typecheck --workspace=sentzunhat-website-backend",
+    "check": "npm run typecheck && npm run lint && npm run build"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
+    "@eslint/js": "^9.39.4",
     "concurrently": "^10.0.5",
-    "nodemon": "^3.1.14",
-    "oxlint": "^1.81.0",
-    "tailwindcss": "^4.3.3",
-    "vite": "^8.3.0"
+    "eslint": "^9.39.4",
+    "eslint-import-resolver-typescript": "^4.4.5",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "typescript-eslint": "^8.63.0"
   }
 }

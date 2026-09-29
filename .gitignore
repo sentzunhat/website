@@ -1,4 +1,16 @@
+# Dependencies and generated build output
 node_modules/
 dist/
-data/*.sqlite
+*.tsbuildinfo
+
+# Runtime data
+src/data/*.sqlite
+src/data/*.sqlite-*
+
+# Local environment and logs
+.env
+.env.*
+*.log
+
+# Editor and OS metadata
 .DS_Store
