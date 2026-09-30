@@ -2,6 +2,7 @@ export type Theme = 'system' | 'light' | 'dark'
 
 export interface Project {
   id?: number
+  slug?: string
   name: string
   description: string
   version: string
@@ -11,6 +12,7 @@ export interface Project {
 }
 
 export interface Exploration {
+  slug: string
   name: string
   status: string
   description: string
