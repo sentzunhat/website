@@ -44,6 +44,9 @@
   --aqua: #8cf5e9;
   --sky: #8ce7f5;
   --cloud: #a6f3ff;
+  --exploration-link-sky: #006783;
+  --exploration-link-aqua: #006b70;
+  --exploration-link-green: #24720f;
   --accent: var(--primary);
   font-family: 'Fira Sans', sans-serif;
   color: var(--ink);

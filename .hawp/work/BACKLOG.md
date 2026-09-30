@@ -28,7 +28,7 @@ Each row links to its plan file when one exists.
 | --- | --- | --- | --- | --- | --- | --- |
 | `2a1dc541` | improvement | Resolve transitive Sequelize uuid advisory | plan-ready | [plan](active/2a1dc541/plan.md) | 2026-09-29 | Reproduce the scoped compatibility options in Zacatl |
 | `f07ad639` | improvement | Prototype sliding book-page section navigation | plan-ready | [plan](active/f07ad639/plan.md) | 2026-09-29 | Prototype two sections without changing crawlable content |
-| `c3d0e4a8` | audit | Verify production SEO/AEO/GEO after deployment | in-progress | [plan](active/c3d0e4a8/plan.md) | 2026-09-30 | Fix measured accessibility findings, then complete Search Console and checker evidence |
+| `c3d0e4a8` | audit | Verify production SEO/AEO/GEO after deployment | in-progress | [plan](active/c3d0e4a8/plan.md) | 2026-09-30 | Confirm deployment, then verify Search Console indexing and rerun the same AEO/GEO checker |
 
 ---
 

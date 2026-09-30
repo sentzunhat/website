@@ -115,3 +115,46 @@ category, not proof of citations or GEO/AEO results.
 3. Re-run the same AEO/GEO checker used for the original 47/100 report.
 4. Keep user-requested sliding book-page navigation (`f07ad639`) sequenced after
    these checks; protect static HTML, reduced motion, and layout stability.
+
+## Accessibility fixes and verification — 2026-09-30
+
+Implemented after the supplied production Lighthouse report:
+
+- Added dedicated exploration-link text colors for light mode while retaining
+  the existing bright accent colors in dark mode and for the solar artwork.
+  Calculated contrast against the exploration card background (`#f7fbfc`) is
+  6.17:1 (sky), 6.04:1 (aqua), and 5.78:1 (green), above the 4.5:1 target.
+- Matched the solar button's explicit accessible name to its visible label:
+  “Center on Sun.”
+
+Direct verification:
+
+- `npm run check` passed TypeScript, lint, and frontend/backend production
+  builds. Lint reported 19 existing warnings and zero errors; the build retains
+  the previously known lazy solar chunk size warning.
+- Lighthouse 13.5.0 against the rebuilt local production preview scored
+  Accessibility 100 and SEO 100. This is local preview evidence, not post-push
+  production Lighthouse evidence.
+- Live `robots.txt`, `sitemap.xml`, and `llms.txt` returned HTTP success and
+  exposed the expected crawler policy and homepage/six-project discovery links.
+- Direct live fetches of the homepage and six project URLs all returned HTTP
+  200. Each has a distinct title, exactly one H1, a matching canonical URL,
+  and JSON-LD that parses as JSON. `/.well-known/ai.txt` returned HTTP 200 as
+  `text/plain`.
+
+Still open:
+
+- Verify the deployed accessibility fix with production Lighthouse after the
+  hosting platform deploys the pushed commit.
+- Search Console indexing/URL inspection and sitemap processing remain
+  account-level evidence; public sitemap availability does not establish
+  processing or indexing.
+- The same AEO/GEO checker comparison against its earlier 47/100 result remains
+  open. Lighthouse and public discovery-file checks are not substitutes for
+  that checker or actual citations.
+- No external rich-results validator or account-level search result was
+  completed.
+
+Next sequence: confirm hosting deployment, rerun production Lighthouse, then
+complete Search Console and same-checker evidence. Keep `f07ad639` plan-ready
+until these higher-priority checks are captured.

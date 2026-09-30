@@ -15,6 +15,9 @@
   --aqua: #8cf5e9;
   --sky: #8ce7f5;
   --cloud: #a6f3ff;
+  --exploration-link-sky: var(--sky);
+  --exploration-link-aqua: var(--aqua);
+  --exploration-link-green: var(--green);
   --accent: var(--sky);
 }
 
@@ -36,6 +39,9 @@
     --aqua: #8cf5e9;
     --sky: #8ce7f5;
     --cloud: #a6f3ff;
+    --exploration-link-sky: var(--sky);
+    --exploration-link-aqua: var(--aqua);
+    --exploration-link-green: var(--green);
     --accent: var(--sky);
   }
 }
@@ -770,9 +776,13 @@ select option {
 .exploration-link {
   margin-top: auto;
   padding-top: 2.25rem;
-  color: var(--exploration-accent);
+  color: var(--exploration-link-color, var(--exploration-accent));
   font-size: .78rem;
 }
+
+.exploration-card.sky { --exploration-link-color: var(--exploration-link-sky); }
+.exploration-card.aqua { --exploration-link-color: var(--exploration-link-aqua); }
+.exploration-card.green { --exploration-link-color: var(--exploration-link-green); }
 
 /* Project pages */
 .project-page {

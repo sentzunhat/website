@@ -1,41 +1,75 @@
-# Status Report: production search readiness
+# Status Report: production search readiness and accessibility fixes
 
 ## Intent
 
-Use the newly supplied production Lighthouse run to update the outstanding
-SEO/AEO/GEO verification work and direct the next fixes.
+Continue `c3d0e4a8` by fixing the supplied production Lighthouse accessibility
+findings, strengthening search readiness without content bloat, and recording
+the evidence still needed for SEO/AEO/GEO completion.
 
 ## Current State
 
-The production URL returned a Lighthouse result at 2026-09-30 13:33:39 UTC.
-Performance, Best Practices, SEO, and Agentic Browsing scored 100; Accessibility
-scored 96. The work item is unblocked for Lighthouse-based follow-up, while
-Search Console indexing and the same AEO/GEO checker remain outstanding.
+The three contrast findings and the solar-button accessible-name mismatch are
+fixed in source. Local Lighthouse 13.5.0 on the rebuilt production preview
+scored Accessibility 100 and SEO 100. The audit remains open pending
+post-deploy Lighthouse, Search Console indexing/sitemap evidence, and the same
+AEO/GEO checker comparison against the earlier 47/100 score.
 
 ## What Was Inspected
 
-The supplied Lighthouse 13.4.1 JSON, current repository `main`, canonical
-website checkpoint, and active plans `c3d0e4a8` and `f07ad639`.
+Current theme/link CSS and solar button markup; the active `c3d0e4a8` plan and
+previous report; production `robots.txt`, `sitemap.xml`, `llms.txt`, and
+homepage HTML; and a local production build served through Vite preview.
+
+## What Changed
+
+- Added light-mode exploration-link text colors separate from decorative
+  accents; dark-mode accents remain unchanged.
+- Matched the solar button accessible name to its visible “Center on Sun”
+  label.
+- Updated the active audit plan and backlog next action with evidence and
+  remaining gates.
 
 ## What Was Directly Verified
 
-Reported FCP 0.4 s, LCP 0.5 s, Speed Index 0.7 s, TBT 10 ms, CLS 0.002,
-Interactive 0.8 s, and root response 120 ms. Exploration-link contrast ratios
-were 1.35:1, 1.23:1, and 3.94:1 for sky, aqua, and green. The solar button's
-visible label and accessible name differ. The Lighthouse trace attributes most
-JS savings to browser extensions, and lists 58 KiB unused from the lazy solar
-chunk.
+- Calculated light-card contrast ratios: sky 6.17:1, aqua 6.04:1, green
+  5.78:1 against `#f7fbfc`; each exceeds 4.5:1.
+- `npm run check` completed successfully: frontend/backend typecheck, ESLint,
+  frontend static-page build, and backend build. ESLint reported 19 warnings
+  and zero errors; build reported the existing >500 kB lazy solar chunk.
+- Lighthouse 13.5.0 on local production preview: Accessibility 100, SEO 100.
+- Production `robots.txt` allows crawling; the sitemap lists the homepage and
+  six project URLs; `llms.txt` identifies the company/projects and links to
+  the compact and extended summaries.
+- Direct live fetches of the homepage and all six project URLs returned HTTP
+  200. Each response has a unique title, one H1, a self-matching canonical,
+  and JSON-LD that parses as JSON. `/.well-known/ai.txt` returned HTTP 200.
 
 ## What Remains Unproven
 
-Search Console URL indexing, sitemap processing, actual search results/ranking,
-AEO/GEO citations/checker score, and App Platform `/data` durability. Lighthouse
-Agentic Browsing is not a measure of those search outcomes. Repo HAWP
-validation still fails on three existing closed-record omissions
-(`7b5feb25`, `8c2e01f4`, `9508bdf5`); this turn did not change those records.
+- The pushed release has not yet been verified against production Lighthouse.
+- Public sitemap availability does not prove Search Console has processed it
+  or indexed any URL. URL Inspection and sitemap status need account access.
+- The earlier AEO/GEO checker is not identified in the repository records by
+  a runnable URL or tool name; its refreshed score/citation report remains
+  outstanding.
+- Lighthouse SEO and Agentic Browsing scores, or crawlable structured data, do
+  not establish search ranking, indexing, or AI citations.
+
+## Constraints
+
+Keep the approved theme, solar system, and concise homepage copy. Do not add
+FAQPage/HowTo schema solely to improve a third-party score. Preserve truthful
+project status and static crawlable HTML.
+
+## Help Wanted
+
+No code review is required to continue. Search Console evidence and the
+original AEO/GEO checker access/report are needed to close the remaining
+account-level and comparison checks.
 
 ## Suggested Next Step
 
-Fix contrast and accessible-name findings, rerun accessibility, then continue
-Search Console/sitemap and same-checker AEO/GEO validation. Keep
-`f07ad639` sequenced after audit fixes.
+Confirm deployment of the pushed commit, rerun production Lighthouse, inspect
+all seven canonical URLs and sitemap in Search Console, and rerun the same
+AEO/GEO checker. Keep `f07ad639` queued until these search-readiness checks are
+captured.

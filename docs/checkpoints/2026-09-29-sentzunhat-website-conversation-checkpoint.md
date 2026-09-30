@@ -101,9 +101,9 @@ Vite development tooling rather than the production bundle.
 ## Latest state — 2026-09-30
 
 - Repository: public `sentzunhat/website`, organization `sentzunhat`, branch
-  `main`. At checkpoint creation, local `main`, `origin/main`, and GitHub all
-  matched `61b3f5933fa06daf169e27619490b690689191b8`; the working tree was clean
-  before this checkpoint update.
+  `main`. The 2026-09-30 checkpoint commit `9273885` extended this document;
+  current follow-up changes are recorded below and will receive their own
+  commit. Verify remote state again after push.
 - After the 2026-09-29 container milestone, `979c6b4` added build-time HTML for
   the homepage and six project pages, metadata/canonicals/schema, sitemap and
   AI-discovery files. `3a5a5d5` refined the Nawat/Pipil-inspired energy-line hero
@@ -115,10 +115,21 @@ Vite development tooling rather than the production bundle.
   reports Performance 100, Accessibility 96, Best Practices 100, SEO 100, and
   Agentic Browsing 100. Metrics: FCP 0.4 s, LCP 0.5 s, Speed Index 0.7 s, TBT
   10 ms, CLS 0.002, Interactive 0.8 s, and server response 120 ms.
-- Accessibility findings in that report: exploration-card links have contrast
+- Accessibility findings in that report: exploration-card links had contrast
   ratios 1.35:1 (sky), 1.23:1 (aqua), and 3.94:1 (green), below 4.5:1 for the
-  reported text; the visible solar control says “Center on Sun” but its explicit
-  accessible name is “Center view on the Sun.” These point to concrete fixes.
+  reported text; the visible solar control said “Center on Sun” but its
+  explicit accessible name was “Center view on the Sun.” The follow-up changed
+  light-mode link text colors and matched the button name to its visible text.
+- `npm run check` then passed frontend/backend typecheck, ESLint, and both
+  production builds (19 existing lint warnings, no errors; the lazy solar chunk
+  still triggers the existing >500 kB build warning). Lighthouse 13.5.0 on the
+  rebuilt local production preview scored Accessibility 100 and SEO 100.
+- Calculated light-card contrast against `#f7fbfc`: 6.17:1 sky, 6.04:1 aqua,
+  and 5.78:1 green. The existing bright accents remain in dark mode and solar
+  artwork.
+- Live `robots.txt`, `sitemap.xml`, and `llms.txt` were fetched successfully.
+  The sitemap lists the homepage and six project URLs; `llms.txt` describes the
+  company/projects and links to compact and extended context files.
 - Unminified/unused JavaScript savings are reported, but the report attributes
   most listed bytes to browser extensions; it also lists 58 KiB unused in the
   lazy solar chunk. Recheck with extensions excluded before treating these
@@ -131,10 +142,10 @@ Vite development tooling rather than the production bundle.
   Search Console indexing and sitemap-read evidence are still unavailable.
   Lighthouse SEO 100 and Agentic Browsing 100 do not prove search ranking,
   indexing, citations, or an AEO/GEO checker score.
-- Next: fix and recheck the reported text contrast and button-name mismatch;
-  then inspect the homepage and six project URLs in Search Console, confirm
-  sitemap processing, and capture page-by-page structured-data results. Run the
-  same AEO/GEO checker used for the earlier 47/100 report when available.
+- Next: confirm deployment, rerun production Lighthouse, inspect the homepage
+  and six project URLs in Search Console, confirm sitemap processing, and
+  capture page-by-page structured-data results. Run the same AEO/GEO checker
+  used for the earlier 47/100 report when its URL/tool is available.
 - `f07ad639` remains plan-ready: prototype sliding book-page navigation
   sequentially, preserving crawlable content, stable layout, reduced motion,
   and persistent header/footer. Do this after or alongside the accessibility
@@ -174,4 +185,4 @@ Vite development tooling rather than the production bundle.
 
 ## Next direction
 
-Resume from pushed `main` at `61b3f5933fa06daf169e27619490b690689191b8` and the supplied production Lighthouse report dated 2026-09-30. Next objective: clear the concrete accessibility findings, then complete Search Console/sitemap verification and the same-checker AEO/GEO comparison. Keep `f07ad639` as the following interaction prototype. Separately, verify DigitalOcean's durable `/data` mount before claiming hosting persistence.
+Resume from the latest pushed `main` commit after this follow-up and the supplied production Lighthouse report dated 2026-09-30. The measured source-level accessibility findings are fixed and local Lighthouse now scores Accessibility/SEO 100. Next objective: confirm deployment, verify production accessibility, then complete Search Console/sitemap verification and the same-checker AEO/GEO comparison. Keep `f07ad639` queued until these checks are captured. Separately, verify DigitalOcean's durable `/data` mount before claiming hosting persistence.

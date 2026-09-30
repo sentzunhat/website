@@ -79,7 +79,7 @@ export function SolarSystem({ projects }: { projects: UniverseProject[] }) {
         className="solar-center"
         type="button"
         onClick={() => sceneRef.current?.resetView()}
-        aria-label="Center view on the Sun"
+        aria-label="Center on Sun"
       >
         <FaCrosshairs className="ui-icon action-icon" aria-hidden="true" />
         Center on Sun
