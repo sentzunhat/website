@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { FaArrowDown } from 'react-icons/fa'
 
 import { founder } from '../content/founder'
 
@@ -25,7 +26,10 @@ export function Founder() {
           <p className="eyebrow">Behind Sentzunhat</p>
           <h2 id="founder-heading">{founder.heading}</h2>
         </div>
-        <a className="founder-jump" href="#founder-story">Meet the founder <span aria-hidden="true">↘</span></a>
+        <a className="founder-jump" href="#founder-story">
+          Meet the founder
+          <FaArrowDown className="ui-icon action-icon" aria-hidden="true" />
+        </a>
       </header>
       <div className="founder-layout">
         <aside className="founder-identity" aria-label="Founder">
