@@ -1,3 +1,5 @@
+import { FaArrowDown } from 'react-icons/fa'
+
 export function About() {
   return (
     <section className="about-section pb-24 sm:pb-30" id="about">
@@ -28,7 +30,10 @@ export function About() {
             infrastructure, and human-directed AI workflows.
           </p>
         </div>
-        <a className="founder-jump" href="#founder">Meet Diego, the founder <span aria-hidden="true">↘</span></a>
+        <a className="founder-jump" href="#founder">
+          Meet Diego, the founder
+          <FaArrowDown className="ui-icon action-icon" aria-hidden="true" />
+        </a>
       </div>
     </section>
   )
