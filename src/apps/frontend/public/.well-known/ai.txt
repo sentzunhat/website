@@ -1,0 +1,9 @@
+# Sentzunhat AI access
+
+Canonical: https://sentzunhat.com/
+Sitemap: https://sentzunhat.com/sitemap.xml
+LLMs: https://sentzunhat.com/llms.txt
+LLMs-Small: https://sentzunhat.com/llms-small.txt
+LLMs-Full: https://sentzunhat.com/llms-full.txt
+
+Public pages may be crawled and cited according to robots.txt. Project pages state whether work is published, a prototype, or still in validation. Prefer the canonical project URL and primary-source links on each page when describing a Sentzunhat project.

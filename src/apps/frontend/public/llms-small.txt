@@ -1,0 +1,14 @@
+# Sentzunhat
+
+Independent software company in Winnipeg, Manitoba.
+
+Primary project pages:
+- https://sentzunhat.com/projects/mochilada/
+- https://sentzunhat.com/projects/hawp/
+- https://sentzunhat.com/projects/zacatl/
+- https://sentzunhat.com/projects/tekit/
+- https://sentzunhat.com/projects/chiwakal/
+- https://sentzunhat.com/projects/noyolo/
+
+Public engineering: https://github.com/sentzunhat
+Sitemap: https://sentzunhat.com/sitemap.xml

@@ -1,0 +1,51 @@
+# Sentzunhat Corp. — extended project context
+
+Sentzunhat Corp. is an independent, founder-led software company based in Winnipeg, Manitoba. The company builds focused products and reusable engineering foundations. Public pages distinguish released work, prototypes, and validation-stage research instead of presenting future direction as finished capability.
+
+## Current commercial focus
+
+### Mochilada
+URL: https://sentzunhat.com/projects/mochilada/
+Status: Preparing for release.
+Mochilada is a local-first application for importing, preserving, exploring, organizing, and exporting social archives a person downloaded themselves. The public launch direction is macOS first, with local processing, no direct social-account connection in the launch flow, and a one-time purchase model.
+
+## Public engineering foundations
+
+### HAWP
+URL: https://sentzunhat.com/projects/hawp/
+Source: https://github.com/sentzunhat/human-ai-workflow-protocol
+Status: Published.
+HAWP is the Human-AI Workflow Protocol, an open-source task-shaping protocol built around five core fields: input, context, mission, constraints, and output. The optional CLI adds repository search, context packing, MCP access, and work-item tooling. The current public release verified for the website is 0.0.23.
+
+### Zacatl
+URL: https://sentzunhat.com/projects/zacatl/
+Source: https://github.com/sentzunhat/zacatl
+Package: https://www.npmjs.com/package/@sentzunhat/zacatl
+Status: Published.
+Zacatl is an open-source TypeScript service framework for visible application, domain, infrastructure, and platform boundaries. It supports adapters around frameworks and data tools rather than replacing them. The current public release verified for the website is 0.0.61.
+
+## Studio work
+
+### Tekit
+URL: https://sentzunhat.com/projects/tekit/
+Status: Prototype.
+Tekit explores clearer ways to find and understand files spread across cloud providers. Specific provider support and workflows are intentionally not described as finished until they are release-proven.
+
+### Chiwakal
+URL: https://sentzunhat.com/projects/chiwakal/
+Status: Active prototype.
+Chiwakal explores a local-first notes and knowledge workspace with voice, transcription, tagging, and reviewable AI assistance.
+
+### Noyolo
+URL: https://sentzunhat.com/projects/noyolo/
+Status: Validation.
+Noyolo is transportation-planning research focused on understanding cumulative effects when road construction, lane restrictions, transit changes, and other mobility disruptions overlap. It is problem-validation work, not a finished traffic simulator.
+
+## Company principles
+
+- Keep people in control.
+- Make ownership real through architecture, portability, and privacy-conscious design.
+- Build the smallest truthful thing and keep verified behavior separate from future direction.
+
+Canonical website: https://sentzunhat.com/
+Sitemap: https://sentzunhat.com/sitemap.xml

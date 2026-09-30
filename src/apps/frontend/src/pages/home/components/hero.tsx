@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { FaArrowDown } from 'react-icons/fa'
 
 import { SolarSystem } from './solar-system'
 import type { Project } from '../../../types'
@@ -38,10 +39,12 @@ export function Hero({ projects }: { projects: Project[] }) {
         </p>
         <div className="hero-actions">
           <a className="hero-primary" href="#focus">
-            See what we are building <span aria-hidden="true">↓</span>
+            See what we are building
+            <FaArrowDown className="ui-icon action-icon" aria-hidden="true" />
           </a>
           <a className="hero-secondary" href="#about">
-            Why Sentzunhat <span aria-hidden="true">↘</span>
+            Why Sentzunhat
+            <FaArrowDown className="ui-icon action-icon" aria-hidden="true" />
           </a>
         </div>
       </div>

@@ -1,19 +1,20 @@
 # Sentzunhat Corp.
 
-Sentzunhat Corp. is a founder-led software company based in Winnipeg, Manitoba. It builds focused products and reusable engineering foundations that give people more control over their technology and data.
+Sentzunhat Corp. is an independent, founder-led software company based in Winnipeg, Manitoba. It builds focused products and reusable engineering foundations with an emphasis on understandable systems, portable data, privacy-conscious architecture, and human control.
 
-## Current focus
+## Project pages
 
-- [Mochilada](https://sentzunhat.com/#focus): a local-first application for preserving and exploring social archives that people downloaded themselves.
-
-## Selected work
-
-- [HAWP](https://github.com/sentzunhat/human-ai-workflow-protocol): a durable, human-led workflow protocol for building with AI.
-- [Zacatl](https://github.com/sentzunhat/zacatl): a minimal library for practical services.
+- [Mochilada](https://sentzunhat.com/projects/mochilada/) — current commercial focus; local-first social archive preservation and organization; preparing for a macOS-first release.
+- [HAWP](https://sentzunhat.com/projects/hawp/) — published open-source Human-AI Workflow Protocol.
+- [Zacatl](https://sentzunhat.com/projects/zacatl/) — published open-source TypeScript service framework.
+- [Tekit](https://sentzunhat.com/projects/tekit/) — prototype exploring clearer ways to find and understand files across cloud providers.
+- [Chiwakal](https://sentzunhat.com/projects/chiwakal/) — active local-first notes and knowledge workspace prototype.
+- [Noyolo](https://sentzunhat.com/projects/noyolo/) — validation-stage transportation-planning research focused on overlapping mobility disruptions.
 
 ## Company
 
-- [About Sentzunhat](https://sentzunhat.com/#about)
-- [Vision](https://sentzunhat.com/#vision)
-- [Founder](https://sentzunhat.com/#founder)
+- [Home](https://sentzunhat.com/)
 - [GitHub](https://github.com/sentzunhat)
+
+For a compact machine-readable summary, see https://sentzunhat.com/llms-small.txt.
+For the extended project summary, see https://sentzunhat.com/llms-full.txt.

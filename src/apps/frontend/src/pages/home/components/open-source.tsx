@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { FaBoxOpen, FaGithub, FaNpm } from 'react-icons/fa'
+import { FaArrowRight, FaBoxOpen, FaGithub, FaNpm } from 'react-icons/fa'
 
 import type { Project } from '../../../types'
 
@@ -7,16 +7,6 @@ interface OpenSourceProps {
   projects: Project[]
   projectsLoading: boolean
 }
-
-const ProjectSkeleton = ({ index }: { index: number }) => (
-  <div className="project-card project-card-skeleton" aria-hidden="true" key={index}>
-    <span className="skeleton-block skeleton-icon" />
-    <span className="skeleton-block skeleton-status" />
-    <span className="skeleton-block skeleton-title" />
-    <span className="skeleton-block skeleton-copy" />
-    <span className="skeleton-block skeleton-meta" />
-  </div>
-)
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const cardStyle = {
@@ -27,14 +17,13 @@ const ProjectCard = ({ project }: { project: Project }) => {
     : project.name === 'HAWP'
       ? FaGithub
       : FaBoxOpen
+  const slug = project.slug ?? project.name.toLowerCase()
 
   return (
     <a
       className="project-card group flex min-h-80 flex-col justify-between rounded-2xl border border-line bg-surface p-6 transition duration-200 hover:-translate-y-1 hover:border-card-accent"
       style={cardStyle}
-      href={project.url}
-      target="_blank"
-      rel="noreferrer"
+      href={`/projects/${slug}/`}
     >
       <div className="flex items-center justify-between">
         <span className="grid size-11 place-items-center rounded-xl bg-card-accent text-white shadow-[0_8px_24px_color-mix(in_srgb,var(--card-accent)_22%,transparent)]">
@@ -51,7 +40,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       </div>
       <div className="mt-14 flex items-center justify-between font-mono text-[0.6875rem] text-muted">
         <span>Latest · {project.version}</span>
-        <span className="text-[1.375rem] text-card-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+        <FaArrowRight className="ui-icon text-card-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
       </div>
     </a>
   )
@@ -59,7 +48,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
 export function OpenSource({ projects, projectsLoading }: OpenSourceProps) {
   return (
-    <section className="pb-24 sm:pb-30" id="opensource" aria-busy={projectsLoading}>
+    <section className="pb-24 sm:pb-30" id="opensource">
       <div className="mb-7 flex flex-col items-start justify-between gap-5 border-b border-line pb-5 sm:flex-row sm:items-end">
         <div>
           <p className="eyebrow mb-2.5">Selected work</p>
@@ -67,11 +56,9 @@ export function OpenSource({ projects, projectsLoading }: OpenSourceProps) {
         </div>
         <p className="max-w-64 text-[0.8125rem] leading-5 text-muted">Public projects with real code behind the philosophy.</p>
       </div>
-      <p className="sr-only" role="status">{projectsLoading ? 'Loading selected work.' : ''}</p>
+      <p className="sr-only" role="status">{projectsLoading ? 'Refreshing selected work.' : ''}</p>
       <div className="grid gap-4 md:grid-cols-2">
-        {projectsLoading
-          ? [0, 1].map((index) => <ProjectSkeleton index={index} key={index} />)
-          : projects.map((project) => <ProjectCard project={project} key={project.name} />)}
+        {projects.map((project) => <ProjectCard project={project} key={project.name} />)}
       </div>
     </section>
   )

@@ -1,4 +1,10 @@
-import { FaDesktop, FaGithub, FaMoon, FaSun } from 'react-icons/fa'
+import {
+  FaDesktop,
+  FaExternalLinkAlt,
+  FaGithub,
+  FaMoon,
+  FaSun,
+} from 'react-icons/fa'
 
 import { useTheme } from '../hooks/use-theme'
 import type { Theme } from '../types'
@@ -19,7 +25,7 @@ export function Header() {
     >
       <a
         className="flex items-center gap-2 font-bold tracking-[-0.03em]"
-        href="#top"
+        href="/"
         aria-label="sentzunhat home"
       >
         <img
@@ -32,9 +38,9 @@ export function Header() {
         <span>sentzunhat</span>
       </a>
       <div className="flex items-center gap-3 text-[0.8125rem] text-muted sm:gap-7">
-        <a className="hidden transition-colors hover:text-ink sm:block" href="#about">About</a>
-        <a className="hidden transition-colors hover:text-ink sm:block" href="#focus">Work</a>
-        <a className="hidden transition-colors hover:text-ink lg:block" href="#vision">Vision</a>
+        <a className="hidden transition-colors hover:text-ink sm:block" href="/#about">About</a>
+        <a className="hidden transition-colors hover:text-ink sm:block" href="/#focus">Work</a>
+        <a className="hidden transition-colors hover:text-ink lg:block" href="/#vision">Vision</a>
         <a
           className="inline-flex items-center gap-1.5 transition-colors hover:text-ink"
           href="https://github.com/sentzunhat"
@@ -43,7 +49,7 @@ export function Header() {
         >
           <FaGithub className="brand-icon" size={15} aria-hidden="true" />
           <span className="sr-only sm:not-sr-only">GitHub</span>
-          <span aria-hidden="true">↗</span>
+          <FaExternalLinkAlt className="ui-icon external-icon" size={10} aria-hidden="true" />
         </a>
         <div className="theme-switcher" role="group" aria-label="Theme preference">
           {themeOptions.map(({ value, label }) => {

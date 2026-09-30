@@ -1,3 +1,5 @@
+import { FaArrowRight } from 'react-icons/fa'
+
 import { commercialProject } from '../content/site'
 
 export function Focus() {
@@ -28,6 +30,10 @@ export function Focus() {
             <span>No direct account connection</span>
             <span>One-time purchase</span>
           </div>
+          <a className="project-inline-link" href={`/projects/${commercialProject.slug}/`}>
+            Explore Mochilada
+            <FaArrowRight className="ui-icon" aria-hidden="true" />
+          </a>
         </div>
       </article>
     </section>
