@@ -1,0 +1,502 @@
+{
+  "lastReviewed": "2026-09-29",
+  "projects": [
+    {
+      "slug": "mochilada",
+      "name": "Mochilada",
+      "category": "Commercial product",
+      "status": "Preparing for release",
+      "metaDescription": "Mochilada is Sentzunhat's local-first macOS app for importing, preserving, exploring, organizing, and exporting social media archives.",
+      "lede": "Your social archives, beautifully preserved. Private, offline, and designed to stay in your hands.",
+      "intro": "Mochilada is Sentzunhat's current commercial product: a local-first application for people who have downloaded their own social media archives and want a calmer way to preserve, explore, organize, and export those memories. The product is being prepared for a macOS-first release. Archive processing is designed to happen on the user's device rather than through a direct connection to a social account, keeping the core experience aligned with a simple promise: your memories are yours to keep.",
+      "sections": [
+        {
+          "heading": "What is Mochilada?",
+          "paragraphs": [
+            "Mochilada turns downloaded social media archives into a browsable personal collection while keeping the archive itself under the user's control.",
+            "The goal is not to become another social network. It is to make exported data useful again: easier to browse, understand, preserve, organize, and move elsewhere when needed."
+          ],
+          "items": [
+            "Import archives the user downloaded themselves",
+            "Explore and organize archive content locally",
+            "Export preserved content without creating a new cloud dependency"
+          ]
+        },
+        {
+          "heading": "How does Mochilada protect privacy?",
+          "paragraphs": [
+            "The current design is local-first. Core archive processing happens on the device, and the launch experience does not require a direct connection to the user's social-media account.",
+            "That architecture reduces the amount of sensitive archive data that needs to leave the computer and keeps offline access compatible with the product's ownership promise."
+          ],
+          "items": [
+            "Local processing is the default",
+            "No direct social-account connection is part of the launch flow",
+            "The existing archive remains usable independently of a recurring cloud service"
+          ]
+        },
+        {
+          "heading": "What is the current launch direction?",
+          "paragraphs": [
+            "The public launch direction is macOS first with a one-time purchase model. Sentzunhat will publish final availability and purchasing details when the release is ready.",
+            "Future platforms and account-connected services are separate product work. They are not being presented as part of the first desktop release."
+          ],
+          "items": [
+            "Platform: macOS first",
+            "Commercial model: one-time purchase",
+            "Release status: preparing for release"
+          ]
+        },
+        {
+          "heading": "What is not being claimed yet?",
+          "paragraphs": [
+            "Mochilada is still being prepared for release. The website therefore describes the product direction and verified implementation choices without claiming that every future platform or integration is already available.",
+            "Direct cloud-account synchronization, an iOS release, and future account services should be treated as later work until they are separately verified."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "question": "Is Mochilada a cloud backup service?",
+          "answer": "No. Its core product direction is a local-first archive viewer and organizer for archives the user has already downloaded."
+        },
+        {
+          "question": "Does Mochilada connect directly to social-media accounts?",
+          "answer": "Not in the launch flow. The product is designed around importing archives the user downloaded themselves."
+        },
+        {
+          "question": "Which platform comes first?",
+          "answer": "The current launch plan is macOS first."
+        },
+        {
+          "question": "Is Mochilada subscription software?",
+          "answer": "The current public launch direction is a one-time purchase rather than a subscription."
+        }
+      ],
+      "links": [],
+      "schemaType": "SoftwareApplication",
+      "schema": {
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "macOS"
+      },
+      "seoTitle": "Mochilada — Local-First Social Archive App | Sentzunhat"
+    },
+    {
+      "slug": "hawp",
+      "name": "HAWP",
+      "category": "Open-source foundation",
+      "status": "Published",
+      "metaDescription": "HAWP is Sentzunhat's open-source Human-AI Workflow Protocol for shaping work, preserving constraints, and carrying context across AI-assisted sessions.",
+      "lede": "Shape the work before execution begins, then carry that intent across tools, agents, and sessions.",
+      "intro": "HAWP, the Human-AI Workflow Protocol, is an open-source task-shaping protocol for human-led AI work. It gives a task five explicit fields before execution begins: input, context, mission, constraints, and output. Those fields travel with the work so a new agent or session can recover the intended objective without reconstructing the entire conversation. HAWP is deliberately not a runtime, memory system, or orchestration framework; the protocol itself is plain Markdown, while the optional CLI adds search, indexing, context packing, MCP access, and work-item tooling.",
+      "sections": [
+        {
+          "heading": "What problem does HAWP solve?",
+          "paragraphs": [
+            "AI-assisted work often loses precision when the objective, boundaries, and definition of done are scattered across a long conversation. HAWP moves those decisions into a small, durable shape that can be reviewed before execution.",
+            "The protocol is intentionally compact. It aims to preserve intent without forcing every project into a large process framework."
+          ],
+          "items": [
+            "input: the request as received",
+            "context: the minimum background needed",
+            "mission: one concrete objective",
+            "constraints: hard limits and quality bars",
+            "output: what done looks like"
+          ]
+        },
+        {
+          "heading": "How does the HAWP CLI extend the protocol?",
+          "paragraphs": [
+            "The optional CLI adds practical repository workflows around the same human-authored shape. It can index and search HAWP documents, pack ranked context within a token budget, expose search through MCP, initialize provider integrations, update the kit, and scaffold work items.",
+            "Teams can use only the Markdown protocol or add the CLI where searchable repository context is useful."
+          ],
+          "items": [
+            "Hybrid lexical and vector search",
+            "Token-capped context packing with deduplication",
+            "MCP access for compatible coding agents",
+            "Repository work-item scaffolding and validation"
+          ]
+        },
+        {
+          "heading": "What evidence is published today?",
+          "paragraphs": [
+            "The public repository includes benchmark results for the kit itself. Those repository benchmarks report lexical search below 1 ms with 10/10 quality, hybrid search at 72 ms with 10/10 quality, semantic search at 479 ms with 9/10 quality, and roughly 30% token reduction from Jaccard deduplication in the measured context-packing run.",
+            "These figures are project benchmark results, not independent third-party performance claims, and they should be read in that context."
+          ],
+          "items": [
+            "Current public release: 0.0.23",
+            "License: Apache 2.0",
+            "Published benchmark data is available in the repository"
+          ]
+        },
+        {
+          "heading": "Why keep HAWP human-led?",
+          "paragraphs": [
+            "The protocol makes the human's mission and constraints explicit before automation begins. That keeps AI tools useful as executors and collaborators without making them the source of project intent.",
+            "HAWP's design deliberately separates shaping from execution: clearer authoring is the mechanism, not adding more hidden automation."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "question": "Is HAWP an AI agent framework?",
+          "answer": "No. HAWP is a task-shaping protocol. Its CLI and MCP tools support the workflow, but the protocol does not act as an autonomous runtime or orchestrator."
+        },
+        {
+          "question": "Do I need a database to use HAWP?",
+          "answer": "No. The core protocol is plain Markdown and can be used without a database or hosted service."
+        },
+        {
+          "question": "Which AI tools can use HAWP?",
+          "answer": "The project publishes provider guidance for tools including Claude Code, GitHub Copilot, Cursor, Codex, and Continue."
+        },
+        {
+          "question": "What is the latest public HAWP release listed here?",
+          "answer": "The current public release verified during this website update is 0.0.23."
+        }
+      ],
+      "links": [
+        {
+          "label": "HAWP on GitHub",
+          "url": "https://github.com/sentzunhat/human-ai-workflow-protocol",
+          "kind": "github"
+        },
+        {
+          "label": "HAWP 0.0.23 release",
+          "url": "https://github.com/sentzunhat/human-ai-workflow-protocol/releases/tag/0.0.23",
+          "kind": "external"
+        },
+        {
+          "label": "Published benchmark details",
+          "url": "https://github.com/sentzunhat/human-ai-workflow-protocol/tree/main/benchmark",
+          "kind": "external"
+        }
+      ],
+      "schemaType": "SoftwareSourceCode",
+      "schema": {
+        "programmingLanguage": "Go",
+        "codeRepository": "https://github.com/sentzunhat/human-ai-workflow-protocol",
+        "version": "0.0.23",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "seoTitle": "HAWP — Human-AI Workflow Protocol | Sentzunhat"
+    },
+    {
+      "slug": "zacatl",
+      "name": "Zacatl",
+      "category": "Open-source foundation",
+      "status": "Published",
+      "metaDescription": "Zacatl is Sentzunhat's open-source TypeScript framework for consistent service boundaries, validation, dependency injection, adapters, and structured errors.",
+      "lede": "A TypeScript service framework for keeping application boundaries visible as systems grow.",
+      "intro": "Zacatl is an open-source TypeScript framework for teams building modular APIs and backend services. It provides a repeatable application, domain, infrastructure, and platform structure while allowing teams to keep using frameworks and data tools such as Fastify, Express, Mongoose, Sequelize, and Node's built-in SQLite support. The project focuses on visible boundaries, replaceable adapters, type-safe validation, dependency injection, structured errors, and repeatable verification so service architecture stays understandable instead of leaking framework choices through the entire codebase.",
+      "sections": [
+        {
+          "heading": "What does Zacatl provide?",
+          "paragraphs": [
+            "Zacatl supplies architectural boundaries around common TypeScript service components. Business logic can depend on ports while HTTP servers, persistence, logging, and other concrete integrations remain replaceable.",
+            "The intent is not to replace every underlying framework. It is to make their role explicit and keep application code from becoming tightly coupled to one adapter."
+          ],
+          "items": [
+            "Application, domain, infrastructure, and platform layers",
+            "Dependency injection",
+            "Zod-based type-safe validation",
+            "Structured errors and observability helpers",
+            "Fastify and Express server adapters",
+            "Database paths for MongoDB, PostgreSQL, Sequelize, and Node SQLite"
+          ]
+        },
+        {
+          "heading": "How is Zacatl verified?",
+          "paragraphs": [
+            "The public project README currently reports 659 passing tests across 78 files and more than 91% line coverage. Its CI runs the full test suite together with dependency checks and an eight-example Docker smoke matrix before release.",
+            "Those counts are repository-reported engineering evidence and can change as the project evolves."
+          ],
+          "items": [
+            "Current public release: 0.0.61",
+            "Node.js requirement: 26+",
+            "659 tests reported in the current README",
+            "91.41% line coverage reported in the current README"
+          ]
+        },
+        {
+          "heading": "Why use adapters instead of one fixed stack?",
+          "paragraphs": [
+            "Zacatl keeps application and domain code separate from concrete server and database choices. That makes it easier to compare implementations, replace infrastructure, and test business behavior without making the framework itself the business logic.",
+            "The examples intentionally implement the same greeting flow across multiple server, database, and frontend combinations so the boundaries are visible in working code."
+          ]
+        },
+        {
+          "heading": "What is Zacatl not trying to be?",
+          "paragraphs": [
+            "Zacatl is not presented as a universal platform that replaces Fastify, Express, MongoDB, PostgreSQL, or SQLite. Those tools continue doing their own jobs.",
+            "The framework's role is to provide a consistent structure and integration surface around them."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "question": "Does Zacatl replace Fastify or Express?",
+          "answer": "No. Zacatl can use Fastify or Express as server adapters while keeping domain behavior outside the HTTP framework."
+        },
+        {
+          "question": "Can Zacatl use more than one database approach?",
+          "answer": "Yes. The public project documents adapters for MongoDB, Sequelize-backed databases, and Node's built-in SQLite path, with examples covering MongoDB, PostgreSQL, and SQLite."
+        },
+        {
+          "question": "What Node.js version does Zacatl target?",
+          "answer": "The current project requires Node.js 26 or newer."
+        },
+        {
+          "question": "What is the latest public Zacatl release listed here?",
+          "answer": "The current public release verified during this website update is 0.0.61."
+        }
+      ],
+      "links": [
+        {
+          "label": "Zacatl on GitHub",
+          "url": "https://github.com/sentzunhat/zacatl",
+          "kind": "github"
+        },
+        {
+          "label": "Zacatl on npm",
+          "url": "https://www.npmjs.com/package/@sentzunhat/zacatl",
+          "kind": "npm"
+        },
+        {
+          "label": "Zacatl 0.0.61 release",
+          "url": "https://github.com/sentzunhat/zacatl/releases/tag/v0.0.61",
+          "kind": "external"
+        }
+      ],
+      "schemaType": "SoftwareSourceCode",
+      "schema": {
+        "programmingLanguage": "TypeScript",
+        "codeRepository": "https://github.com/sentzunhat/zacatl",
+        "runtimePlatform": "Node.js 26+",
+        "version": "0.0.61",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "seoTitle": "Zacatl — TypeScript Service Framework | Sentzunhat"
+    },
+    {
+      "slug": "tekit",
+      "name": "Tekit",
+      "category": "Product development",
+      "status": "Prototype",
+      "metaDescription": "Tekit is a Sentzunhat cloud-file product in development, exploring clearer ways to connect, find, and understand files across providers.",
+      "lede": "A cloud-file product in development, with launch claims kept deliberately narrower than the long-term idea.",
+      "intro": "Tekit is a Sentzunhat prototype around a familiar problem: files become difficult to find and understand when they are spread across cloud providers. The product direction explores a clearer cross-cloud experience without pretending that every provider or workflow is already complete. Tekit remains under active development, so this page focuses on the problem being explored, the design principles guiding the work, and the boundaries of what Sentzunhat is prepared to claim publicly today.",
+      "sections": [
+        {
+          "heading": "What is Tekit exploring?",
+          "paragraphs": [
+            "The product direction is a clearer way to find and understand files that may live across different cloud storage providers. The aim is to reduce the friction of remembering which service contains a document and how each provider organizes it.",
+            "Tekit is still a prototype. Provider coverage and workflow details will be published as they are verified rather than presented as finished in advance."
+          ]
+        },
+        {
+          "heading": "How is Tekit being designed?",
+          "paragraphs": [
+            "The work is guided by a scan-first, selective approach: understand what exists before moving or duplicating data unnecessarily. The broader goal is to make cross-cloud organization useful without turning the application into another opaque storage silo.",
+            "Privacy and ownership remain core product constraints, particularly when metadata or files come from more than one provider."
+          ]
+        },
+        {
+          "heading": "What is verified publicly today?",
+          "paragraphs": [
+            "Tekit is an active prototype, not a finished cross-cloud product. Sentzunhat is comfortable describing the problem, the intended user experience, and the emphasis on clear boundaries, but it is not publishing broad provider or synchronization claims until those behaviors are release-proven."
+          ],
+          "items": [
+            "Status: prototype",
+            "Focus: finding and understanding files across cloud providers",
+            "Public scope is intentionally narrower than the long-term direction"
+          ]
+        },
+        {
+          "heading": "Why keep the scope explicit?",
+          "paragraphs": [
+            "Sentzunhat's product principle is to build the smallest truthful thing. Tekit is a useful example of that principle: the website can explain where the product is going without turning unfinished work into a marketing promise.",
+            "That makes the page easier for people and search systems to interpret because the current status is stated directly."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "question": "Does Tekit already support every cloud provider?",
+          "answer": "No. Tekit is still a prototype, and Sentzunhat will publish specific provider support only as it is verified."
+        },
+        {
+          "question": "What problem is Tekit trying to solve?",
+          "answer": "It explores clearer ways to find and understand files that are spread across cloud storage providers."
+        },
+        {
+          "question": "Does Tekit move every file into a new Sentzunhat cloud?",
+          "answer": "That is not the product direction described here. The design emphasizes understanding existing cloud content and avoiding unnecessary duplication."
+        },
+        {
+          "question": "Is Tekit released?",
+          "answer": "No. It is currently presented as a prototype under active development."
+        }
+      ],
+      "links": [],
+      "schemaType": "SoftwareApplication",
+      "schema": {
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web"
+      },
+      "seoTitle": "Tekit — Cross-Cloud File Prototype | Sentzunhat"
+    },
+    {
+      "slug": "chiwakal",
+      "name": "Chiwakal",
+      "category": "Studio exploration",
+      "status": "Active prototype",
+      "metaDescription": "Chiwakal is Sentzunhat's local-first notes and knowledge workspace prototype with voice, transcription, and reviewable AI assistance.",
+      "lede": "A local-first notes and knowledge workspace with voice, transcription, and reviewable AI assistance.",
+      "intro": "Chiwakal is an active Sentzunhat prototype for local-first notes and knowledge work. The product direction combines writing, tags, recordings, transcription, and AI-assisted review while keeping the user's own workspace central. Chiwakal is being developed around the idea that assistance should be reviewable and that a personal knowledge base should remain understandable and portable. Because the product is still a prototype, this page describes the verified direction rather than presenting unreleased implementation details or a finished feature list.",
+      "sections": [
+        {
+          "heading": "What is Chiwakal for?",
+          "paragraphs": [
+            "Chiwakal is being designed for people who want one local workspace for written notes, recorded thoughts, transcription, tagging, and reviewable assistance.",
+            "The local-first direction is meant to keep the primary knowledge base usable on the person's own machine instead of making a remote service the only place the information exists."
+          ],
+          "items": [
+            "Notes and tags",
+            "Voice recordings and transcription",
+            "Reviewable AI assistance",
+            "Local-first product direction"
+          ]
+        },
+        {
+          "heading": "How does Chiwakal treat AI assistance?",
+          "paragraphs": [
+            "Chiwakal's direction treats AI as assistance inside a user's knowledge workflow, not as an authority that silently rewrites the record. Suggestions should remain visible and reviewable.",
+            "That approach matches Sentzunhat's broader preference for systems that leave meaningful decisions with the person using them."
+          ]
+        },
+        {
+          "heading": "Why local-first knowledge work?",
+          "paragraphs": [
+            "Notes and recordings can become long-lived personal records. A local-first architecture can make ownership, portability, offline access, and migration clearer because the user's own copy remains central to the product.",
+            "Cloud services may still add value later, but they should not erase the distinction between assistance and ownership."
+          ]
+        },
+        {
+          "heading": "Is Chiwakal available as a finished product?",
+          "paragraphs": [
+            "No. It is an active prototype. The website intentionally labels it that way and avoids release, platform, or feature-completeness claims that have not been verified."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "question": "Is Chiwakal local-first?",
+          "answer": "Yes. Local-first operation is part of the product direction and the user's own workspace remains central."
+        },
+        {
+          "question": "Does Chiwakal include voice features?",
+          "answer": "The prototype direction includes recordings and transcription alongside notes and tags."
+        },
+        {
+          "question": "Does AI change notes automatically?",
+          "answer": "The product direction emphasizes reviewable assistance rather than silent, automatic rewriting of the user's record."
+        },
+        {
+          "question": "Is Chiwakal released?",
+          "answer": "No. It is currently presented as an active prototype."
+        }
+      ],
+      "links": [],
+      "schemaType": "SoftwareApplication",
+      "schema": {
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Desktop"
+      },
+      "seoTitle": "Chiwakal — Local-First Notes Workspace | Sentzunhat"
+    },
+    {
+      "slug": "noyolo",
+      "name": "Noyolo",
+      "category": "Research project",
+      "status": "Validation",
+      "metaDescription": "Noyolo is Sentzunhat's early-stage Winnipeg mobility research project exploring cumulative construction disruption, data preparation, and scenario comparison.",
+      "lede": "Researching how planners could understand overlapping transportation disruptions early enough to compare options before they happen.",
+      "intro": "Noyolo is an early-stage Sentzunhat research project focused on transportation disruption in Winnipeg. The original idea was to simulate the effect of a single road closure, but early practitioner discovery pointed toward a harder question: several construction projects, lane restrictions, transit changes, and other disruptions can overlap across a network. Noyolo is therefore validating where the recurring friction actually sits, including data preparation, calibration, scenario setup, comparison, and communication, before deciding whether the right solution is a simulator, a data layer, orchestration around established tools, or something else.",
+      "sections": [
+        {
+          "heading": "What problem is Noyolo validating?",
+          "paragraphs": [
+            "The central discovery question is how planners can understand the combined effects of overlapping disruptions early enough to compare options and reduce avoidable impacts.",
+            "The City of Winnipeg's own road-construction guidance says big-picture construction-season planning can begin as many as five years in advance and specifically describes efforts to avoid combinations that would redirect multiple routes into the same area. That public context supports studying cumulative effects rather than treating every project as isolated."
+          ]
+        },
+        {
+          "heading": "What public data exists today?",
+          "paragraphs": [
+            "Winnipeg publishes an open-data catalogue, road construction and lane-closure information, and Winnipeg Transit open data. These sources make a local prototype plausible, but their existence does not prove that the data is complete, synchronized, or sufficient to calibrate a decision-grade model.",
+            "Data sufficiency and trust are therefore part of the research problem, not assumptions being glossed over."
+          ],
+          "items": [
+            "City of Winnipeg Open Data Portal",
+            "Road construction and lane-closure information",
+            "Winnipeg Transit open-data services and performance datasets"
+          ]
+        },
+        {
+          "heading": "What has early discovery changed?",
+          "paragraphs": [
+            "Practitioner conversations have reinforced two cautions. First, the valuable problem may be the interaction of multiple projects across the network rather than simulation of one closure. Second, assembling enough trustworthy data may be as difficult as running the model itself.",
+            "That evidence has shifted the project away from assuming that a new simulation engine is automatically the answer."
+          ]
+        },
+        {
+          "heading": "What would a useful pilot need to prove?",
+          "paragraphs": [
+            "A credible pilot should use one bounded Winnipeg scenario, work with data that can actually be obtained, compare alternatives that matter to practitioners, and produce outputs that can change a planning decision.",
+            "A negative result is also useful: if project-specific calibration is too expensive, data cannot be reused, or established workflows already solve the problem efficiently, Noyolo should narrow or stop rather than force a product."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "question": "Is Noyolo a finished traffic simulator?",
+          "answer": "No. Noyolo is in problem-validation work and has not been presented as a finished simulator."
+        },
+        {
+          "question": "Why focus on overlapping projects?",
+          "answer": "Early discovery suggests the harder operational problem may be cumulative network disruption from several projects and restrictions rather than one isolated closure."
+        },
+        {
+          "question": "Does public data guarantee an accurate model?",
+          "answer": "No. Public datasets are useful inputs, but data sufficiency, quality, calibration, and reuse still need to be validated with practitioners."
+        },
+        {
+          "question": "Would Noyolo replace established transportation modelling tools?",
+          "answer": "That is not assumed. One research question is whether the more useful opportunity sits around trusted tools in data preparation, scenario setup, comparison, or communication."
+        }
+      ],
+      "links": [
+        {
+          "label": "City of Winnipeg Open Data Portal",
+          "url": "https://data.winnipeg.ca/",
+          "kind": "external"
+        },
+        {
+          "label": "City road construction information",
+          "url": "https://www.winnipeg.ca/services-programs/transportation-roads-parking/road-construction-closures/road-construction-information",
+          "kind": "external"
+        },
+        {
+          "label": "Winnipeg Transit open data",
+          "url": "https://www.winnipeg.ca/services-programs/transportation-roads-parking/transit",
+          "kind": "external"
+        }
+      ],
+      "schemaType": "Project",
+      "schema": {
+        "areaServed": "Winnipeg, Manitoba, Canada"
+      },
+      "seoTitle": "Noyolo — Mobility Planning Research | Sentzunhat"
+    }
+  ]
+}
