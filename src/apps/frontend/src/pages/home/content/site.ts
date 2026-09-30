@@ -1,9 +1,10 @@
 import type { Exploration, Principle, Project } from '../../../types'
 
-export const commercialProject = { name: 'Mochilada', accent: 'earth' } as const
+export const commercialProject = { name: 'Mochilada', slug: 'mochilada', accent: 'earth' } as const
 
 export const fallbackProjects: Project[] = [
   {
+    slug: 'hawp',
     name: 'HAWP',
     description: 'A durable, human-led workflow protocol for building with AI.',
     version: '0.0.23',
@@ -12,6 +13,7 @@ export const fallbackProjects: Project[] = [
     accent: 'coral',
   },
   {
+    slug: 'zacatl',
     name: 'Zacatl',
     description: 'A blazing-fast, minimal, straightforward library for practical services.',
     version: '0.0.61',
@@ -23,18 +25,21 @@ export const fallbackProjects: Project[] = [
 
 export const explorations: Exploration[] = [
   {
+    slug: 'tekit',
     name: 'Tekit',
     status: 'Prototype',
     description: 'Exploring clearer ways to find and understand files spread across cloud providers.',
     accent: 'sky',
   },
   {
+    slug: 'chiwakal',
     name: 'Chiwakal',
     status: 'Active prototype',
     description: 'A local-first notes and knowledge workspace with voice, transcription, and reviewable AI assistance.',
     accent: 'aqua',
   },
   {
+    slug: 'noyolo',
     name: 'Noyolo',
     status: 'Validation',
     description: 'Researching how mobility simulations could reduce uncertainty before a road or transit change happens.',
