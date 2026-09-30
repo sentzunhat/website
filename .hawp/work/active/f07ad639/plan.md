@@ -29,3 +29,11 @@ output: |
 4. Keep header/footer outside the transition viewport so they remain continuously available.
 5. Re-run SEO/AEO/GEO and performance checks.
 6. Decide whether project pages benefit from the same interaction or should stay conventional.
+
+## Search-readiness guardrails from the 2026-09-29 audit
+
+- Preserve the build-time crawlable headings, paragraphs, and `<a href>` project links even if sections become swipeable.
+- Avoid a large static-to-client layout replacement that could create CLS. The transition shell should progressively enhance content that already occupies its final layout.
+- Keep one canonical URL per project and do not move meaningful project content into URL fragments.
+- Do not add FAQPage or HowTo markup merely to satisfy third-party checker points. Current Google guidance limits FAQ rich results to authoritative government/health sites and HowTo rich results are deprecated.
+- Measure LCP, INP, and CLS after the prototype; target Google's "good" thresholds (LCP <= 2.5 s, INP < 200 ms, CLS < 0.1).

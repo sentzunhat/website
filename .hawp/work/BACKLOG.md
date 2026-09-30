@@ -28,6 +28,7 @@ Each row links to its plan file when one exists.
 | --- | --- | --- | --- | --- | --- | --- |
 | `2a1dc541` | improvement | Resolve transitive Sequelize uuid advisory | plan-ready | [plan](active/2a1dc541/plan.md) | 2026-09-29 | Reproduce the scoped compatibility options in Zacatl |
 | `f07ad639` | improvement | Prototype sliding book-page section navigation | plan-ready | [plan](active/f07ad639/plan.md) | 2026-09-29 | Prototype two sections without changing crawlable content |
+| `c3d0e4a8` | audit | Verify production SEO/AEO/GEO after deployment | blocked | [plan](active/c3d0e4a8/plan.md) | 2026-09-29 | Run live URL Inspection and performance checks when production access is available |
 
 ---
 
@@ -38,7 +39,8 @@ Keep this section short (for example last 5-10 items or last 14-30 days).
 | ID | Type | Title | Closed | Detail |
 | --- | --- | --- | --- | --- |
 | `8c2e01f4` | improvement | Refine hero energy geometry | 2026-09-29 | [plan](closed/2026/09/29/8c2e01f4/plan.md) |
-| `9508bdf5` | improvement | Improve crawlability, project pages, and icon consistency | 2026-09-29 | [plan](closed/2026/09/29/9508bdf5/plan.md) |\n| `5f1b9849` | improvement | Project universe and container simplification | 2026-09-29 | [plan](closed/2026/09/29/5f1b9849/plan.md) |
+| `9508bdf5` | improvement | Improve crawlability, project pages, and icon consistency | 2026-09-29 | [plan](closed/2026/09/29/9508bdf5/plan.md) |
+| `5f1b9849` | improvement | Project universe and container simplification | 2026-09-29 | [plan](closed/2026/09/29/5f1b9849/plan.md) |
 | `7b5feb25` | improvement | Repair frontend shape and redesign hero system | 2026-09-29 | [plan](closed/2026/09/29/7b5feb25/plan.md) |
 | `815b752b` | improvement | Align website workspace and feature structure | 2026-09-29 | [plan](closed/2026/09/29/815b752b/plan.md) |
 | `dc0a4fe3` | improvement | Add interactive 3D solar system hero | 2026-09-29 | [plan](closed/2026/09/29/dc0a4fe3/plan.md) |
