@@ -1,3 +1,5 @@
+import { FaArrowRight } from 'react-icons/fa'
+
 import { explorations } from '../content/site'
 
 export function Explorations() {
@@ -12,14 +14,18 @@ export function Explorations() {
       </div>
       <div className="grid gap-4 md:grid-cols-3">
         {explorations.map((item) => (
-          <article className={`exploration-card ${item.accent}`} key={item.name}>
+          <a className={`exploration-card ${item.accent}`} href={`/projects/${item.slug}/`} key={item.name}>
             <div className="mb-8 flex items-center justify-between">
               <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-muted uppercase">{item.status}</span>
               <span className="exploration-dot" aria-hidden="true" />
             </div>
             <h3 className="mb-3 text-2xl font-semibold tracking-[-0.05em]">{item.name}</h3>
             <p className="text-sm leading-6 text-muted">{item.description}</p>
-          </article>
+            <span className="exploration-link">
+              Explore project
+              <FaArrowRight className="ui-icon" aria-hidden="true" />
+            </span>
+          </a>
         ))}
       </div>
     </section>
