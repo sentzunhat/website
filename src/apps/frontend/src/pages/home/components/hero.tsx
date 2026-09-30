@@ -5,6 +5,15 @@ import { SolarSystem } from './solar-system'
 import type { Project } from '../../../types'
 import { commercialProject, explorations } from '../content/site'
 
+const EnergyPaths = () => (
+  <>
+    <path d="M-40 126h160v-42h58v84h58V84h58v42h168v82h74v-42h74v42h168v-82h74v42h74v-42h184" />
+    <path d="M-24 332h162l58-58 58 58h148l58 58 58-58h148l58-58 58 58h148l58 58 58-58h160" />
+    <path d="M-40 548h188v-66h70v66h174V430h78v118h172v-66h72v66h174V430h78v118h194" />
+    <path d="M42 676l76-76 76 76 76-76 76 76 76-76 76 76 76-76 76 76 76-76 76 76 76-76 76 76 76-76 76 76" />
+  </>
+)
+
 export function Hero({ projects }: { projects: Project[] }) {
   const universeProjects = useMemo(
     () => [commercialProject, ...projects, ...explorations],
@@ -15,16 +24,33 @@ export function Hero({ projects }: { projects: Project[] }) {
       <svg
         className="hero-lines"
         viewBox="0 0 1200 720"
-        preserveAspectRatio="none"
+        preserveAspectRatio="xMidYMid slice"
         aria-hidden="true"
       >
-        <path d="M18 122h176v54h92v-54h164v112h108v-58h172v116h126v-72h326" />
-        <path d="M0 318h154l62-54 72 54h178l68 58 72-58h176l68 58 74-58h276" />
-        <path d="M24 554h214v-62h106v62h188v-118h116v118h170v-62h112v62h252" />
-        <path d="M84 676c74-82 148-82 222 0s148 82 222 0 148-82 222 0 148 82 222 0" />
-        <circle cx="192" cy="176" r="12" />
-        <circle cx="730" cy="292" r="9" />
-        <circle cx="930" cy="554" r="14" />
+        <defs>
+          <linearGradient id="hero-energy-gradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="var(--aqua)" stopOpacity="0.1" />
+            <stop offset="45%" stopColor="var(--sky)" stopOpacity="0.95" />
+            <stop offset="70%" stopColor="var(--primary)" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="var(--green)" stopOpacity="0.12" />
+          </linearGradient>
+        </defs>
+
+        <g className="hero-line-base">
+          <EnergyPaths />
+        </g>
+        <g className="hero-line-energy">
+          <EnergyPaths />
+        </g>
+
+        <g className="hero-nodes">
+          <circle cx="178" cy="168" r="13" />
+          <circle cx="724" cy="332" r="10" />
+          <circle cx="938" cy="548" r="15" />
+          <circle className="hero-node-core" cx="178" cy="168" r="3.5" />
+          <circle className="hero-node-core" cx="724" cy="332" r="3" />
+          <circle className="hero-node-core" cx="938" cy="548" r="4" />
+        </g>
       </svg>
 
       <div className="hero-copy">

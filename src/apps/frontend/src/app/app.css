@@ -459,29 +459,54 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
 .hero-lines {
   position: absolute;
   z-index: -1;
-  inset: 1rem calc(50% - 50vw) 0;
+  top: 1rem;
+  left: 50%;
   width: 100vw;
   height: calc(100% - 1rem);
-  overflow: visible;
+  overflow: hidden;
   fill: none;
-  stroke: color-mix(in srgb, var(--aqua) 48%, var(--primary));
-  stroke-width: 1.15;
-  vector-effect: non-scaling-stroke;
-  opacity: .28;
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--aqua) 34%, transparent));
+  transform: translateX(-50%);
   pointer-events: none;
 }
 
-.hero-lines path:nth-child(2),
-.hero-lines path:nth-child(4) {
-  stroke: color-mix(in srgb, var(--sky) 44%, var(--green));
-  stroke-dasharray: 4 12;
-  animation: line-flow 18s linear infinite;
+.hero-line-base {
+  stroke: color-mix(in srgb, var(--aqua) 48%, var(--primary));
+  stroke-width: 1.1;
+  opacity: .22;
+  vector-effect: non-scaling-stroke;
 }
 
-.hero-lines circle {
-  fill: color-mix(in srgb, var(--canvas) 78%, transparent);
+.hero-line-energy {
+  stroke: url('#hero-energy-gradient');
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-dasharray: 54 250;
+  opacity: .72;
+  filter:
+    drop-shadow(0 0 5px color-mix(in srgb, var(--aqua) 62%, transparent))
+    drop-shadow(0 0 12px color-mix(in srgb, var(--primary) 32%, transparent));
+  vector-effect: non-scaling-stroke;
+}
+
+.hero-line-energy path {
+  animation: hero-energy-flow 9s linear infinite;
+}
+
+.hero-line-energy path:nth-child(2) { animation-delay: -2.25s; }
+.hero-line-energy path:nth-child(3) { animation-delay: -4.5s; }
+.hero-line-energy path:nth-child(4) { animation-delay: -6.75s; }
+
+.hero-nodes {
+  stroke: color-mix(in srgb, var(--sky) 62%, var(--primary));
   stroke-width: 1.5;
+  fill: color-mix(in srgb, var(--canvas) 82%, transparent);
+  vector-effect: non-scaling-stroke;
+}
+
+.hero-nodes .hero-node-core {
+  fill: var(--aqua);
+  stroke: none;
+  filter: drop-shadow(0 0 7px color-mix(in srgb, var(--aqua) 70%, transparent));
 }
 
 .hero-card {
@@ -609,7 +634,7 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   animation: fallback-glow 4s ease-in-out infinite alternate;
 }
 
-@keyframes line-flow { to { stroke-dashoffset: -64; } }
+@keyframes hero-energy-flow { to { stroke-dashoffset: -304; } }
 @keyframes fallback-glow { to { opacity: .72; transform: scale(1.08); } }
 
 select:focus-visible, a:focus-visible {
@@ -645,7 +670,7 @@ select option {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
-  .hero-lines path, .solar-fallback span { animation: none; }
+  .hero-line-energy path, .solar-fallback span { animation: none; }
   .exploration-card { transition: none; }
   .skeleton-block { animation: none; }
 }
