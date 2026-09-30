@@ -2,9 +2,9 @@
 
 ID: `c3d0e4a8`
 Type: audit
-Status: blocked
+Status: in-progress
 Opened: 2026-09-29
-Updated: 2026-09-29
+Updated: 2026-09-30
 
 input: |
   After the main-branch deployment, re-audit Sentzunhat for SEO, GEO, and AEO improvements, compare against the earlier 47/100 report, identify remaining high-value fixes, and keep the site simple, minimal, timeless, and fast.
@@ -50,15 +50,20 @@ Production verification therefore still needs:
 
 ## Remaining priorities
 
-### P0 — Production and indexing evidence
-- Confirm 200 responses, canonical URLs, raw HTML headings, project links, robots.txt, sitemap, and AI text files from production.
-- Inspect homepage and project URLs in Search Console and request indexing where appropriate.
-- Verify that the six project pages are discoverable from the homepage and sitemap.
+### P0 — Measured accessibility corrections
+- Fix low contrast for the sky, aqua, and green exploration links (observed at 1.35:1, 1.23:1, and 3.94:1).
+- Align the solar center button's accessible name with its visible label.
+- Rerun production accessibility checks without changing the approved theme or 3D universe.
 
-### P1 — Page experience
-- Measure LCP, INP, and CLS. Use Google's good thresholds: LCP <= 2.5 s, INP < 200 ms, CLS < 0.1.
-- Pay special attention to any layout shift caused by replacing the build-time prerender with the client-rendered React application.
+### P1 — Indexing evidence
+- Inspect homepage and six project URLs in Search Console; confirm sitemap processing and request indexing where appropriate.
+- Compare the same AEO/GEO checker against its earlier 47/100 report when a refreshed run is available.
+- Lighthouse SEO/Agentic Browsing categories do not prove search rankings or AI citations.
+
+### P2 — Page experience
+- The supplied report records LCP 0.5 s and CLS 0.002, within Google's good thresholds. Preserve them when making changes.
 - Keep the Three.js solar system lazy and unchanged unless measurement proves it is a bottleneck.
+- Filter browser extension scripts from any JavaScript savings analysis; most measured bytes are outside the site.
 
 ### P2 — Content/entity clarity without bloat
 - Keep the homepage concise; do not chase an 800-word checker target.
@@ -70,6 +75,43 @@ Production verification therefore still needs:
 - Do not add FAQPage merely for score points: Google limits FAQ rich results primarily to authoritative government and health sites.
 - Do not add HowTo markup: Google deprecated HowTo rich results and the Sentzunhat homepage is not a how-to page.
 
-## Blocker
+## Initial blocker and current state
 
-Live production and Search Console measurement are not available through the currently connected tools. This work item remains blocked on a production-capable audit path (for example, a connected Search Console integration or a fresh checker report) rather than guessing from source alone.
+At intake, a production-capable audit path was unavailable. The user-supplied
+2026-09-30 Lighthouse report now clears that blocker for the homepage's
+production response, Lighthouse categories, and measured accessibility issues.
+Search Console URL Inspection and sitemap processing still need account-level
+evidence; do not infer indexing or ranking from this Lighthouse result.
+
+
+## Production Lighthouse evidence — 2026-09-30
+
+User supplied Lighthouse 13.4.1 JSON for `https://sentzunhat.com/`, fetched at
+`2026-09-30T13:33:39.450Z`:
+
+- Performance 100; Accessibility 96; Best Practices 100; SEO 100; Agentic
+  Browsing 100.
+- FCP 0.4 s; LCP 0.5 s; Speed Index 0.7 s; TBT 10 ms; CLS 0.002; Interactive
+  0.8 s; root response 120 ms.
+- Accessibility reports exploration link contrast of 1.35:1 (sky), 1.23:1
+  (aqua), and 3.94:1 (green), against the 4.5:1 target for the observed text.
+  The solar control visibly reads “Center on Sun” but exposes the name “Center
+  view on the Sun.” These are application findings for the next fix.
+- JavaScript savings include browser extension resources; do not treat their
+  bytes as website work. The report attributes 58 KiB unused to the lazy solar
+  chunk, which is not currently limiting the 100 Performance score.
+
+This clears the prior blocker for production Lighthouse measurement. It does
+not confirm Google indexing/Search Console sitemap processing, search ranking,
+or the separate AEO/GEO checker score. Agentic Browsing is a Lighthouse
+category, not proof of citations or GEO/AEO results.
+
+## Next actions
+
+1. Fix the concrete contrast and accessible-name findings without changing the
+   approved theme or 3D project universe; rerun Lighthouse accessibility.
+2. Inspect the homepage and six project URLs in Search Console and confirm
+   sitemap processing when access is available.
+3. Re-run the same AEO/GEO checker used for the original 47/100 report.
+4. Keep user-requested sliding book-page navigation (`f07ad639`) sequenced after
+   these checks; protect static HTML, reduced motion, and layout stability.

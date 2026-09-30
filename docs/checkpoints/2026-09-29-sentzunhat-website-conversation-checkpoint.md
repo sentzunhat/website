@@ -98,6 +98,54 @@ Vite development tooling rather than the production bundle.
   macOS ARM executable. It is present in the public repository; portability to
   other operating systems and architectures is unverified.
 
+## Latest state — 2026-09-30
+
+- Repository: public `sentzunhat/website`, organization `sentzunhat`, branch
+  `main`. At checkpoint creation, local `main`, `origin/main`, and GitHub all
+  matched `61b3f5933fa06daf169e27619490b690689191b8`; the working tree was clean
+  before this checkpoint update.
+- After the 2026-09-29 container milestone, `979c6b4` added build-time HTML for
+  the homepage and six project pages, metadata/canonicals/schema, sitemap and
+  AI-discovery files. `3a5a5d5` refined the Nawat/Pipil-inspired energy-line hero
+  while retaining proportional geometry and leaving the theme and 3D scene
+  alone. `61b3f59` recorded the production SEO/AEO/GEO audit and the proposed
+  sliding book-page section-navigation work item `f07ad639`.
+- A user-supplied Lighthouse 13.4.1 report for `https://sentzunhat.com/`, fetched
+  `2026-09-30T13:33:39Z`, directly confirms production page reachability and
+  reports Performance 100, Accessibility 96, Best Practices 100, SEO 100, and
+  Agentic Browsing 100. Metrics: FCP 0.4 s, LCP 0.5 s, Speed Index 0.7 s, TBT
+  10 ms, CLS 0.002, Interactive 0.8 s, and server response 120 ms.
+- Accessibility findings in that report: exploration-card links have contrast
+  ratios 1.35:1 (sky), 1.23:1 (aqua), and 3.94:1 (green), below 4.5:1 for the
+  reported text; the visible solar control says “Center on Sun” but its explicit
+  accessible name is “Center view on the Sun.” These point to concrete fixes.
+- Unminified/unused JavaScript savings are reported, but the report attributes
+  most listed bytes to browser extensions; it also lists 58 KiB unused in the
+  lazy solar chunk. Recheck with extensions excluded before treating these
+  savings as application work. Production performance scores are already 100.
+
+## Active priorities and unresolved work — 2026-09-30
+
+- `c3d0e4a8` (SEO/AEO/GEO verification) now has a production Lighthouse report;
+  its previous “no fresh checker report” blocker is cleared for Lighthouse.
+  Search Console indexing and sitemap-read evidence are still unavailable.
+  Lighthouse SEO 100 and Agentic Browsing 100 do not prove search ranking,
+  indexing, citations, or an AEO/GEO checker score.
+- Next: fix and recheck the reported text contrast and button-name mismatch;
+  then inspect the homepage and six project URLs in Search Console, confirm
+  sitemap processing, and capture page-by-page structured-data results. Run the
+  same AEO/GEO checker used for the earlier 47/100 report when available.
+- `f07ad639` remains plan-ready: prototype sliding book-page navigation
+  sequentially, preserving crawlable content, stable layout, reduced motion,
+  and persistent header/footer. Do this after or alongside the accessibility
+  corrections; keep the theme and approved 3D universe intact.
+- The 2026-09-29 `2a1f7bb` project-universe/container work remains pushed. Its
+  local named-volume persistence check is not proof of DigitalOcean volume
+  persistence. Verify the actual App Platform mount before making that claim.
+- UUID advisory `2a1dc541` remains separate. HAWP validation currently reports
+  incomplete closed records `7b5feb25`, `8c2e01f4`, and `9508bdf5`; leave these
+  separate from the production accessibility/search work.
+
 ## Decisions and constraints to preserve
 
 - Keep the approved Sentzunhat theme, hero, coastal identity, and corporate narrative direction.
@@ -114,20 +162,16 @@ Vite development tooling rather than the production bundle.
 
 ## Unresolved / not proven
 
-- Public deployment, CDN behavior, TLS configuration, external uptime, and production hosting have not been validated.
-- The container smoke test used temporary storage; durable `/data` volume behavior after container replacement and the target hosting platform remain unverified.
+- The supplied Lighthouse run verifies a production document response and page metrics at its fetch time. It does not establish CDN/TLS configuration, uptime, indexing, or search ranking.
+- Local named-volume survival was verified after `2a1f7bb`; DigitalOcean App Platform `/data` persistence remains unverified.
 - Browser-extension `runtime.lastError` messages remain outside the application boundary and were not modified.
 - The 20 ESLint warnings and the Three.js chunk-size warning remain. The three moderate npm audit entries are tracked separately in `.hawp/work/active/2a1dc541/plan.md`; no forced downgrade or UUID override was applied.
 - That separate dependency-advisory work item remains `plan-ready`; its next
   action is to reproduce the compatibility options in the Zacatl repository.
 - `.hawp/bin/hawp` is a committed macOS ARM binary; a portable contributor installation strategy is unresolved.
-- `hawp work validate` still reports one pre-existing closed-record completeness issue: `.hawp/work/closed/2026/09/29/7b5feb25/plan.md` lacks Verification and Close Checklist sections. The new work records pass consistency.
+- `hawp work validate` reports three existing closed-record completeness omissions: `7b5feb25` lacks Verification/Close Checklist, `8c2e01f4` lacks Outcome/Close Checklist, and `9508bdf5` lacks Outcome. Backlog consistency, evidence integrity, verification clarity, and dead-link checks pass.
 - No launch, incorporation, financial, GPU, infrastructure, or product-strategy change occurred.
 
 ## Next direction
 
-Resume from pushed commit `c61a9f41a891912c18b6c8a9ae0cfb0f35834fc0` on a clean `main` checkout. Before claiming deployment, choose the hosting target and verify a persistent `/data` mount, then exercise the built container in that target and recheck responsive, reduced-motion, accessibility, and performance behavior.
-
-Resume from: the post-commit `main` state at `c61a9f4`, with the paired React/Vite + Fastify/Sequelize/SQLite application committed, the local distroless Node 26 image smoke-tested, and no deployment target or durable volume yet verified.
-
-Next objective: select and validate the production hosting/storage target for the distroless image, including durable SQLite storage at `/data`, before making any public deployment claim.
+Resume from pushed `main` at `61b3f5933fa06daf169e27619490b690689191b8` and the supplied production Lighthouse report dated 2026-09-30. Next objective: clear the concrete accessibility findings, then complete Search Console/sitemap verification and the same-checker AEO/GEO comparison. Keep `f07ad639` as the following interaction prototype. Separately, verify DigitalOcean's durable `/data` mount before claiming hosting persistence.
