@@ -13,10 +13,9 @@ RUN npm ci
 
 COPY . .
 RUN npm run build \
-  && npm prune --omit=dev
-
-FROM node:26-trixie-slim AS runtime-prep
-RUN mkdir -p /data && chown 65532:65532 /data
+  && npm prune --omit=dev \
+  && mkdir -p /data \
+  && chown 65532:65532 /data
 
 FROM gcr.io/distroless/nodejs26-debian13:nonroot AS runtime
 
@@ -28,7 +27,7 @@ ENV NODE_ENV=production \
   DATABASE_PATH=/data/website.sqlite \
   LOG_LEVEL=info
 
-COPY --from=runtime-prep --chown=65532:65532 /data /data
+COPY --from=build --chown=65532:65532 /data /data
 COPY --from=build --chown=65532:65532 /app/node_modules ./node_modules
 COPY --from=build --chown=65532:65532 /app/src/apps/backend/dist ./src/apps/backend/dist
 COPY --from=build --chown=65532:65532 /app/src/apps/frontend/dist ./src/apps/frontend/dist

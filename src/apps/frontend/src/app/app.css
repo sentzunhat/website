@@ -519,7 +519,7 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   border-radius: inherit;
   background:
     radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--sky) 8%, transparent), transparent 42%),
-    color-mix(in srgb, var(--canvas) 30%, #07101b);
+    var(--canvas);
 }
 
 .solar-canvas {
@@ -570,7 +570,7 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   bottom: .9rem;
   left: 1.15rem;
   margin: 0;
-  color: color-mix(in srgb, white 74%, var(--sky));
+  color: var(--copy);
   font-size: .68rem;
   letter-spacing: .035em;
   pointer-events: none;
@@ -587,10 +587,10 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   align-items: center;
   gap: .4rem;
   padding: .46rem .68rem;
-  border: 1px solid color-mix(in srgb, white 26%, var(--sky));
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: color-mix(in srgb, #091523 78%, transparent);
-  color: #f5f9ff;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  color: var(--ink);
   font: inherit;
   font-size: .7rem;
   line-height: 1;
@@ -599,8 +599,8 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   backdrop-filter: blur(10px);
 }
 
-.solar-center span { color: #a6dcff; font-size: .92rem; }
-.solar-center:hover { background: color-mix(in srgb, #12304a 88%, transparent); }
+.solar-center span { color: var(--accent); font-size: .92rem; }
+.solar-center:hover { background: var(--elevated); }
 .solar-center:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
 
 .solar-system[data-scene='loading'] .solar-canvas { opacity: 0; }
@@ -651,19 +651,23 @@ select option {
 }
 
 @media (max-width: 860px) {
-  .hero-card { right: -8rem; opacity: .62; transform: scale(.88); }
+  .hero-card { position: relative; top: auto; right: auto; margin-top: 2.5rem; width: 100%; height: 22rem; opacity: 1; transform: none; }
   .about-section, .vision-section { grid-template-columns: 1fr; }
   .about-brand { min-height: 18rem; }
   .vision-section { align-items: start; }
 }
 
 @media (max-width: 640px) {
-  .hero { min-height: 51rem; padding-bottom: 21rem; }
+  .hero { min-height: 0; padding-bottom: 3rem; }
   .hero-lines { opacity: .2; }
-  .hero-card { top: 35rem; right: 0; bottom: auto; width: 100%; height: 15rem; opacity: .7; }
+  .hero-card { position: relative; top: auto; right: auto; margin-top: 2.5rem; width: 100%; height: 20rem; opacity: 1; transform: none; }
   .about-brand { min-height: 15rem; border-radius: 1.5rem; }
   .about-columns, .principles-grid { grid-template-columns: 1fr; }
   .principle-card { min-height: auto; padding-inline: 0; }
   .principle-card + .principle-card { border-top: 1px solid var(--line); border-left: 0; }
   .principle-card > span { margin-bottom: 2.5rem; }
+}
+
+@media (max-width: 380px) {
+  .solar-hint { bottom: 3.25rem; }
 }

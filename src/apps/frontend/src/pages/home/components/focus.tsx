@@ -1,3 +1,5 @@
+import { commercialProject } from '../content/site'
+
 export function Focus() {
   return (
     <section className="pb-24 sm:pb-30" id="focus">
@@ -6,7 +8,7 @@ export function Focus() {
           <p className="eyebrow mb-2.5">Current focus</p>
           <h2 className="text-[2.125rem] font-semibold tracking-[-0.06em]">Your memories, yours to keep.</h2>
         </div>
-        <p className="max-w-64 text-[0.8125rem] leading-5 text-muted">Mochilada is the current commercial product.</p>
+        <p className="max-w-64 text-[0.8125rem] leading-5 text-muted">{commercialProject.name} is the current commercial product.</p>
       </div>
       <article className="focus-card group relative overflow-hidden rounded-3xl border border-line bg-surface p-7 sm:p-10">
         <div className="focus-card-glow" aria-hidden="true" />
@@ -15,7 +17,7 @@ export function Focus() {
             <span className="status-pill primary">Preparing for release</span>
             <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-muted uppercase">macOS first</span>
           </div>
-          <h3 className="mb-4 text-4xl font-semibold tracking-[-0.06em] sm:text-5xl">Mochilada</h3>
+          <h3 className="mb-4 text-4xl font-semibold tracking-[-0.06em] sm:text-5xl">{commercialProject.name}</h3>
           <p className="mb-7 max-w-xl text-base leading-7 text-muted">
             A local-first application for importing, preserving, exploring,
             organizing, and exporting social archives you downloaded yourself.

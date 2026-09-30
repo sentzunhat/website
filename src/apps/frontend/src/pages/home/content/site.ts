@@ -1,5 +1,7 @@
 import type { Exploration, Principle, Project } from '../../../types'
 
+export const commercialProject = { name: 'Mochilada', accent: 'earth' } as const
+
 export const fallbackProjects: Project[] = [
   {
     name: 'HAWP',

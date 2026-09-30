@@ -13,7 +13,7 @@ export function Home() {
 
   return (
     <>
-      <Hero />
+      <Hero projects={projects} />
       <Focus />
       <About />
       <OpenSource projects={projects} projectsLoading={projectsLoading} />

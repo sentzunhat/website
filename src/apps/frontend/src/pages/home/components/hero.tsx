@@ -1,6 +1,14 @@
-import { SolarSystem } from './solar-system'
+import { useMemo } from 'react'
 
-export function Hero() {
+import { SolarSystem } from './solar-system'
+import type { Project } from '../../../types'
+import { commercialProject, explorations } from '../content/site'
+
+export function Hero({ projects }: { projects: Project[] }) {
+  const universeProjects = useMemo(
+    () => [commercialProject, ...projects, ...explorations],
+    [projects],
+  )
   return (
     <section className="hero py-25 sm:py-36" id="top">
       <svg
@@ -39,7 +47,7 @@ export function Hero() {
       </div>
 
       <div className="hero-card">
-        <SolarSystem />
+        <SolarSystem projects={universeProjects} />
       </div>
     </section>
   )

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 
-import type { SolarScene } from './solar-scene'
+import type { SolarScene, UniverseProject } from './solar-scene'
 
-export function SolarSystem() {
+export function SolarSystem({ projects }: { projects: UniverseProject[] }) {
   const [reducedMotion, setReducedMotion] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<SolarScene | null>(null)
@@ -26,15 +26,18 @@ export function SolarSystem() {
     const panel = panelRef.current
     if (!panel) return
 
+    setStatus('loading')
     let disposed = false
     let scene: SolarScene | null = null
+    let loading = false
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry?.isIntersecting || scene || disposed) return
+      if (!entry?.isIntersecting || loading || scene || disposed) return
 
+      loading = true
       void import('./solar-scene')
         .then(({ createSolarScene }) => {
           if (disposed) return
-          scene = createSolarScene(panel, motionRef.current)
+          scene = createSolarScene(panel, motionRef.current, projects)
           sceneRef.current = scene
           setStatus('ready')
         })
@@ -50,14 +53,14 @@ export function SolarSystem() {
       scene?.dispose()
       sceneRef.current = null
     }
-  }, [])
+  }, [projects])
 
   return (
     <div
       className="solar-system"
       ref={panelRef}
       role="group"
-      aria-label="Interactive three-dimensional model of the Solar System"
+      aria-label="Interactive three-dimensional project universe"
       aria-describedby="solar-hint solar-note"
       data-scene={status}
     >
@@ -68,8 +71,8 @@ export function SolarSystem() {
       </div>
       <p className="solar-hint" id="solar-hint">Drag to explore · pinch to zoom</p>
       <span className="sr-only" id="solar-note">
-        Planetary motion follows a Keplerian model from NASA J2000 mean elements.
-        Time is accelerated and display distances are compressed for this small panel.
+        One planet for each project: {projects.map((project) => project.name).join(', ')}.
+        Imagined orbits around a blue sun.
       </span>
       <button
         className="solar-center"
