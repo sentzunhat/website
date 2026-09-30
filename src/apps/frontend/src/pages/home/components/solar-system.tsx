@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { FaCrosshairs } from 'react-icons/fa'
 
 import type { SolarScene, UniverseProject } from './solar-scene'
 
@@ -80,7 +81,7 @@ export function SolarSystem({ projects }: { projects: UniverseProject[] }) {
         onClick={() => sceneRef.current?.resetView()}
         aria-label="Center view on the Sun"
       >
-        <span aria-hidden="true">◎</span>
+        <FaCrosshairs className="ui-icon action-icon" aria-hidden="true" />
         Center on Sun
       </button>
       {status === 'unavailable' && (
