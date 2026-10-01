@@ -1,7 +1,9 @@
 import './app.css'
 
-import { lazy, Suspense, type ComponentType } from 'react'
+import { lazy, Suspense, useCallback, useState, type ComponentType } from 'react'
 
+import { hasMeasurementId } from '../analytics/google-analytics'
+import { AnalyticsConsent } from '../components/analytics-consent'
 import { Footer } from '../components/footer'
 import { Header } from '../components/header'
 import { Home } from '../pages/home/home'
@@ -22,6 +24,8 @@ interface AppProps {
 }
 
 function App({ path = currentPath(), initialProjects, projectPageComponent: ProjectPage = LazyProjectPage }: AppProps) {
+  const [analyticsOpen, setAnalyticsOpen] = useState(false)
+  const openAnalytics = useCallback(() => setAnalyticsOpen(true), [])
   const normalizedPath = path.replace(/\/+$/, '') || '/'
   const projectMatch = normalizedPath.match(/^\/projects\/([^/]+)$/)
 
@@ -40,8 +44,9 @@ function App({ path = currentPath(), initialProjects, projectPageComponent: Proj
               <ProjectPage slug={decodeURIComponent(projectMatch[1])} liveProjects={initialProjects} />
             </Suspense>
           : <Home initialProjects={initialProjects} />}
-        <Footer />
       </main>
+      <Footer onAnalyticsSettings={hasMeasurementId() ? openAnalytics : undefined} />
+      <AnalyticsConsent open={analyticsOpen} onOpen={openAnalytics} onClose={() => setAnalyticsOpen(false)} />
     </>
   )
 }

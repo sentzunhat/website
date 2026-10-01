@@ -1,6 +1,10 @@
 import { FaArrowRight } from 'react-icons/fa'
 
-export function Footer() {
+interface FooterProps {
+  onAnalyticsSettings?: (() => void) | undefined
+}
+
+export function Footer({ onAnalyticsSettings }: FooterProps) {
   return (
     <footer className="flex flex-col items-start justify-between gap-2.5 border-t border-line py-6 font-mono text-[0.6875rem] text-muted sm:flex-row sm:items-center">
       <span>© {new Date().getFullYear()} Sentzunhat Corp. · Winnipeg, Manitoba</span>
@@ -8,6 +12,7 @@ export function Footer() {
         Meet the founder
         <FaArrowRight className="ui-icon" aria-hidden="true" />
       </a>
+      {onAnalyticsSettings && <button className="analytics-settings" type="button" onClick={onAnalyticsSettings}>Analytics settings</button>}
     </footer>
   )
 }

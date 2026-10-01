@@ -68,3 +68,6 @@ npm run preview --workspace=sentzunhat-website-frontend
 ```
 
 The static preview is available at `http://127.0.0.1:4174`. It displays build-time project content and does not serve live database data.
+# Website analytics
+
+Google Analytics 4 uses the configured web stream ID in `src/apps/frontend/src/analytics/google-analytics.ts` by default; `VITE_GA_MEASUREMENT_ID` can override it during the frontend build. The site asks visitors to accept or decline before loading Google's tag, supports changing the choice in the footer, and sends page views manually to avoid duplicates in the client-rendered app. A production rebuild and deployment are required before collection begins.
