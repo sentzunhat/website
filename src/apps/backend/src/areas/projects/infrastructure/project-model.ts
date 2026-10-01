@@ -5,7 +5,9 @@ import {
 } from '@sentzunhat/zacatl/third-party/databases/sequelize'
 
 export class Project extends SequelizeModel {
-  declare id: number
+  declare id: string
+  declare slug: string
+  declare sortOrder: number
   declare name: string
   declare description: string
   declare version: string
@@ -16,19 +18,23 @@ export class Project extends SequelizeModel {
 
 export const initProject = (sequelize: Sequelize): void => {
   Project.init({
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+    slug: { type: DataTypes.STRING, allowNull: false, unique: true },
+    sortOrder: { type: DataTypes.INTEGER, allowNull: false },
     name: { type: DataTypes.STRING, allowNull: false, unique: true },
     description: { type: DataTypes.STRING, allowNull: false },
     version: { type: DataTypes.STRING, allowNull: false },
     status: { type: DataTypes.STRING, allowNull: false },
     url: { type: DataTypes.STRING, allowNull: false },
     accent: { type: DataTypes.STRING, allowNull: false },
-  }, { sequelize, modelName: 'Project' })
+  }, { sequelize, modelName: 'Project', tableName: 'projects', underscored: true })
 }
 
 export const seedProjects = async (): Promise<void> => {
   await Project.bulkCreate([
     {
+      slug: 'hawp',
+      sortOrder: 1,
       name: 'HAWP',
       description: 'A durable, human-led workflow protocol for building with AI.',
       version: '0.0.23',
@@ -37,6 +43,8 @@ export const seedProjects = async (): Promise<void> => {
       accent: 'coral',
     },
     {
+      slug: 'zacatl',
+      sortOrder: 2,
       name: 'Zacatl',
       description: 'A blazing-fast, minimal, straightforward library for practical services.',
       version: '0.0.61',

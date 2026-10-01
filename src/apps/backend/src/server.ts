@@ -2,6 +2,7 @@ import { createApp } from './app'
 import { initProject, seedProjects } from './areas/projects/infrastructure/project-model'
 import { config } from './config'
 import { connectDatabase, sequelize } from './database'
+import { runMigrations } from './infrastructure/migrations/run-migrations'
 
 const app = createApp()
 
@@ -14,6 +15,7 @@ const shutdown = async (signal: string): Promise<void> => {
 const main = async (): Promise<void> => {
   initProject(sequelize)
   await connectDatabase()
+  await runMigrations(sequelize)
   await sequelize.sync()
   await seedProjects()
   await app.listen({ host: config.host, port: config.port })

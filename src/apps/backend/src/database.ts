@@ -14,4 +14,5 @@ export const sequelize = new Sequelize({
 export const connectDatabase = async (): Promise<void> => {
   if (config.databasePath !== ':memory:') await mkdir(dirname(config.databasePath), { recursive: true })
   await sequelize.authenticate()
+  await sequelize.query('PRAGMA foreign_keys = ON')
 }
