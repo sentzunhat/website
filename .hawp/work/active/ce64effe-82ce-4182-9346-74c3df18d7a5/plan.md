@@ -64,5 +64,6 @@ The server uses Zacatl's layer aggregators and class-token dependency registrati
 - [x] Gtag command shim now queues the original `arguments` object; local preview emitted a page-view request after opt-in.
 - [x] Local browser preview emitted a page-view and internal click request; explicit opt-out persisted and suppressed collection after reload. Requests were blocked during verification.
 - [x] Typechecks, lint, builds, diff checks, backend smoke, and browser decline/reopen behavior passed.
-- [ ] Push the head tag and interaction tracking, confirm the production deployment serves them, and verify live page/click events in GA4 Realtime.
+- [x] Push the head tag and interaction tracking (`b4ceb24`, `488c3cf`) and confirm the push succeeded.
+- [ ] Confirm the production deployment serves the new tag and verify live page/click events in GA4 Realtime. The live site still serves the old bundle as of 2026-10-01 21:36 UTC.
 - [x] Turso module recommendation and current pricing source were added to the separate active investigation.

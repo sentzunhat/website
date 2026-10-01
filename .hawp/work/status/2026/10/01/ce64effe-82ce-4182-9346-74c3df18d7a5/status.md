@@ -6,7 +6,7 @@ Install a detectable GA4 tag, collect page and internal navigation activity, and
 
 #### Current State
 
-The owner clarified that the global opt-in prompt blocks useful collection. The implementation now loads the tag from the page head, uses regional Consent Mode defaults, tracks internal navigation clicks and history/hash page views, and provides persistent enable/disable settings. Typecheck, lint, and production build pass. Changes are not yet pushed or deployed.
+The owner clarified that the global opt-in prompt blocks useful collection. The implementation now loads the tag from the page head, uses regional Consent Mode defaults, tracks internal navigation clicks and history/hash page views, and provides persistent enable/disable settings. Typecheck, lint, and production build pass. Changes are pushed; production has not rolled out the new bundle yet.
 
 #### What Was Inspected
 
@@ -26,11 +26,12 @@ The Google tag is now present in initial HTML. The frontend sends page views for
 - Current build explicitly sends page views on document loads and history/hash changes. Browser events could not be re-inspected in a clean session during this turn; production Tag Assistant/Realtime verification remains required.
 - Choosing Disable analytics persisted `denied`; after reload the tag still loaded for detection but no collection request was emitted.
 - `npm run check` passed after the page-view adjustment; lint reported 19 existing warnings and no errors, and Vite reported the existing large solar-scene chunk warning.
-- Production still needs the new source pushed/deployed and a real Tag Assistant/GA4 Realtime check.
+- Commits `b4ceb24` and `488c3cf` were pushed to `origin/main`.
+- At 2026-10-01 21:36 UTC, `https://sentzunhat.com/` still served the previous `index-BYAjL7oE.js` bundle and no Google tag in its HTML; `/projects/mochilada/` also returned old static HTML without the tag. The deployment has not yet rolled out these commits.
 
 #### What Remains Unproven
 
-The latest source has not been pushed or deployed. A page-view/click request from the deployed bundle and receipt in GA4 Realtime remain unverified.
+The commits are pushed, but the latest source has not been deployed. A page-view/click request from the deployed bundle and receipt in GA4 Realtime remain unverified.
 
 #### Constraints
 
@@ -38,7 +39,7 @@ No Analytics event was transmitted from the local preview. No deployment action 
 
 #### Help Wanted
 
-Deploy the latest `main` build through the configured DigitalOcean app deployment path if it does not deploy automatically.
+Check the GitHub/DigitalOcean deployment status and trigger or repair the `main` deployment if it has not started. Then confirm the live HTML and verify Tag Assistant plus GA4 Realtime.
 
 #### Suggested Next Step
 
