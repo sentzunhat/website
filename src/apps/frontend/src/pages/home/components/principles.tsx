@@ -5,7 +5,7 @@ export function Principles() {
     <section className="pb-24 sm:pb-30" id="principles">
       <div className="mb-7 flex flex-col items-start justify-between gap-5 border-b border-line pb-5 sm:flex-row sm:items-end">
         <div>
-          <p className="eyebrow mb-2.5">How we build</p>
+          <p className="eyebrow mb-2.5">Principles</p>
           <h2 className="text-[2.125rem] font-semibold tracking-[-0.06em]">Principles before promises.</h2>
         </div>
         <p className="max-w-64 text-[0.8125rem] leading-5 text-muted">A practical standard for product and engineering decisions.</p>

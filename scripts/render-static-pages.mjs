@@ -230,17 +230,17 @@ const renderHome = () => {
   return `
     <div class="prerender-page home-prerender">
       <header class="prerender-hero" id="top">
-        <p class="eyebrow">Independent software company · Winnipeg, Manitoba</p>
+        <p class="eyebrow">Independent company · Winnipeg, Manitoba</p>
         <h1>Small tools. Thoughtfully made.</h1>
         <p class="prerender-lede">Sentzunhat Corp. builds focused software products and reusable engineering foundations that give people more control over their technology and data.</p>
-        <p>Sentzunhat is a founder-led software company based in Winnipeg, Manitoba. The company combines commercial product work with public engineering foundations and clearly labelled prototypes. The goal is not to make one enormous platform. It is to build focused tools around understandable boundaries, privacy-conscious architecture, portable data, and human-directed AI workflows.</p>
+        <p>Sentzunhat is a founder-led company based in Winnipeg, Manitoba. The company combines commercial product work with public engineering foundations and clearly labelled prototypes. The goal is not to make one enormous platform. It is to build focused tools around understandable boundaries, privacy-conscious architecture, portable data, and human-directed AI workflows.</p>
       </header>
       <section class="prerender-section" id="focus">
         <p class="prerender-index">01</p>
         <div>
           <h2>What is Sentzunhat building now?</h2>
           <p>Mochilada is the current commercial focus. It is a local-first application for importing, preserving, exploring, organizing, and exporting social archives that a person downloaded themselves. The public launch direction is macOS first with local processing, no direct social-account connection in the launch flow, and a one-time purchase model.</p>
-          <p>The rest of the studio includes both public foundations and clearly labelled prototypes. Each project now has its own crawlable page so people and search systems can understand what is released, what is still being validated, and what Sentzunhat is not claiming yet.</p>
+          <p>Other Sentzunhat work includes public foundations and clearly labelled prototypes. Each project now has its own crawlable page so people and search systems can understand what is released, what is still being validated, and what Sentzunhat is not claiming yet.</p>
         </div>
       </section>
       <section class="prerender-section">

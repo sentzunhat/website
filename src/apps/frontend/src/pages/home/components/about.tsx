@@ -14,14 +14,14 @@ export function About() {
         />
       </div>
       <div className="about-copy">
-        <p className="eyebrow mb-3">About us</p>
+        <p className="eyebrow mb-3">Company</p>
         <h2 className="mb-6 max-w-2xl text-[clamp(2.4rem,5vw,4.25rem)] leading-[1.02] font-semibold tracking-[-0.065em]">
           A new company built on years of connected engineering work.
         </h2>
         <div className="about-columns">
           <p>
-            Sentzunhat Corp. is a founder-led software company based in Winnipeg,
-            Manitoba. We build focused applications alongside reusable engineering
+            Sentzunhat Corp. is a founder-led company based in Winnipeg,
+            Manitoba. We build focused products alongside reusable engineering
             foundations, with an emphasis on understandable systems and human control.
           </p>
           <p>

@@ -38,8 +38,8 @@ export function Header() {
         <span>sentzunhat</span>
       </a>
       <div className="flex items-center gap-3 text-[0.8125rem] text-muted sm:gap-7">
-        <a className="hidden transition-colors hover:text-ink sm:block" href="/#about">About</a>
-        <a className="hidden transition-colors hover:text-ink sm:block" href="/#focus">Work</a>
+        <a className="hidden transition-colors hover:text-ink sm:block" href="/#about">Company</a>
+        <a className="hidden transition-colors hover:text-ink sm:block" href="/#focus">Products</a>
         <a className="hidden transition-colors hover:text-ink lg:block" href="/#vision">Vision</a>
         <a
           className="inline-flex items-center gap-1.5 transition-colors hover:text-ink"

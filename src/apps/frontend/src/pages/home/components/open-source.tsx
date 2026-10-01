@@ -38,9 +38,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <h3 className="mb-2.5 text-[2.125rem] font-semibold tracking-[-0.07em]">{project.name}</h3>
         <p className="max-w-xs text-sm leading-6 text-muted">{project.description}</p>
       </div>
-      <div className="mt-14 flex items-center justify-between font-mono text-[0.6875rem] text-muted">
-        <span>Latest · {project.version}</span>
-        <FaArrowRight className="ui-icon text-card-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
+      <div className="project-card-footer mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4">
+        <span className="font-mono text-[0.6875rem] text-muted">Release {project.version}</span>
+        <span className="project-card-action">
+          Explore project
+          <FaArrowRight className="ui-icon transition-transform group-hover:translate-x-1" aria-hidden="true" />
+        </span>
       </div>
     </a>
   )
@@ -51,8 +54,8 @@ export function OpenSource({ projects, projectsLoading }: OpenSourceProps) {
     <section className="pb-24 sm:pb-30" id="opensource">
       <div className="mb-7 flex flex-col items-start justify-between gap-5 border-b border-line pb-5 sm:flex-row sm:items-end">
         <div>
-          <p className="eyebrow mb-2.5">Selected work</p>
-          <h2 className="text-[2.125rem] font-semibold tracking-[-0.06em]">Open source foundations</h2>
+          <p className="eyebrow mb-2.5">Public work</p>
+          <h2 className="text-[2.125rem] font-semibold tracking-[-0.06em]">Foundations</h2>
         </div>
         <p className="max-w-64 text-[0.8125rem] leading-5 text-muted">Public projects with real code behind the philosophy.</p>
       </div>

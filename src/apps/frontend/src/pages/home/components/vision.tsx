@@ -5,8 +5,8 @@ export function Vision() {
         <p className="eyebrow mb-3">Our vision</p>
         <h2>Focused products.<br /><em>Shared foundations.</em></h2>
         <p>
-          We are building a durable software company capable of creating products
-          for different problems without turning into a collection of unrelated experiments.
+          We are building a durable company capable of creating useful products
+          and systems for different problems without becoming a collection of unrelated experiments.
         </p>
       </div>
       <div className="vision-detail">

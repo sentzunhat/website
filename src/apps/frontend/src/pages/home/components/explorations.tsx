@@ -7,7 +7,7 @@ export function Explorations() {
     <section className="pb-24 sm:pb-30" id="explorations">
       <div className="mb-7 flex flex-col items-start justify-between gap-5 border-b border-line pb-5 sm:flex-row sm:items-end">
         <div>
-          <p className="eyebrow mb-2.5">In the studio</p>
+          <p className="eyebrow mb-2.5">Research &amp; development</p>
           <h2 className="text-[2.125rem] font-semibold tracking-[-0.06em]">What comes next</h2>
         </div>
         <p className="max-w-64 text-[0.8125rem] leading-5 text-muted">Development work, prototypes, and questions we are still exploring.</p>

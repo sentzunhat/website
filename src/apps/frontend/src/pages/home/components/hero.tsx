@@ -54,7 +54,7 @@ export function Hero({ projects }: { projects: Project[] }) {
       </svg>
 
       <div className="hero-copy">
-        <p className="eyebrow">Independent software company · Winnipeg, Manitoba</p>
+        <p className="eyebrow">Independent company · Winnipeg, Manitoba</p>
         <h1 className="mb-7 max-w-3xl text-[clamp(3.4rem,8vw,6rem)] leading-[0.98] font-semibold tracking-[-0.075em]">
           Small tools.<br />
           <em className="font-sans font-normal italic text-muted">Thoughtfully made.</em>
