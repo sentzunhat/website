@@ -1,10 +1,10 @@
-import { createApp } from './app'
-import { initProject, seedProjects } from './areas/projects/infrastructure/project-model'
 import { config } from './config'
-import { connectDatabase, sequelize } from './database'
-import { runMigrations } from './infrastructure/migrations/run-migrations'
+import { connectDatabase, sequelize } from './platforms/server/database/sequelize'
+import { createFastifyApp } from './platforms/server/fastify-app'
+import { createLayers } from './platforms/server/layers'
 
-const app = createApp()
+const layers = createLayers()
+const app = createFastifyApp()
 
 const shutdown = async (signal: string): Promise<void> => {
   app.log.info({ signal }, 'shutting down')
@@ -12,19 +12,16 @@ const shutdown = async (signal: string): Promise<void> => {
   await sequelize.close()
 }
 
-const main = async (): Promise<void> => {
-  initProject(sequelize)
+const startServer = async (): Promise<void> => {
   await connectDatabase()
-  await runMigrations(sequelize)
-  await sequelize.sync()
-  await seedProjects()
+  await layers.start()
   await app.listen({ host: config.host, port: config.port })
 }
 
 process.once('SIGINT', () => void shutdown('SIGINT'))
 process.once('SIGTERM', () => void shutdown('SIGTERM'))
 
-main().catch((error: unknown) => {
+startServer().catch((error: unknown) => {
   app.log.fatal({ error }, 'startup failed')
   process.exitCode = 1
 })

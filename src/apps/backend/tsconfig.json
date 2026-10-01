@@ -10,6 +10,8 @@
     "noUnusedParameters": true,
     "noUncheckedIndexedAccess": true,
     "useDefineForClassFields": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
