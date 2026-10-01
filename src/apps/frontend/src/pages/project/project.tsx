@@ -9,120 +9,15 @@ import {
   FaNpm,
 } from 'react-icons/fa'
 
-import projectContent from '../../content/project-pages.json'
-
-type ProjectLink = {
-  label: string
-  url: string
-  kind: 'external' | 'github' | 'npm'
-}
-
-type ProjectSection = {
-  heading: string
-  paragraphs: string[]
-  items?: string[]
-}
-
-type ProjectFaq = {
-  question: string
-  answer: string
-}
-
-type ProjectPageContent = {
-  slug: string
-  name: string
-  category: string
-  status: string
-  seoTitle: string
-  metaDescription: string
-  lede: string
-  intro: string
-  sections: ProjectSection[]
-  faq: ProjectFaq[]
-  links: ProjectLink[]
-  schemaType: string
-  schema: Record<string, string>
-}
-
-const content = projectContent as {
-  lastReviewed: string
-  projects: ProjectPageContent[]
-}
+import { content, findLiveProject, projectSchema, type ProjectLink, type ProjectPageContent } from './project-metadata'
+import type { Project } from '../../types'
 
 const setMeta = (selector: string, attribute: 'content' | 'href', value: string) => {
   const element = document.head.querySelector<HTMLElement>(selector)
   element?.setAttribute(attribute, value)
 }
 
-const projectSchema = (project: ProjectPageContent) => {
-  const url = `https://sentzunhat.com/projects/${project.slug}/`
-  const organizationId = 'https://sentzunhat.com/#organization'
-  const websiteId = 'https://sentzunhat.com/#website'
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Corporation',
-        '@id': organizationId,
-        name: 'Sentzunhat Corp.',
-        url: 'https://sentzunhat.com/',
-        logo: 'https://sentzunhat.com/sentzunhat-logo.svg',
-        sameAs: ['https://github.com/sentzunhat'],
-      },
-      {
-        '@type': 'WebSite',
-        '@id': websiteId,
-        url: 'https://sentzunhat.com/',
-        name: 'Sentzunhat Corp.',
-        publisher: { '@id': organizationId },
-        inLanguage: 'en-CA',
-      },
-      {
-        '@type': 'WebPage',
-        '@id': `${url}#webpage`,
-        url,
-        name: project.seoTitle,
-        description: project.metaDescription,
-        isPartOf: { '@id': websiteId },
-        about: { '@id': `${url}#project` },
-        dateModified: content.lastReviewed,
-        inLanguage: 'en-CA',
-      },
-      {
-        '@type': project.schemaType,
-        '@id': `${url}#project`,
-        name: project.name,
-        description: project.intro,
-        url,
-        ...(project.schemaType === 'Project'
-          ? { parentOrganization: { '@id': organizationId } }
-          : { creator: { '@id': organizationId } }),
-        ...project.schema,
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${url}#breadcrumb`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Sentzunhat',
-            item: 'https://sentzunhat.com/',
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: project.name,
-            item: url,
-          },
-        ],
-      },
-    ],
-  }
-}
-
-const updateStructuredData = (project: ProjectPageContent) => {
+const updateStructuredData = (project: ProjectPageContent, liveProject?: Project) => {
   let script = document.getElementById('page-structured-data') as HTMLScriptElement | null
   if (!script) {
     script = document.createElement('script')
@@ -130,7 +25,7 @@ const updateStructuredData = (project: ProjectPageContent) => {
     script.id = 'page-structured-data'
     document.head.append(script)
   }
-  script.textContent = JSON.stringify(projectSchema(project))
+  script.textContent = JSON.stringify(projectSchema(project, liveProject))
 }
 
 const ExternalLinkIcon = ({ kind }: { kind: ProjectLink['kind'] }) => {
@@ -139,8 +34,9 @@ const ExternalLinkIcon = ({ kind }: { kind: ProjectLink['kind'] }) => {
   return <FaExternalLinkAlt className="ui-icon" aria-hidden="true" />
 }
 
-export function ProjectPage({ slug }: { slug: string }) {
+export function ProjectPage({ slug, liveProjects = [] }: { slug: string; liveProjects?: Project[] | undefined }) {
   const project = content.projects.find((item) => item.slug === slug)
+  const liveProject = project ? findLiveProject(project, liveProjects) : undefined
 
   useEffect(() => {
     if (!project) {
@@ -158,8 +54,8 @@ export function ProjectPage({ slug }: { slug: string }) {
     setMeta('meta[property="og:url"]', 'content', url)
     setMeta('meta[name="twitter:title"]', 'content', project.seoTitle)
     setMeta('meta[name="twitter:description"]', 'content', project.metaDescription)
-    updateStructuredData(project)
-  }, [project])
+    updateStructuredData(project, liveProject)
+  }, [project, liveProject])
 
   if (!project) {
     return (
@@ -186,7 +82,8 @@ export function ProjectPage({ slug }: { slug: string }) {
         </a>
         <div className="project-page-meta">
           <span>{project.category}</span>
-          <span>{project.status}</span>
+          <span>{liveProject?.status ?? project.status}</span>
+          {liveProject && <span>Version {liveProject.version}</span>}
         </div>
         <h1>{project.name}</h1>
         <p className="project-page-lede">{project.lede}</p>
@@ -204,9 +101,19 @@ export function ProjectPage({ slug }: { slug: string }) {
         )}
       </header>
 
+      <nav className="project-page-guide" aria-label={`${project.name} page sections`}>
+        <span className="project-page-guide-label">On this page</span>
+        <div className="project-page-guide-links">
+          {project.sections.map((section, index) => (
+            <a href={`#project-section-${index + 1}`} key={section.heading}>{section.heading}</a>
+          ))}
+          <a href="#project-questions">Questions</a>
+        </div>
+      </nav>
+
       <div className="project-page-body">
         {project.sections.map((section, index) => (
-          <section className="project-detail-section" key={section.heading}>
+          <section className="project-detail-section" id={`project-section-${index + 1}`} key={section.heading}>
             <div className="project-detail-index" aria-hidden="true">
               {String(index + 1).padStart(2, '0')}
             </div>
@@ -228,7 +135,7 @@ export function ProjectPage({ slug }: { slug: string }) {
         ))}
       </div>
 
-      <section className="project-faq" aria-labelledby="project-faq-title">
+      <section className="project-faq" id="project-questions" aria-labelledby="project-faq-title">
         <div className="project-section-heading">
           <FaInfoCircle className="ui-icon" aria-hidden="true" />
           <div>
@@ -248,13 +155,13 @@ export function ProjectPage({ slug }: { slug: string }) {
 
       <section className="project-related" aria-labelledby="related-projects-title">
         <p className="eyebrow">More from Sentzunhat</p>
-        <h2 id="related-projects-title">Explore related projects</h2>
+        <h2 id="related-projects-title">Explore more projects</h2>
         <div className="project-related-grid">
           {related.map((item) => (
             <a href={`/projects/${item.slug}/`} key={item.slug}>
               <span>
                 <strong>{item.name}</strong>
-                <small>{item.status}</small>
+                <small>{findLiveProject(item, liveProjects)?.status ?? item.status}</small>
               </span>
               <FaArrowRight className="ui-icon" aria-hidden="true" />
             </a>

@@ -785,6 +785,18 @@ select option {
 .exploration-card.green { --exploration-link-color: var(--exploration-link-green); }
 
 /* Project pages */
+.project-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  color: var(--ink);
+  font-size: .78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.project-card-action .ui-icon { color: var(--card-accent); }
+
 .project-page {
   padding: clamp(4rem, 9vw, 7rem) 0 7rem;
 }
@@ -792,6 +804,42 @@ select option {
 .project-page-hero {
   padding-bottom: clamp(3rem, 7vw, 5.5rem);
   border-bottom: 1px solid var(--line);
+}
+
+.project-page-guide {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1rem 2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-page-guide-label {
+  padding-top: .4rem;
+  color: var(--muted);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.project-page-guide-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem .6rem;
+}
+
+.project-page-guide-links a {
+  border-radius: 999px;
+  padding: .35rem .65rem;
+  color: var(--copy);
+  font-size: .78rem;
+  line-height: 1.4;
+}
+
+.project-page-guide-links a:hover {
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .project-back-link {
@@ -1159,6 +1207,8 @@ select option {
 }
 
 @media (max-width: 720px) {
+  .project-page-guide { grid-template-columns: 1fr; }
+
   .project-faq-grid,
   .project-related-grid,
   .prerender-faq-grid,

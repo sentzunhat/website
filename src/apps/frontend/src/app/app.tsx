@@ -1,18 +1,29 @@
 import './app.css'
 
+import { lazy, Suspense, type ComponentType } from 'react'
+
 import { Footer } from '../components/footer'
 import { Header } from '../components/header'
 import { Home } from '../pages/home/home'
-import { ProjectPage } from '../pages/project/project'
+import type { Project } from '../types'
+
+type ProjectPageProps = { slug: string; liveProjects?: Project[] | undefined }
+const LazyProjectPage = lazy(() => import('../pages/project/project').then(({ ProjectPage }) => ({ default: ProjectPage })))
 
 const currentPath = () => {
   const normalized = window.location.pathname.replace(/\/+$/, '')
   return normalized === '' ? '/' : normalized
 }
 
-function App() {
-  const path = currentPath()
-  const projectMatch = path.match(/^\/projects\/([^/]+)$/)
+interface AppProps {
+  path?: string | undefined
+  initialProjects?: Project[] | undefined
+  projectPageComponent?: ComponentType<ProjectPageProps> | undefined
+}
+
+function App({ path = currentPath(), initialProjects, projectPageComponent: ProjectPage = LazyProjectPage }: AppProps) {
+  const normalizedPath = path.replace(/\/+$/, '') || '/'
+  const projectMatch = normalizedPath.match(/^\/projects\/([^/]+)$/)
 
   return (
     <>
@@ -25,8 +36,10 @@ function App() {
       >
         <Header />
         {projectMatch?.[1]
-          ? <ProjectPage slug={decodeURIComponent(projectMatch[1])} />
-          : <Home />}
+          ? <Suspense fallback={<p className="min-h-112 pt-16 text-sm text-muted" role="status">Loading project…</p>}>
+              <ProjectPage slug={decodeURIComponent(projectMatch[1])} liveProjects={initialProjects} />
+            </Suspense>
+          : <Home initialProjects={initialProjects} />}
         <Footer />
       </main>
     </>

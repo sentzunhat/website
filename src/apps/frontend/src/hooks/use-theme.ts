@@ -8,12 +8,19 @@ const readStoredTheme = (): Theme => {
 }
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState<Theme>(readStoredTheme)
+  const [theme, setTheme] = useState<Theme>('system')
+  const [restored, setRestored] = useState(false)
 
   useEffect(() => {
+    setTheme(readStoredTheme())
+    setRestored(true)
+  }, [])
+
+  useEffect(() => {
+    if (!restored) return
     document.documentElement.dataset.theme = theme
     localStorage.setItem('sentzunhat-theme', theme)
-  }, [theme])
+  }, [restored, theme])
 
   return { theme, setTheme }
 }

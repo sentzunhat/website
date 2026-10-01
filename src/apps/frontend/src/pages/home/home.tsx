@@ -7,9 +7,10 @@ import { OpenSource } from './components/open-source'
 import { Principles } from './components/principles'
 import { Vision } from './components/vision'
 import { useProjects } from '../../hooks/use-projects'
+import type { Project } from '../../types'
 
-export function Home() {
-  const { projects, projectsLoading } = useProjects()
+export function Home({ initialProjects }: { initialProjects?: Project[] | undefined }) {
+  const { projects, projectsLoading } = useProjects(initialProjects)
 
   return (
     <>

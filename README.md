@@ -1,6 +1,6 @@
 # sentzunhat website
 
-Public landing page for Sentzunhat Corp., its current product, open-source work, and carefully labelled studio research.
+Public landing page for Sentzunhat Corp., its current product, open-source foundations, and clearly labelled product research and prototypes.
 
 ## Stack
 
@@ -55,17 +55,16 @@ npm run typecheck
 npm run check
 ```
 
-`npm run build` emits the browser bundle to `src/apps/frontend/dist/` and the Node server modules to `src/apps/backend/dist/`. Start the compiled API with:
+`npm run build` emits the browser bundle and static preview pages to `src/apps/frontend/dist/`, the React server entry to `src/apps/frontend/server-dist/`, and the Node server modules to `src/apps/backend/dist/`. Start the production server with:
 
 ```bash
-LOG_LEVEL=info npm start
+NODE_ENV=production LOG_LEVEL=info npm start
 ```
 
-In a second terminal, serve the built frontend with the API proxy enabled:
+The production server at `http://127.0.0.1:3001` serves request-time React HTML for `/` and `/projects/:slug`, with current project status and version from SQLite. The browser hydrates those pages and can refresh data through `/api/projects`. Stable project prose and page metadata remain in source content. The generated pages also support a standalone static preview:
 
 ```bash
 npm run preview --workspace=sentzunhat-website-frontend
 ```
 
-The production preview is available at `http://127.0.0.1:4174`; the API listens
-at `http://127.0.0.1:3001`.
+The static preview is available at `http://127.0.0.1:4174`. It displays build-time project content and does not serve live database data.

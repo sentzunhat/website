@@ -9,7 +9,7 @@ const projectConfigs = [
 
 export default [
   {
-    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**'],
+    ignores: ['**/dist/**', '**/server-dist/**', '**/node_modules/**', '**/coverage/**'],
   },
   ...zacatl,
   {

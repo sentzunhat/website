@@ -31,6 +31,7 @@ COPY --from=build --chown=65532:65532 /data /data
 COPY --from=build --chown=65532:65532 /app/node_modules ./node_modules
 COPY --from=build --chown=65532:65532 /app/src/apps/backend/dist ./src/apps/backend/dist
 COPY --from=build --chown=65532:65532 /app/src/apps/frontend/dist ./src/apps/frontend/dist
+COPY --from=build --chown=65532:65532 /app/src/apps/frontend/server-dist ./src/apps/frontend/server-dist
 
 EXPOSE 3001
 VOLUME ["/data"]

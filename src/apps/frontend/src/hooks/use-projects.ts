@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { fallbackProjects } from '../pages/home/content/site'
 import type { Project } from '../types'
 
-export const useProjects = () => {
-  const [projects, setProjects] = useState<Project[]>(fallbackProjects)
-  const [projectsLoading, setProjectsLoading] = useState(true)
+export const useProjects = (initialProjects?: Project[]) => {
+  const [projects, setProjects] = useState<Project[]>(initialProjects ?? fallbackProjects)
+  const [projectsLoading, setProjectsLoading] = useState(initialProjects == null)
 
   useEffect(() => {
     const controller = new AbortController()
