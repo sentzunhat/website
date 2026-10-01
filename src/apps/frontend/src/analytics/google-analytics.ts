@@ -10,7 +10,7 @@ type GoogleTag = (...args: unknown[]) => void
 
 declare global {
   interface Window {
-    dataLayer?: unknown[][]
+    dataLayer?: unknown[]
     gtag?: GoogleTag
   }
 }
@@ -50,7 +50,11 @@ export const enableGoogleAnalytics = (): void => {
 
   initialized = true
   window.dataLayer = window.dataLayer ?? []
-  window.gtag = (...args: unknown[]) => window.dataLayer?.push(args)
+  window.gtag = function () {
+    // Google processes the original argument list from the documented gtag bootstrap.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments)
+  }
   window.gtag('js', new Date())
   window.gtag('config', measurementId, { send_page_view: false })
 
