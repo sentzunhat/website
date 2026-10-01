@@ -26,6 +26,7 @@ Each row links to its plan file when one exists.
 
 | ID | Type | Title | Status | Detail | Updated | Next Action |
 | --- | --- | --- | --- | --- | --- | --- |
+| `c4253e37-2d77-457b-afa8-2dfeb5887073` | investigation | Assess Turso database support in Zacatl | plan-ready | [plan](active/c4253e37-2d77-457b-afa8-2dfeb5887073/plan.md) | 2026-10-01 | Prototype a standalone Zacatl Turso module first; keep Sequelize as a conditional alternative |
 | `eb03bd96-c0df-4da0-821b-88717e414f94` | improvement | Move homepage and project page content into SQLite | plan-ready | [plan](active/eb03bd96-c0df-4da0-821b-88717e414f94/plan.md) | 2026-10-01 | Seed ordered pages/sections, then render them from SQLite through SSR |
 | `f07ad639` | improvement | Prototype sliding page navigation for home and project sections | plan-ready | [plan](active/f07ad639/plan.md) | 2026-10-01 | Start after the database-backed page model; prototype two sections and side-arrow controls |
 | `2a1dc541` | improvement | Resolve transitive Sequelize uuid advisory | plan-ready | [plan](active/2a1dc541/plan.md) | 2026-09-29 | Reproduce the scoped compatibility options in Zacatl |
@@ -47,6 +48,8 @@ Keep this section short (for example last 5-10 items or last 14-30 days).
 
 | ID | Type | Title | Closed | Detail |
 | --- | --- | --- | --- | --- |
+| `ce64effe-82ce-4182-9346-74c3df18d7a5` | improvement | Add consent-aware site analytics and simplify Zacatl wiring | 2026-10-01 | [plan](closed/2026/10/01/ce64effe-82ce-4182-9346-74c3df18d7a5/plan.md) |
+| `34397672-17e5-4db1-94fa-4a0466f08623` | improvement | Align backend with Zacatl layers and model structure | 2026-10-01 | [plan](closed/2026/10/01/34397672-17e5-4db1-94fa-4a0466f08623/plan.md) |
 | `327c8216-9cb7-468d-9d5b-769dea4e1ccd` | improvement | Give projects UUID identity and a page-content schema | 2026-10-01 | [plan](closed/2026/10/01/327c8216-9cb7-468d-9d5b-769dea4e1ccd/plan.md) |
 | `c0200001` | improvement | CORP-02 — Server-render React pages from live project data | 2026-10-01 | [plan](closed/2026/10/01/c0200001/plan.md) |
 | `c0300001` | improvement | CORP-03 — Measure and improve mobile loading | 2026-10-01 | [plan](closed/2026/10/01/c0300001/plan.md) |
@@ -55,8 +58,6 @@ Keep this section short (for example last 5-10 items or last 14-30 days).
 | `9508bdf5` | improvement | Improve crawlability, project pages, and icon consistency | 2026-09-29 | [plan](closed/2026/09/29/9508bdf5/plan.md) |
 | `5f1b9849` | improvement | Project universe and container simplification | 2026-09-29 | [plan](closed/2026/09/29/5f1b9849/plan.md) |
 | `7b5feb25` | improvement | Repair frontend shape and redesign hero system | 2026-09-29 | [plan](closed/2026/09/29/7b5feb25/plan.md) |
-| `815b752b` | improvement | Align website workspace and feature structure | 2026-09-29 | [plan](closed/2026/09/29/815b752b/plan.md) |
-| `dc0a4fe3` | improvement | Add interactive 3D solar system hero | 2026-09-29 | [plan](closed/2026/09/29/dc0a4fe3/plan.md) |
 
 ---
 

@@ -10,7 +10,7 @@ input: |
   Project pages should load from the database row with their sections. The homepage should use the same section model so its sections can support page-like navigation.
 
 context: |
-  Current project data is split between SQLite facts in Projects and detailed project content in src/apps/frontend/src/content/project-pages.json. Home sections are assembled as React components and source copy. Work item 327c8216-9cb7-468d-9d5b-769dea4e1ccd owns the UUID and page-section schema/migration. The existing SSR path already renders / and /projects/:slug/ from the server.
+  Current project facts are stored in SQLite while detailed project content remains in src/apps/frontend/src/content/project-pages.json and homepage components. The unpublished UUID/page schema is now defined by Sequelize models in the backend; no migration history is needed. The existing SSR path renders / and /projects/:slug/ from the server.
 
 mission: |
   Move the homepage and project-page content into the database schema, seed it from the reviewed current source content, and render the same crawlable pages through the existing SSR routes.
@@ -29,11 +29,11 @@ Directly inspected:
 - src/apps/frontend/src/pages/project/project-metadata.ts reads this JSON for metadata, project lookup, and structured-data generation.
 - src/apps/frontend/src/pages/home/home.tsx composes home sections from individual components.
 - src/apps/backend/src/page-routes.ts already calls renderPage(path, projects) for SSR.
-- The project identity/schema change is tracked separately in 327c8216-9cb7-468d-9d5b-769dea4e1ccd.
+- Project and page schema models live in `src/apps/backend/src/areas/*/infrastructure/models/` and initialize on a fresh database.
 
 ## Planned sequence
 
-1. Agree on the page/section content contract supplied by the schema item.
+1. Confirm the page/section content contract in the current Sequelize models.
 2. Create an idempotent import/seed from the existing reviewed page JSON and home-page copy.
 3. Add backend repositories/queries that return ordered pages and sections, including home.
 4. Pass server-loaded content to React SSR; keep client hydration on the same initial payload.

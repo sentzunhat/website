@@ -10,7 +10,7 @@ input: |
   Add a home-page and project-page section experience that feels like turning a book page or opening a sliding door, with swipe navigation and restrained side-arrow controls.
 
 context: |
-  The current visual direction is approved as simple, minimal, and timeless. The solar system and light/dark theme are approved and should remain intact. Project IDs and shared page-section structure are being handled by 327c8216-9cb7-468d-9d5b-769dea4e1ccd and eb03bd96-c0df-4da0-821b-88717e414f94. SEO/AEO/GEO crawlability depends on server-rendered page HTML and dedicated project URLs, so transitions must preserve semantic content and crawlable links.
+  The current visual direction is approved as simple, minimal, and timeless. The solar system and light/dark theme are approved and should remain intact. Project IDs and shared page-section structure are defined in the backend Sequelize models; page copy import and SSR integration remain in eb03bd96-c0df-4da0-821b-88717e414f94. SEO/AEO/GEO crawlability depends on server-rendered page HTML and dedicated project URLs, so transitions must preserve semantic content and crawlable links.
 
 mission: |
   Design and implement a progressive-enhancement section transition system shared by the homepage and project pages, with side arrows and touch swipes that work without harming accessibility, crawlability, or performance.
@@ -23,7 +23,7 @@ output: |
 
 ## Planned sequence
 
-1. Wait for the database-backed page and ordered-section contract in 327c8216-9cb7-468d-9d5b-769dea4e1ccd and eb03bd96-c0df-4da0-821b-88717e414f94.
+1. Wait for the page-copy import and ordered-section SSR contract in eb03bd96-c0df-4da0-821b-88717e414f94.
 2. Prototype the transition around two semantic sections with the header/footer fixed outside the transition area.
 3. Add unobtrusive previous/next arrow icons on the sides. At rest they are dim; on hover and keyboard focus they glow using the active theme accent.
 4. Verify keyboard, touch, ordinary scroll, reduced-motion, and server-rendered HTML behavior.
