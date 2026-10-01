@@ -28,8 +28,8 @@ Non-findings increase reader confidence that the review was thorough and not che
 
 ## Example
 
-**Initially appeared as:** `config.ts` may store secrets in plaintext.
-**What was checked:** Reviewed `src/config.ts` and all `.env*` loading code.
-**What was observed:** All secrets are loaded from environment variables at startup; configuration file itself contains no secrets.
-**Confidence:** Confirmed
+**Initially appeared as:** `config.ts` may store secrets in plaintext.  
+**What was checked:** Reviewed `src/config.ts` and all `.env*` loading code.  
+**What was observed:** All secrets are loaded from environment variables at startup; configuration file itself contains no secrets.  
+**Confidence:** Confirmed  
 **Conclusion:** Config file is safe; no plaintext secrets found.

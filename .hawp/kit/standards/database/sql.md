@@ -27,8 +27,8 @@ Maintain consistent, readable, and maintainable database schemas across the appl
 - **Example:**
   ```sql
   CREATE TABLE notes (
-    id TEXT PRIMARY KEY,
-    ...
+  	id TEXT PRIMARY KEY,
+  	...
   );
   ```
 
@@ -77,11 +77,11 @@ When representing object hierarchies in denormalized form, use the pattern:
 - **Example:**
   ```sql
   CREATE TABLE note_tags (
-    note_id TEXT NOT NULL REFERENCES notes(id),
-    tag_id TEXT NOT NULL REFERENCES tags(id),
-    source TEXT NOT NULL DEFAULT 'manual',
-    created_at TEXT NOT NULL,
-    PRIMARY KEY (note_id, tag_id)
+  	note_id TEXT NOT NULL REFERENCES notes(id),
+  	tag_id TEXT NOT NULL REFERENCES tags(id),
+  	source TEXT NOT NULL DEFAULT 'manual',
+  	created_at TEXT NOT NULL,
+  	PRIMARY KEY (note_id, tag_id)
   );
   ```
 
