@@ -70,4 +70,6 @@ npm run preview --workspace=sentzunhat-website-frontend
 The static preview is available at `http://127.0.0.1:4174`. It displays build-time project content and does not serve live database data.
 # Website analytics
 
-Google Analytics 4 uses the configured web stream ID in `src/apps/frontend/src/analytics/google-analytics.ts` by default; `VITE_GA_MEASUREMENT_ID` can override it during the frontend build. The site asks visitors to accept or decline before loading Google's tag, supports changing the choice in the footer, and sends page views manually to avoid duplicates in the client-rendered app. A production rebuild and deployment are required before collection begins.
+Google Analytics 4 uses the Sentzunhat web stream (`G-8TVQJXLW0K`) from the tag in `src/apps/frontend/index.html`. The frontend sends page views for document loads and in-page hash/history changes, enhanced measurement collects outbound clicks and scrolls, and the frontend emits GA4 `click` events for internal navigation links without sending URL query strings. GA4 provides aggregate device category, browser, operating system, and screen reports; the site does not fingerprint visitors.
+
+Analytics is enabled by default except for the configured EEA/UK regional consent defaults. Advertising storage, user data, Google signals, and ad personalization remain disabled. Visitors can enable or disable analytics from the footer's Analytics settings control. The preference is stored in local storage. A production rebuild and deployment are required for source changes to take effect.
