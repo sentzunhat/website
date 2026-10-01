@@ -2,8 +2,7 @@ import './app.css'
 
 import { lazy, Suspense, useCallback, useState, type ComponentType } from 'react'
 
-import { hasMeasurementId } from '../analytics/google-analytics'
-import { AnalyticsConsent } from '../components/analytics-consent'
+import { AnalyticsSettings } from '../components/analytics-settings'
 import { Footer } from '../components/footer'
 import { Header } from '../components/header'
 import { Home } from '../pages/home/home'
@@ -45,8 +44,8 @@ function App({ path = currentPath(), initialProjects, projectPageComponent: Proj
             </Suspense>
           : <Home initialProjects={initialProjects} />}
       </main>
-      <Footer onAnalyticsSettings={hasMeasurementId() ? openAnalytics : undefined} />
-      <AnalyticsConsent open={analyticsOpen} onOpen={openAnalytics} onClose={() => setAnalyticsOpen(false)} />
+      <Footer onAnalyticsSettings={openAnalytics} />
+      <AnalyticsSettings open={analyticsOpen} onClose={() => setAnalyticsOpen(false)} />
     </>
   )
 }

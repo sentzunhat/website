@@ -1,84 +1,97 @@
-/* eslint-disable @typescript-eslint/naming-convention -- GA4 requires its documented snake_case parameter names. */
-const defaultMeasurementId = 'G-8TVQJXLW0K'
-const configuredMeasurementId = import.meta.env.VITE_GA_MEASUREMENT_ID
-const measurementId = configuredMeasurementId === undefined || configuredMeasurementId.trim().length === 0
-  ? defaultMeasurementId
-  : configuredMeasurementId.trim()
+/* eslint-disable @typescript-eslint/naming-convention -- GA4 uses documented snake_case parameter names. */
 const consentKey = 'sentzunhat-analytics-consent'
+const measurementId = 'G-8TVQJXLW0K'
 
 type GoogleTag = (...args: unknown[]) => void
 
 declare global {
   interface Window {
-    dataLayer?: unknown[]
     gtag?: GoogleTag
+    [key: `ga-disable-${string}`]: boolean | undefined
   }
 }
 
-let initialized = false
+let clickTrackingInstalled = false
 
-const hasAnalyticsConsent = (): boolean => {
+const hasExplicitDenial = (): boolean => {
+  if (window['ga-disable-G-8TVQJXLW0K'] === true) return true
+
   try {
-    return window.localStorage.getItem(consentKey) === 'granted'
+    return window.localStorage.getItem(consentKey) === 'denied'
   } catch {
     return false
   }
 }
 
 const sendPageView = (): void => {
-  if (!hasAnalyticsConsent()) return
-
   window.gtag?.('event', 'page_view', {
     page_location: window.location.href,
-    page_path: `${window.location.pathname}${window.location.search}`,
+    page_path: `${window.location.pathname}${window.location.search}${window.location.hash}`,
     page_title: document.title,
   })
 }
 
-export const hasMeasurementId = (): boolean => Boolean(measurementId)
-
-export const hasAnalyticsChoice = (): boolean => {
-  try {
-    return window.localStorage.getItem(consentKey) !== null
-  } catch {
-    return true
-  }
-}
-
-export const enableGoogleAnalytics = (): void => {
-  if (measurementId === undefined || measurementId.length === 0 || initialized || !hasAnalyticsConsent()) return
-
-  initialized = true
-  window.dataLayer = window.dataLayer ?? []
-  window.gtag = function () {
-    // Google processes the original argument list from the documented gtag bootstrap.
-    // eslint-disable-next-line prefer-rest-params
-    window.dataLayer?.push(arguments)
-  }
-  window.gtag('js', new Date())
-  window.gtag('config', measurementId, { send_page_view: false })
-
-  const script = document.createElement('script')
-  script.async = true
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`
-  document.head.append(script)
-
-  sendPageView()
-  window.addEventListener('popstate', sendPageView)
+const trackCurrentPage = (): void => {
+  window.gtag?.('config', measurementId, {
+    page_location: window.location.href,
+    page_path: `${window.location.pathname}${window.location.search}${window.location.hash}`,
+    page_title: document.title,
+    send_page_view: true,
+  })
 }
 
 export const chooseAnalyticsConsent = (granted: boolean): void => {
+  let previousChoice: string | null = null
   try {
+    previousChoice = window.localStorage.getItem(consentKey)
     window.localStorage.setItem(consentKey, granted ? 'granted' : 'denied')
   } catch {
-    return
+    // The live setting still applies in this page even when storage is unavailable.
   }
 
-  if (granted) {
-    enableGoogleAnalytics()
-    return
-  }
+  window['ga-disable-G-8TVQJXLW0K'] = !granted
+  window.gtag?.('consent', 'update', {
+    analytics_storage: granted ? 'granted' : 'denied',
+  })
 
-  window.removeEventListener('popstate', sendPageView)
-  window.gtag?.('consent', 'update', { analytics_storage: 'denied' })
+  if (granted && previousChoice === 'denied') sendPageView()
+}
+
+export const installAnalyticsClickTracking = (): void => {
+  if (clickTrackingInstalled) return
+  clickTrackingInstalled = true
+
+  // The static HTML tag handles a real document load. SPA history changes
+  // need a fresh virtual page view; hash changes are handled here as well.
+  window.addEventListener('popstate', trackCurrentPage)
+  window.addEventListener('hashchange', trackCurrentPage)
+
+  document.addEventListener('click', (event) => {
+    if (hasExplicitDenial() || !(event.target instanceof Element)) return
+
+    const link = event.target.closest('a[href]')
+    if (!(link instanceof HTMLAnchorElement)) return
+
+    let destination: URL
+    try {
+      destination = new URL(link.href, window.location.href)
+    } catch {
+      return
+    }
+
+    if (destination.protocol !== 'http:' && destination.protocol !== 'https:') return
+    if (destination.origin !== window.location.origin) return
+
+    const linkPath = `${destination.pathname}${destination.search}${destination.hash}`
+    const currentPath = `${window.location.pathname}${window.location.hash}`
+    if (linkPath === currentPath && destination.origin === window.location.origin) return
+
+    window.gtag?.('event', 'click', {
+      link_url: linkPath,
+      link_domain: destination.hostname,
+      link_id: link.id || undefined,
+      link_classes: typeof link.className === 'string' ? link.className : undefined,
+      outbound: false,
+    })
+  })
 }

@@ -1,12 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 
+import { installAnalyticsClickTracking } from './analytics/google-analytics'
 import App from './app/app'
 import './app/base.css'
 import type { Project } from './types'
 
 const root = document.getElementById('root')
 if (root == null) throw new Error('Root element not found')
+
+installAnalyticsClickTracking()
 
 const readInitialProjects = (): Project[] | undefined => {
   const state = document.getElementById('initial-page-state')?.textContent
