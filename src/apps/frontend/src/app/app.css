@@ -113,6 +113,84 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   box-shadow: inset 0 1px 0 color-mix(in srgb, white 60%, transparent), 0 1.5rem 4rem color-mix(in srgb, var(--primary) 9%, transparent);
 }
 
+.section-booklet { position: relative; }
+.section-booklet-controls {
+  position: sticky;
+  z-index: 20;
+  top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: .6rem;
+  height: 0;
+  padding-right: .15rem;
+}
+.section-booklet-controls button {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--aqua) 30%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  color: var(--aqua);
+  box-shadow: 0 0 1.3rem color-mix(in srgb, var(--aqua) 0%, transparent);
+  backdrop-filter: blur(12px);
+  opacity: .46;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translateY(-.35rem);
+  transition: opacity .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.section-booklet-controls button:hover:not(:disabled),
+.section-booklet-controls button:focus-visible:not(:disabled) {
+  border-color: var(--aqua);
+  color: var(--ink);
+  box-shadow: 0 0 1.4rem color-mix(in srgb, var(--aqua) 45%, transparent);
+  opacity: 1;
+  transform: translateY(-.35rem) scale(1.04);
+}
+.section-booklet-controls button:disabled { opacity: .18; cursor: default; }
+.section-booklet-rail {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+.section-booklet-rail::-webkit-scrollbar { display: none; }
+.section-booklet-hint {
+  position: absolute;
+  z-index: 10;
+  top: .55rem;
+  left: .4rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: var(--muted);
+  font: 500 .62rem/1.2 'Fira Sans', sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.section-booklet-hint span:first-child { color: var(--aqua); font-family: ui-monospace, monospace; }
+.section-booklet-rail > section {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-booklet-rail { scroll-behavior: auto; }
+  .section-booklet-controls button { transition: none; }
+}
+@media (max-width: 640px) {
+  .section-booklet-controls { top: .65rem; gap: .4rem; }
+  .section-booklet-controls button { width: 2.35rem; height: 2.35rem; }
+  .section-booklet-hint { top: .8rem; left: .1rem; gap: .45rem; font-size: .55rem; }
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
