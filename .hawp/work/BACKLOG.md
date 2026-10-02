@@ -26,7 +26,8 @@ Each row links to its plan file when one exists.
 
 | ID | Type | Title | Status | Detail | Updated | Next Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ce64effe-82ce-4182-9346-74c3df18d7a5` | improvement | Install detectable GA4 with navigation analytics | in-progress | [plan](active/ce64effe-82ce-4182-9346-74c3df18d7a5/plan.md) | 2026-10-01 | Push the head tag and interaction tracking; verify on the deployed site |
+| `a1206037-b80f-409e-a394-fd38c0a4996b` | audit | GA4 routes, navigation, and device report | plan-ready | [plan](active/a1206037-b80f-409e-a394-fd38c0a4996b/plan.md) | 2026-10-02 | Confirm the GA4 stream, then produce route/click/device report with hostname separation |
+| `ce64effe-82ce-4182-9346-74c3df18d7a5` | improvement | Install detectable GA4 with navigation analytics | in-progress | [plan](active/ce64effe-82ce-4182-9346-74c3df18d7a5/plan.md) | 2026-10-02 | Push initial and virtual page-view fix; confirm live GA4 receipt |
 | `c4253e37-2d77-457b-afa8-2dfeb5887073` | investigation | Assess Turso database support in Zacatl | plan-ready | [plan](active/c4253e37-2d77-457b-afa8-2dfeb5887073/plan.md) | 2026-10-01 | Prototype a standalone Zacatl Turso module first; keep Sequelize as a conditional alternative |
 | `eb03bd96-c0df-4da0-821b-88717e414f94` | improvement | Move homepage and project page content into SQLite | plan-ready | [plan](active/eb03bd96-c0df-4da0-821b-88717e414f94/plan.md) | 2026-10-01 | Seed ordered pages/sections, then render them from SQLite through SSR |
 | `f07ad639` | improvement | Prototype sliding page navigation for home and project sections | in-progress | [plan](active/f07ad639/plan.md) | 2026-10-02 | Verify deployed category/document-scroll refinement, then review project-page scope and performance |

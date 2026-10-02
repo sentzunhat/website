@@ -4,7 +4,7 @@ ID: `ce64effe-82ce-4182-9346-74c3df18d7a5`
 Type: improvement
 Status: in-progress
 Opened: 2026-10-01
-Updated: 2026-10-01
+Updated: 2026-10-02
 
 input: |
   Google Tag Assistant does not detect the tag before a visitor accepts the site's opt-in prompt. Install the supplied GA4 tag in the page head, collect page and internal navigation activity, and report device categories.
@@ -55,6 +55,14 @@ Consent Mode defaults analytics on outside the EEA/UK, applies denied analytics 
 ## Outcome — 2026-10-01
 
 The server uses Zacatl's layer aggregators and class-token dependency registration. Provider/repository ports sit beside their adapters in feature folders. The frontend now installs GA4 `G-8TVQJXLW0K` in the HTML head, tracks page views and internal links, uses Enhanced Measurement for outbound clicks/scrolls, reports aggregate device categories, and exposes regional consent and persistent opt-out settings.
+
+## October 2 regression follow-up — initial and virtual page views
+
+Investigation: `src/apps/frontend/index.html` configures the tag with `send_page_view: false`. Before this follow-up, `installAnalyticsClickTracking()` registered `popstate` and `hashchange` listeners but did not send an initial page view. The homepage booklet updates section hashes with `history.pushState`, which emits neither event. Therefore a normal document load and in-app booklet navigation could be absent from GA4 despite the tag being installed. The existing click event does include destination path and hostname; GA4 reporting of those event parameters may require registering custom dimensions.
+
+Implementation: send one initial `page_view` unless the visitor has explicitly opted out; send a virtual page view after same-origin links change the URL through `pushState`; retain native `popstate` and `hashchange` tracking and suppress duplicate reports for the same URL. Production page views retain the full `page_location`, so GA4's hostname dimension can separate `localhost` from `sentzunhat.com` without introducing a custom hostname parameter.
+
+Verification: `npm run check` passed frontend/backend typecheck, lint, and frontend client/SSR/static plus backend builds (19 existing lint warnings). In a clean production preview, the initial `page_view` included the local full page URL; selecting `Why Sentzunhat` emitted an internal `click` and a second `page_view` for `/#about`. The GA collection endpoint returned HTTP 204. Live production receipt remains unverified. HAWP MCP inspection found the connected GSC Wizard account lacks Google Analytics scope. The authenticated Chrome Analytics home view showed Sentzunhat and Mochilada page titles, but route, click-parameter, and technology breakdowns have not yet been retrieved.
 
 ## Close Checklist
 

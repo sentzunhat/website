@@ -77,3 +77,10 @@ The owner requested full-viewport section backgrounds that change while moving t
 Implementation: `src/apps/frontend/src/pages/home/components/section-booklet.tsx` exposes the active panel index to a full-viewport backdrop. `src/apps/frontend/src/app/app.css` changes the backdrop accent per section and reduces the brightest card gradients, highlights, shadows, and blur. `src/apps/frontend/src/pages/home/components/solar-scene.ts` uses rough standard materials, low-strength procedural bump textures, softer theme-specific ambient/key lighting, and lower star, nebula, and glow intensity. The lighting and accent colors update when the theme changes.
 
 Verification is pending: no build, test, or browser inspection was run for this follow-up. Confirm full-width transitions, reduced shine, actual WebGL shading and bump texture, theme changes, reduced motion, and performance before treating the visual outcome as verified. Public deployment is also pending.
+
+
+## October 2 production Lighthouse follow-up
+
+The owner supplied production Lighthouse 13.4.1 reports for `https://sentzunhat.com/`. Mobile recorded Performance 94, LCP 1.6 s, TBT 280 ms, and CLS 0.029. Desktop recorded Performance 76, LCP 0.5 s, and CLS 0.847. Lighthouse attributed the desktop shift primarily to `main#main-content`; font-loaded hero/footer links were also listed as minor shift sources. This is production evidence of a desktop layout-shift problem; the underlying cause is not established by the report. Unused-JavaScript savings include browser-extension code and about 57 KB attributed to the intentionally on-demand solar scene, so no code removal is justified from that estimate alone.
+
+Next action: reproduce desktop CLS in a clean production-preview browser without extensions, inspect layout-shift entries and panel/header/footer measurements, then fix only a confirmed site-owned shift. Preserve the existing visual quality and mobile performance. Do not optimize for a 100 score at the expense of the experience.
