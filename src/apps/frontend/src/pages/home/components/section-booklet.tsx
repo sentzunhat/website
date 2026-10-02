@@ -8,7 +8,10 @@ interface SectionBookletProps {
 
 export function SectionBooklet({ children }: SectionBookletProps) {
   const rail = useRef<HTMLDivElement>(null)
+  const requestedSection = useRef<number | null>(null)
+  const pageScrollFrame = useRef<number | undefined>(undefined)
   const [activeSection, setActiveSection] = useState(0)
+  const [railHeight, setRailHeight] = useState<number>()
   const sectionCount = Children.count(children)
 
   const goTo = useCallback((index: number, target?: HTMLElement) => {
@@ -16,13 +19,16 @@ export function SectionBooklet({ children }: SectionBookletProps) {
     const panel = element?.children.item(index)
     if (!(panel instanceof HTMLElement) || !element) return
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+    requestedSection.current = index
     setActiveSection(index)
+    setRailHeight(panel.offsetHeight)
     element.scrollTo({ left: panel.offsetLeft, behavior })
-    if (target && target !== panel) {
-      panel.scrollTo({ top: target.getBoundingClientRect().top - panel.getBoundingClientRect().top + panel.scrollTop, behavior })
-    } else {
-      panel.scrollTo({ top: 0, behavior })
-    }
+    const destination = target ?? panel
+    if (pageScrollFrame.current !== undefined) cancelAnimationFrame(pageScrollFrame.current)
+    pageScrollFrame.current = requestAnimationFrame(() => {
+      const headerHeight = document.querySelector('main > nav')?.getBoundingClientRect().height ?? 0
+      window.scrollTo({ top: window.scrollY + destination.getBoundingClientRect().top - headerHeight, behavior })
+    })
   }, [])
 
   const move = useCallback((direction: -1 | 1) => {
@@ -32,13 +38,25 @@ export function SectionBooklet({ children }: SectionBookletProps) {
   useEffect(() => {
     const element = rail.current
     if (!element) return
-    const update = () => setActiveSection(Math.max(0, Math.min(sectionCount - 1, Math.round(element.scrollLeft / element.clientWidth))))
+    const update = () => {
+      const index = requestedSection.current ?? Math.max(0, Math.min(sectionCount - 1, Math.round(element.scrollLeft / element.clientWidth)))
+      const panel = element.children.item(index)
+      setActiveSection(index)
+      setRailHeight(panel?.getBoundingClientRect().height ?? 0)
+      if (panel instanceof HTMLElement && Math.abs(element.scrollLeft - panel.offsetLeft) < 2) requestedSection.current = null
+    }
+    const finish = () => { requestedSection.current = null; update() }
+    update()
     element.addEventListener('scroll', update, { passive: true })
+    element.addEventListener('scrollend', finish)
     const observer = new ResizeObserver(update)
     observer.observe(element)
+    Array.from(element.children).forEach((child) => observer.observe(child))
     return () => {
       element.removeEventListener('scroll', update)
+      element.removeEventListener('scrollend', finish)
       observer.disconnect()
+      if (pageScrollFrame.current !== undefined) cancelAnimationFrame(pageScrollFrame.current)
     }
   }, [sectionCount])
 
@@ -53,7 +71,8 @@ export function SectionBooklet({ children }: SectionBookletProps) {
       const target = document.getElementById(id)
       const element = rail.current
       if (!target || !element?.contains(target)) return
-      const panel = target.closest('section')
+      let panel = target.closest('section')
+      while (panel && panel.parentElement !== element) panel = panel.parentElement?.closest('section') ?? null
       const index = panel ? Array.from(element.children).indexOf(panel) : -1
       if (index >= 0) goTo(index, target)
     }
@@ -113,7 +132,7 @@ export function SectionBooklet({ children }: SectionBookletProps) {
         <span>{String(activeSection + 1).padStart(2, '0')} / {String(sectionCount).padStart(2, '0')}</span>
         <span>Swipe or use arrows to explore</span>
       </p>
-      <div className="section-booklet-rail" ref={rail} aria-label="Homepage booklet">
+      <div className="section-booklet-rail" ref={rail} aria-label="Homepage booklet" style={railHeight ? { height: railHeight } : undefined}>
         {children}
       </div>
     </div>

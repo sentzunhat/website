@@ -39,7 +39,7 @@ export function Header() {
       </a>
       <div className="header-actions flex items-center gap-3 text-[0.8125rem] text-muted sm:gap-7">
         <div className="site-section-links" aria-label="Homepage sections">
-          <a href="/#focus">Products</a>
+          <a href="/#projects">Projects</a>
           <a href="/#about">Company</a>
           <a href="/#opensource">Public work</a>
           <a href="/#vision">Vision</a>
