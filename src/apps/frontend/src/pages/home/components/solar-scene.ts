@@ -9,7 +9,7 @@ import {
   LineBasicMaterial,
   Mesh,
   MeshBasicMaterial,
-  MeshPhongMaterial,
+  MeshStandardMaterial,
   NormalBlending,
   Points,
   PointsMaterial,
@@ -81,6 +81,32 @@ function makeNebulaTexture() {
   return new CanvasTexture(canvas)
 }
 
+function makePlanetBumpTexture(seed: number) {
+  const canvas = document.createElement('canvas')
+  canvas.width = 128
+  canvas.height = 64
+  const context = canvas.getContext('2d')
+  const texture = new CanvasTexture(canvas)
+  if (!context) return texture
+
+  const noise = randomGenerator(seed)
+  const image = context.createImageData(canvas.width, canvas.height)
+  for (let y = 0; y < canvas.height; y += 1) {
+    for (let x = 0; x < canvas.width; x += 1) {
+      const index = (y * canvas.width + x) * 4
+      const ridge = Math.sin(x * 0.17 + Math.sin(y * 0.21) * 1.8) * 2.5
+      const value = Math.max(0, Math.min(255, 128 + ridge + (noise() - 0.5) * 13))
+      image.data[index] = value
+      image.data[index + 1] = value
+      image.data[index + 2] = value
+      image.data[index + 3] = 255
+    }
+  }
+  context.putImageData(image, 0, 0)
+  texture.needsUpdate = true
+  return texture
+}
+
 function randomGenerator(seed: number) {
   let value = seed >>> 0
   return () => {
@@ -130,23 +156,23 @@ export function createSolarScene(container: HTMLElement, reducedMotion: boolean,
   controls.zoomSpeed = 0.7
   controls.update()
 
-  const ambient = new AmbientLight('#c9e6ff', 2.1)
+  const ambient = new AmbientLight('#dbe8f2', 1.35)
   scene.add(ambient)
-  const sunlight = new PointLight('#91dcff', 240, 0, 1)
+  const sunlight = new PointLight('#91dcff', 48, 0, 1.6)
   scene.add(sunlight)
 
   const sun = new Mesh(
     new SphereGeometry(0.9, 32, 24),
-    new MeshBasicMaterial({ color: '#8ce7f5' }),
+    new MeshBasicMaterial({ color: '#a7e7ed' }),
   )
   scene.add(sun)
   const sunGlow = new Sprite(new SpriteMaterial({
-    map: makeNebulaTexture(), color: '#9bd9ff', transparent: true, opacity: 0.34,
+    map: makeNebulaTexture(), color: '#9bd9ff', transparent: true, opacity: 0.2,
     blending: AdditiveBlending, depthWrite: false,
   }))
   sunGlow.scale.set(7, 7, 1)
   const flare = new Sprite(new SpriteMaterial({
-    map: makeNebulaTexture(), color: '#7bcfff', transparent: true, opacity: 0.4,
+    map: makeNebulaTexture(), color: '#7bcfff', transparent: true, opacity: 0.16,
     blending: AdditiveBlending, depthWrite: false,
   }))
   flare.scale.set(8, 0.22, 1)
@@ -165,8 +191,13 @@ export function createSolarScene(container: HTMLElement, reducedMotion: boolean,
     orbitLines.push(orbit)
 
     const mesh = new Mesh(
-      new SphereGeometry(planet.radius, 24, 16),
-      new MeshPhongMaterial({ shininess: 26, specular: '#aac8e5' }),
+      new SphereGeometry(planet.radius, 32, 24),
+      new MeshStandardMaterial({
+        roughness: 0.84,
+        metalness: 0.015,
+        bumpMap: makePlanetBumpTexture(projectSeed(planet.name)),
+        bumpScale: 0.022,
+      }),
     )
     mesh.userData.planet = planet
     positionAt(planet, planet.phase, mesh.position)
@@ -292,23 +323,29 @@ export function createSolarScene(container: HTMLElement, reducedMotion: boolean,
     scene.background = new Color(token('canvas'))
     orbitMaterial.color.set(darkTheme ? '#8ab9de' : '#667c99')
     orbitMaterial.opacity = darkTheme ? 0.2 : 0.23
-    ambient.intensity = darkTheme ? 2.1 : 2.6
     stars.material.vertexColors = darkTheme
     stars.material.color.set(darkTheme ? '#ffffff' : '#26394a')
-    stars.material.opacity = darkTheme ? 0.85 : 0.65
+    stars.material.opacity = darkTheme ? 0.58 : 0.36
     stars.material.needsUpdate = true
+    ambient.color.set(darkTheme ? '#d1e5ff' : '#f0e9dc')
+    ambient.intensity = darkTheme ? 1.12 : 1.42
+    sunlight.color.set(darkTheme ? '#78b8ff' : '#f4cf9d')
+    sunlight.intensity = darkTheme ? 48 : 36
+    sun.material.color.set(darkTheme ? '#8ce7f5' : '#65bdc7')
     for (const mesh of planetMeshes) {
       const planet = mesh.userData.planet as PlanetData
       mesh.material.color.set(token(planet.accent) || token('primary'))
     }
     for (const cloud of nebulae) {
       cloud.material.blending = darkTheme ? AdditiveBlending : NormalBlending
-      cloud.material.opacity = darkTheme ? 0.32 : 0.22
+      cloud.material.opacity = darkTheme ? 0.14 : 0.08
       cloud.material.needsUpdate = true
     }
     for (const glow of [sunGlow, flare]) {
       glow.material.blending = darkTheme ? AdditiveBlending : NormalBlending
-      glow.material.opacity = darkTheme ? 0.85 : 0.8
+      glow.material.opacity = glow === sunGlow
+        ? (darkTheme ? 0.48 : 0.22)
+        : (darkTheme ? 0.24 : 0.12)
       glow.material.needsUpdate = true
     }
   }
@@ -339,6 +376,7 @@ export function createSolarScene(container: HTMLElement, reducedMotion: boolean,
       stars.material.dispose()
       for (const mesh of planetMeshes) {
         mesh.geometry.dispose()
+        if (mesh.material instanceof MeshStandardMaterial) mesh.material.bumpMap?.dispose()
         mesh.material.dispose()
       }
       sun.geometry.dispose()

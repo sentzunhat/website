@@ -132,6 +132,7 @@ export function SectionBooklet({ children }: SectionBookletProps) {
         <span>{String(activeSection + 1).padStart(2, '0')} / {String(sectionCount).padStart(2, '0')}</span>
         <span>Swipe or use arrows to explore</span>
       </p>
+      <div key={activeSection} className="section-booklet-backdrop" data-section={activeSection} aria-hidden="true" />
       <div className="section-booklet-rail" ref={rail} aria-label="Homepage booklet" style={railHeight ? { height: railHeight } : undefined}>
         {children}
       </div>

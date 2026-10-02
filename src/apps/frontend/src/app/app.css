@@ -109,18 +109,36 @@ section[id], #founder-story { scroll-margin-top: 7rem; }
 }
 
 .focus-card {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 84%, var(--aqua)), color-mix(in srgb, var(--surface) 92%, var(--primary)));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, white 60%, transparent), 0 1.5rem 4rem color-mix(in srgb, var(--primary) 9%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 94%, var(--aqua)), color-mix(in srgb, var(--surface) 97%, var(--primary)));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 24%, transparent), 0 1rem 3rem color-mix(in srgb, var(--primary) 5%, transparent);
 }
 
 .home-layout { display: flex; flex-direction: column; min-height: 100dvh; }
 .home-shell { display: flex; flex: 1 1 auto; flex-direction: column; }
 .home-shell > nav { position: sticky; z-index: 30; top: 0; flex: 0 0 auto; background: var(--canvas); }
-.home-layout > footer { flex: 0 0 auto; width: min(100% - 2rem, 70rem); margin-inline: auto; padding-block: .8rem; }
+.home-layout > footer { position: relative; z-index: 1; flex: 0 0 auto; width: min(100% - 2rem, 70rem); margin-inline: auto; padding-block: .8rem; background: var(--canvas); }
 .site-section-links { display: flex; align-items: center; gap: clamp(.65rem, 1.5vw, 1.4rem); white-space: nowrap; }
 .site-section-links a { transition: color .2s ease; }
 .site-section-links a:hover, .site-section-links a:focus-visible { color: var(--ink); }
 .section-booklet { position: relative; flex: 1 1 auto; min-height: 0; }
+.section-booklet-backdrop {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 75vw 62vh at 12% 28%, color-mix(in srgb, var(--section-accent, var(--aqua)) 13%, transparent), transparent 72%),
+    radial-gradient(ellipse 68vw 55vh at 88% 76%, color-mix(in srgb, var(--section-accent, var(--sky)) 9%, transparent), transparent 75%),
+    var(--canvas);
+  pointer-events: none;
+  animation: section-backdrop-arrive .55s ease both;
+}
+.section-booklet-backdrop[data-section='0'] { --section-accent: var(--aqua); }
+.section-booklet-backdrop[data-section='1'] { --section-accent: var(--primary); }
+.section-booklet-backdrop[data-section='2'] { --section-accent: var(--sky); }
+.section-booklet-backdrop[data-section='3'] { --section-accent: var(--aqua); }
+.section-booklet-backdrop[data-section='4'] { --section-accent: var(--green); }
+.section-booklet-backdrop[data-section='5'] { --section-accent: var(--primary); }
+@keyframes section-backdrop-arrive { from { opacity: .45; } to { opacity: 1; } }
 .section-booklet-controls {
   position: fixed;
   z-index: 20;
@@ -161,6 +179,8 @@ section[id], #founder-story { scroll-margin-top: 7rem; }
 }
 .section-booklet-controls button:disabled { opacity: .18; cursor: default; }
 .section-booklet-rail {
+  position: relative;
+  z-index: 1;
   display: flex;
   contain: layout paint;
   align-items: flex-start;
@@ -216,6 +236,7 @@ section[id], #founder-story { scroll-margin-top: 7rem; }
 @media (prefers-reduced-motion: reduce) {
   .section-booklet-rail { scroll-behavior: auto; }
   .section-booklet-controls button { transition: none; }
+  .section-booklet-backdrop { animation: none; }
 }
 @media (max-width: 640px) {
   main > nav { gap: .35rem; padding-block: .35rem; }
@@ -654,10 +675,10 @@ section[id], #founder-story { scroll-margin-top: 7rem; }
   border-radius: 2rem;
   background: color-mix(in srgb, var(--surface) 78%, transparent);
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, white 46%, transparent),
-    0 2rem 5rem color-mix(in srgb, var(--primary) 11%, transparent);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+    inset 0 1px 0 color-mix(in srgb, white 20%, transparent),
+    0 1.25rem 3.5rem color-mix(in srgb, var(--primary) 7%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .hero-card::before {
