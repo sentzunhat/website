@@ -67,3 +67,7 @@ The server uses Zacatl's layer aggregators and class-token dependency registrati
 - [x] Push the head tag and interaction tracking (`b4ceb24`, `488c3cf`) and confirm the push succeeded.
 - [ ] Confirm the production deployment serves the new tag and verify live page/click events in GA4 Realtime. The live site still serves the old bundle as of 2026-10-01 21:36 UTC.
 - [x] Turso module recommendation and current pricing source were added to the separate active investigation.
+
+## Follow-on homepage booklet — 2026-10-02
+
+The owner asked to proceed with the sliding-door sections once project data and sections were in place. The current homepage already has a data-backed commercial focus, database-backed HAWP/Zacatl cards, and configured exploration cards. The shared `SectionBooklet` now wraps the seven existing sections after the hero, with one-panel horizontal snap scrolling, swipe/scroll support, dimmed/glowing previous/next controls, a section count hint, anchor-aware navigation, and reduced-motion styling. Local preview verified a next-button panel advance and the `#about` link moving to its panel. Frontend typecheck, focused lint, production frontend build, and `git diff --check` passed. This follow-on is not yet committed or deployed.
