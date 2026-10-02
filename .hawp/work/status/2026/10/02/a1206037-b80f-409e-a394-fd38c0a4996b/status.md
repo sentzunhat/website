@@ -2,46 +2,43 @@
 
 ## Intent
 
-Establish the available GA4 access path and preserve the initial Analytics evidence while preparing the requested route, click, device, and platform report.
+Establish a simple GA4 baseline for Sentzunhat routes, clicks, devices, and platform, separating public from local traffic.
 
 ## Current State
 
-The existing GA4 integration has a local initial/virtual page-view correction in the active source. A new report work item is plan-ready. The GA4 MCP cannot read data until Analytics scope is connected.
+The authenticated Analytics browser yielded a dated baseline for Sep 4–Oct 1, 2026. The report is saved in `.hawp/work/status/2026/10/02/a1206037-b80f-409e-a394-fd38c0a4996b/ga4-baseline.md`. The work item remains active for a fresh post-change public read and a decision on click destination dimensions.
 
 ## What Was Inspected
 
-- `src/apps/frontend/index.html`
-- `src/apps/frontend/src/analytics/google-analytics.ts`
-- `src/apps/frontend/src/pages/home/components/section-booklet.tsx`
-- The available GSC Wizard GA4 property-list MCP
-- The open, authenticated Google Analytics home view in Chrome
+- GA4 Admin: property picker, web stream details, Custom definitions.
+- GA4 Reports: Pages and screens with Hostname, Events with Hostname, and Tech details with Browser, Device category, Platform / device category, and Operating system.
+- Existing site analytics source and `.hawp/work/active/a1206037-b80f-409e-a394-fd38c0a4996b/plan.md`.
 
 ## What Changed
 
-See `.hawp/work/active/ce64effe-82ce-4182-9346-74c3df18d7a5/plan.md` for the page-view instrumentation fix and `.hawp/work/active/a1206037-b80f-409e-a394-fd38c0a4996b/plan.md` for the report plan.
+Saved the baseline report and updated the active plan and backlog. No GA4 Admin setting was changed.
 
 ## What Was Directly Verified
 
-- The browser Analytics home view showed a Sentzunhat page title and a Mochilada page title, with page-view counts of 5 and 3 on the displayed last-7-days card.
-- The same view showed 9 active users, 75 events, 8 new users, and 2 active users in the last 30 minutes on its summary cards. These counts are only a snapshot of the currently open property and range; the property/stream link to `G-8TVQJXLW0K` is not yet confirmed.
-- The GA4 MCP returned `connected: false` because its connected Google account does not have Analytics scope.
-- A local production preview emitted the initial page-view and the booklet click plus `/#about` page-view; the collection endpoint returned HTTP 204.
+- Property `sentzunhat-corp` (`557072524`) has web stream `15939499111` for `https://sentzunhat.com`; measurement ID `G-8TVQJXLW0K` matches the site's source.
+- Sep 4–Oct 1: 8 page views (5 public, 3 local), 36 total events, 7 active users. Both `click` events were on local hosts, with no public `click` in the selected range.
+- The property had 0 custom dimensions. Click destinations were not available in the historical Events report.
+- Property-wide technology counts: 6 desktop and 2 mobile active users; browser Chrome 7; OS Macintosh 6, Android 1, iOS 1. Category counts overlap.
 
 ## What Remains Unproven
 
-- Whether the open Analytics property is the stream for `G-8TVQJXLW0K`.
-- Per-route and click-destination breakdowns, device category, browser, OS, and platform.
-- How localhost and production traffic currently distribute in the property.
-- Live receipt of the newly deployed initial/virtual page views.
+- Public receipt and trend of the Oct 2 initial/virtual page-view change. The selected date range ends Oct 1.
+- Historic click destinations and any future destination breakdown until the relevant event parameters are exposed in reporting.
+- Whether low engagement measures reflect visitor behavior or the tiny, mixed local/public sample.
 
 ## Constraints
 
-The current MCP is not connected to Analytics. The visible browser evidence is a limited home-card snapshot, not the requested complete report. No GA4 Admin settings were changed.
+Browser inspection was read-only. The previous GSC Wizard MCP lacks Analytics scope and is not preferred by the user due to cost. No new service or Cloud project was added.
 
 ## Help Wanted
 
-No implementation help is pending. A connected read-only GA4 MCP or a supported way to navigate the already authenticated Chrome Analytics reports would enable the full report.
+Decide whether destination-level click reporting is worth registering the existing `link_url` and `link_domain` event parameters as event-scoped custom dimensions.
 
 ## Suggested Next Step
 
-Connect Analytics scope to the GSC Wizard MCP or provide the authenticated report path; then verify the property/stream and generate the compact date-ranged report.
+After new public traffic accumulates, rerun the same date-ranged host breakdown and compare it with this baseline. Check the deployed click payload before changing GA4 definitions.
