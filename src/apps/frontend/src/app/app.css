@@ -113,46 +113,55 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   box-shadow: inset 0 1px 0 color-mix(in srgb, white 60%, transparent), 0 1.5rem 4rem color-mix(in srgb, var(--primary) 9%, transparent);
 }
 
-.section-booklet { position: relative; }
+.home-layout { display: flex; flex-direction: column; height: 100dvh; min-height: 28rem; }
+.home-shell { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+.home-shell > nav { flex: 0 0 auto; }
+.home-layout > footer { flex: 0 0 auto; width: min(100% - 2rem, 70rem); margin-inline: auto; padding-block: .8rem; }
+.site-section-links { display: flex; align-items: center; gap: clamp(.65rem, 1.5vw, 1.4rem); white-space: nowrap; }
+.site-section-links a { transition: color .2s ease; }
+.site-section-links a:hover, .site-section-links a:focus-visible { color: var(--ink); }
+.section-booklet { position: relative; flex: 1 1 auto; min-height: 0; }
 .section-booklet-controls {
-  position: sticky;
+  position: absolute;
   z-index: 20;
-  top: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  gap: .6rem;
-  height: 0;
-  padding-right: .15rem;
+  inset: 0;
+  pointer-events: none;
 }
 .section-booklet-controls button {
   display: grid;
-  width: 2.7rem;
-  height: 2.7rem;
+  position: absolute;
+  top: 50%;
+  width: 3rem;
+  height: 3rem;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--aqua) 30%, var(--line));
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 84%, transparent);
-  color: var(--aqua);
-  box-shadow: 0 0 1.3rem color-mix(in srgb, var(--aqua) 0%, transparent);
+  color: var(--accent);
+  box-shadow: 0 0 1.3rem color-mix(in srgb, var(--accent) 0%, transparent);
   backdrop-filter: blur(12px);
-  opacity: .46;
+  opacity: .66;
   cursor: pointer;
   pointer-events: auto;
-  transform: translateY(-.35rem);
+  transform: translateY(-50%);
   transition: opacity .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
+.section-booklet-controls button:first-child { left: .15rem; }
+.section-booklet-controls button:last-child { right: .15rem; }
 .section-booklet-controls button:hover:not(:disabled),
 .section-booklet-controls button:focus-visible:not(:disabled) {
-  border-color: var(--aqua);
+  border-color: var(--accent);
   color: var(--ink);
-  box-shadow: 0 0 1.4rem color-mix(in srgb, var(--aqua) 45%, transparent);
+  box-shadow: 0 0 1.4rem color-mix(in srgb, var(--accent) 45%, transparent);
   opacity: 1;
-  transform: translateY(-.35rem) scale(1.04);
+  transform: translateY(-50%) scale(1.04);
 }
 .section-booklet-controls button:disabled { opacity: .18; cursor: default; }
 .section-booklet-rail {
   display: flex;
+  height: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -162,33 +171,51 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
 .section-booklet-hint {
   position: absolute;
   z-index: 10;
-  top: .55rem;
-  left: .4rem;
+  bottom: .75rem;
+  left: 50%;
   display: flex;
   align-items: center;
   gap: .75rem;
   color: var(--muted);
-  font: 500 .62rem/1.2 'Fira Sans', sans-serif;
+  font: 500 .7rem/1.2 'Fira Sans', sans-serif;
   letter-spacing: .08em;
   text-transform: uppercase;
   pointer-events: none;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
-.section-booklet-hint span:first-child { color: var(--aqua); font-family: ui-monospace, monospace; }
+.section-booklet-hint span:first-child { color: var(--accent); font-family: ui-monospace, monospace; }
 .section-booklet-rail > section {
   flex: 0 0 100%;
   width: 100%;
+  height: 100%;
   min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  padding: clamp(2rem, 5vh, 4rem) clamp(3.4rem, 5vw, 4.5rem) 3.5rem;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
+.section-booklet-rail > section:not(.hero):not(.about-section):not(.vision-section):not(.founder-section) { display: flex; flex-direction: column; justify-content: safe center; }
+.section-booklet-rail > .about-section, .section-booklet-rail > .vision-section { align-content: safe center; }
+.section-booklet-rail > .hero { min-height: 0; }
+.section-booklet-rail > .founder-section { border-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   .section-booklet-rail { scroll-behavior: auto; }
   .section-booklet-controls button { transition: none; }
 }
 @media (max-width: 640px) {
-  .section-booklet-controls { top: .65rem; gap: .4rem; }
-  .section-booklet-controls button { width: 2.35rem; height: 2.35rem; }
-  .section-booklet-hint { top: .8rem; left: .1rem; gap: .45rem; font-size: .55rem; }
+  main > nav { gap: .35rem; padding-block: .35rem; }
+  .site-section-links { order: 3; width: 100%; overflow-x: auto; padding: .25rem 0; gap: 1.1rem; }
+  .header-actions { display: contents; }
+  .theme-switcher { margin-left: auto; }
+  .home-layout > footer { align-items: center; flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: .4rem .8rem; font-size: .6rem; }
+  .section-booklet-rail { height: calc(100% - 3.5rem); }
+  .section-booklet-rail > section { padding: 1.4rem 1rem 2rem; }
+  .section-booklet-controls button { top: auto; bottom: .65rem; width: 2.5rem; height: 2.5rem; transform: none; }
+  .section-booklet-controls button:hover:not(:disabled), .section-booklet-controls button:focus-visible:not(:disabled) { transform: scale(1.04); }
+  .section-booklet-hint { bottom: 1.35rem; gap: .4rem; font-size: .52rem; }
 }
 
 .hero-actions {
@@ -627,6 +654,27 @@ section[id], #founder-story { scroll-margin-top: 2rem; }
   border-radius: 1.35rem;
   content: '';
   pointer-events: none;
+}
+
+/* Keep the homepage's opening spread balanced inside its viewport panel. */
+.section-booklet-rail > .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.section-booklet-rail > .hero .hero-copy { min-width: 0; }
+.section-booklet-rail > .hero h1 { font-size: clamp(3rem, 5vw, 4.75rem); }
+.section-booklet-rail > .hero .hero-card {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: clamp(17rem, 44vh, 22rem);
+  margin: 0;
+}
+@media (max-width: 860px) {
+  .section-booklet-rail > .hero { grid-template-columns: 1fr; align-content: safe center; }
+  .section-booklet-rail > .hero .hero-card { height: min(32vh, 20rem); }
 }
 
 .solar-system {

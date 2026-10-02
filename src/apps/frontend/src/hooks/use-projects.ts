@@ -3,29 +3,36 @@ import { useEffect, useState } from 'react'
 import { fallbackProjects } from '../pages/home/content/site'
 import type { Project } from '../types'
 
-export const useProjects = (initialProjects?: Project[]) => {
+let pendingProjects: Promise<Project[]> | null = null
+
+const refreshProjects = (): Promise<Project[]> => {
+  if (pendingProjects) return pendingProjects
+  const request = fetch('/api/projects')
+    .then(async (response) => {
+      if (!response.ok) throw new Error(`Projects request failed: ${response.status}`)
+      return response.json() as Promise<Project[]>
+    })
+  pendingProjects = request
+  void request.finally(() => { pendingProjects = null }).catch(() => {})
+  return request
+}
+
+export const useProjects = (initialProjects?: Project[]): { projects: Project[]; projectsLoading: boolean } => {
   const [projects, setProjects] = useState<Project[]>(initialProjects ?? fallbackProjects)
   const [projectsLoading, setProjectsLoading] = useState(initialProjects == null)
 
   useEffect(() => {
-    const controller = new AbortController()
-
-    fetch('/api/projects', { signal: controller.signal })
-      .then(async (response) => {
-        if (!response.ok) {
-          throw new Error(`Projects request failed: ${response.status}`)
-        }
-        return response.json() as Promise<Project[]>
-      })
-      .then(setProjects)
+    let active = true
+    refreshProjects()
+      .then((result) => { if (active) setProjects(result) })
       .catch((error: unknown) => {
-        if (error instanceof Error && error.name !== 'AbortError') {
+        if (active && error instanceof Error) {
           setProjects(fallbackProjects)
         }
       })
-      .finally(() => setProjectsLoading(false))
+      .finally(() => { if (active) setProjectsLoading(false) })
 
-    return () => controller.abort()
+    return () => { active = false }
   }, [])
 
   return { projects, projectsLoading }

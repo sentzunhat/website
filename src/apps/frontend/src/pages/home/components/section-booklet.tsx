@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { Children, useCallback, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
@@ -8,71 +8,83 @@ interface SectionBookletProps {
 
 export function SectionBooklet({ children }: SectionBookletProps) {
   const rail = useRef<HTMLDivElement>(null)
-  const [canGoPrevious, setCanGoPrevious] = useState(false)
-  const [canGoNext, setCanGoNext] = useState(false)
   const [activeSection, setActiveSection] = useState(0)
+  const sectionCount = Children.count(children)
 
-  useEffect(() => {
+  const goTo = useCallback((index: number, target?: HTMLElement) => {
     const element = rail.current
-    if (!element) return
-
-    const update = () => {
-      const maximum = element.scrollWidth - element.clientWidth
-      setCanGoPrevious(element.scrollLeft > 2)
-      setCanGoNext(maximum - element.scrollLeft > 2)
-      const railLeft = element.getBoundingClientRect().left
-      const current = Array.from(element.children).findIndex((child) => {
-        const left = child.getBoundingClientRect().left
-        return left <= railLeft + 2 && child.getBoundingClientRect().right > railLeft + 2
-      })
-      setActiveSection(Math.max(0, current))
-    }
-    update()
-    element.addEventListener('scroll', update, { passive: true })
-    const observer = new ResizeObserver(update)
-    observer.observe(element)
-    Array.from(element.children).forEach((child) => observer.observe(child))
-
-    return () => {
-      element.removeEventListener('scroll', update)
-      observer.disconnect()
+    const panel = element?.children.item(index)
+    if (!(panel instanceof HTMLElement) || !element) return
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+    setActiveSection(index)
+    element.scrollTo({ left: panel.offsetLeft, behavior })
+    if (target && target !== panel) {
+      panel.scrollTo({ top: target.getBoundingClientRect().top - panel.getBoundingClientRect().top + panel.scrollTop, behavior })
+    } else {
+      panel.scrollTo({ top: 0, behavior })
     }
   }, [])
 
   const move = useCallback((direction: -1 | 1) => {
-    const element = rail.current
-    if (!element) return
-    const targetIndex = Math.max(0, Math.min(element.children.length - 1, activeSection + direction))
-    element.children.item(targetIndex)?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
-  }, [activeSection])
+    goTo(Math.max(0, Math.min(sectionCount - 1, activeSection + direction)))
+  }, [activeSection, goTo, sectionCount])
 
   useEffect(() => {
-    const handleAnchorNavigation = (event: MouseEvent) => {
-      if (!(event.target instanceof Element)) return
-      const link = event.target.closest<HTMLAnchorElement>('a[href^="#"]')
-      const element = rail.current
-      if (!link || !element) return
-      let targetId: string
+    const element = rail.current
+    if (!element) return
+    const update = () => setActiveSection(Math.max(0, Math.min(sectionCount - 1, Math.round(element.scrollLeft / element.clientWidth))))
+    element.addEventListener('scroll', update, { passive: true })
+    const observer = new ResizeObserver(update)
+    observer.observe(element)
+    return () => {
+      element.removeEventListener('scroll', update)
+      observer.disconnect()
+    }
+  }, [sectionCount])
+
+  useEffect(() => {
+    const navigateToHash = () => {
+      let id: string
       try {
-        targetId = decodeURIComponent(link.hash.slice(1))
+        id = decodeURIComponent(window.location.hash.slice(1))
       } catch {
         return
       }
-      const target = document.getElementById(targetId)
-      if (!target || !element.contains(target)) return
+      const target = document.getElementById(id)
+      const element = rail.current
+      if (!target || !element?.contains(target)) return
+      const panel = target.closest('section')
+      const index = panel ? Array.from(element.children).indexOf(panel) : -1
+      if (index >= 0) goTo(index, target)
+    }
+    const handleAnchorNavigation = (event: MouseEvent) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+      if (!(event.target instanceof Element)) return
+      const link = event.target.closest<HTMLAnchorElement>('a[href^="#"], a[href^="/#"]')
+      if (!link || link.pathname !== window.location.pathname) return
+      let id: string
+      try {
+        id = decodeURIComponent(link.hash.slice(1))
+      } catch {
+        return
+      }
+      const target = document.getElementById(id)
+      if (!target || !rail.current?.contains(target)) return
       event.preventDefault()
       window.history.pushState(null, '', link.hash)
-      const panel = target.closest('section')
-      if (panel) {
-        const panelIndex = Array.from(element.children).indexOf(panel)
-        setActiveSection(panelIndex)
-        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
-      }
-      window.setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300)
+      navigateToHash()
     }
     document.addEventListener('click', handleAnchorNavigation)
-    return () => document.removeEventListener('click', handleAnchorNavigation)
-  }, [])
+    window.addEventListener('popstate', navigateToHash)
+    window.addEventListener('hashchange', navigateToHash)
+    const frame = requestAnimationFrame(navigateToHash)
+    return () => {
+      cancelAnimationFrame(frame)
+      document.removeEventListener('click', handleAnchorNavigation)
+      window.removeEventListener('popstate', navigateToHash)
+      window.removeEventListener('hashchange', navigateToHash)
+    }
+  }, [goTo])
 
   useEffect(() => {
     const handleKeyNavigation = (event: KeyboardEvent) => {
@@ -90,18 +102,18 @@ export function SectionBooklet({ children }: SectionBookletProps) {
   return (
     <div className="section-booklet">
       <div className="section-booklet-controls" role="group" aria-label="Homepage sections">
-        <button type="button" aria-label="Previous section" onClick={() => move(-1)} disabled={!canGoPrevious}>
+        <button type="button" aria-label="Previous section" onClick={() => move(-1)} disabled={activeSection === 0}>
           <FaArrowLeft aria-hidden="true" />
         </button>
-        <button type="button" aria-label="Next section" onClick={() => move(1)} disabled={!canGoNext}>
+        <button type="button" aria-label="Next section" onClick={() => move(1)} disabled={activeSection === sectionCount - 1}>
           <FaArrowRight aria-hidden="true" />
         </button>
       </div>
       <p className="section-booklet-hint" aria-live="polite">
-        <span>{String(activeSection + 1).padStart(2, '0')} / {String(rail.current?.children.length ?? 7).padStart(2, '0')}</span>
+        <span>{String(activeSection + 1).padStart(2, '0')} / {String(sectionCount).padStart(2, '0')}</span>
         <span>Swipe or use arrows to explore</span>
       </p>
-      <div className="section-booklet-rail" ref={rail}>
+      <div className="section-booklet-rail" ref={rail} aria-label="Homepage booklet">
         {children}
       </div>
     </div>

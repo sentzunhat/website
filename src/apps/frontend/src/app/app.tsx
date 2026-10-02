@@ -29,13 +29,13 @@ function App({ path = currentPath(), initialProjects, projectPageComponent: Proj
   const projectMatch = normalizedPath.match(/^\/projects\/([^/]+)$/)
 
   return (
-    <>
+    <div className={projectMatch ? 'site-layout' : 'site-layout home-layout'}>
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
       <main
         id="main-content"
-        className="mx-auto w-[min(100%-2rem,70rem)] sm:w-[min(100%-3rem,70rem)]"
+        className={`mx-auto w-[min(100%-2rem,70rem)] sm:w-[min(100%-3rem,70rem)]${projectMatch ? '' : ' home-shell'}`}
       >
         <Header />
         {projectMatch?.[1]
@@ -46,7 +46,7 @@ function App({ path = currentPath(), initialProjects, projectPageComponent: Proj
       </main>
       <Footer onAnalyticsSettings={openAnalytics} />
       <AnalyticsSettings open={analyticsOpen} onClose={() => setAnalyticsOpen(false)} />
-    </>
+    </div>
   )
 }
 

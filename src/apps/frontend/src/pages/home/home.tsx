@@ -14,17 +14,15 @@ export function Home({ initialProjects }: { initialProjects?: Project[] | undefi
   const { projects, projectsLoading } = useProjects(initialProjects)
 
   return (
-    <>
+    <SectionBooklet>
       <Hero projects={projects} />
-      <SectionBooklet>
-        <Focus />
-        <About />
-        <OpenSource projects={projects} projectsLoading={projectsLoading} />
-        <Vision />
-        <Principles />
-        <Explorations />
-        <Founder />
-      </SectionBooklet>
-    </>
+      <Focus />
+      <About />
+      <OpenSource projects={projects} projectsLoading={projectsLoading} />
+      <Vision />
+      <Principles />
+      <Explorations />
+      <Founder />
+    </SectionBooklet>
   )
 }
