@@ -16,10 +16,10 @@ mission: |
   Produce a compact, source-backed GA4 baseline covering production route views, same-site click destinations, device category, browser/OS/platform, and date range. Show localhost separately from production and identify data-quality or custom-dimension gaps.
 
 constraints: |
-  Use read-only Analytics access. Do not change GA4 Admin definitions, filters, retention, or consent settings without explicit approval. Keep localhost and production identifiable by the GA4 hostname/page-location dimensions. Avoid collecting personal identifiers or treating low-volume/thresholded data as exact. Keep the deliverable simple; do not build a dashboard or add a new analytics service.
+  Use read-only Analytics access. Do not change GA4 Admin definitions, filters, retention, or consent settings without explicit approval. A free Looker Studio report is in scope as the requested interface, subject to the account authorization prompt. Keep localhost and production selectable by GA4 hostname. Avoid collecting personal identifiers or treating low-volume/thresholded data as exact.
 
 output: |
-  A dated report with the property/stream confirmation, date window, page and click tables, device/technology summary, localhost-versus-production comparison, method, caveats, and the next minimal setup step if reporting dimensions are missing.
+  A clean four-tab GA4 exploration plus a compact Looker Studio dashboard with a selectable hostname filter, date window, page/action/device/technology/source views, method, caveats, and explicit treatment of missing section/action dimensions.
 
 ## Investigation findings
 
@@ -55,3 +55,17 @@ Completed: confirmed property/stream identity; retrieved route, click, device, b
 ## October 2 exploration update
 
 Created [Sentzunhat marketing overview](https://analytics.google.com/analytics/web/?authuser=5#/analysis/a410459516p557072524/edit/ORMDbY0mS0WRv_Zbzn3vuA) in the authenticated GA4 property. Its four tabs are Pages and traffic, Actions and events, Devices and browsers, and Acquisition sources. Each uses **Hostname exactly matches `sentzunhat.com`**; the viewed window was September 4–October 1, 2026. The browser showed the tab names, configured dimensions/metrics, and hostname filters. This is a public-only overview; the earlier baseline remains the source for a separate local/public comparison. New action, scroll-depth, and booklet reach measurement belongs to `b317af61-e501-476a-8c44-c88ccc78a358`. Fresh production receipt and destination-level reporting remain unverified.
+
+## October 3 — report repair and dashboard scope
+
+The owner asked for a clean dashboard with a selectable `localhost` / `sentzunhat.com` host filter and sections, actions, devices, and users. This updates the earlier no-dashboard constraint: evaluate the free Google Looker Studio GA4 connector for the interactive host dropdown while preserving the existing production-only GA4 exploration as the public report.
+
+In the authenticated GA4 exploration, removed the empty duplicate `Free form 5` tab and renamed the existing session-source/medium tab to `Acquisition sources`. The report now has four named tabs: Pages and traffic, Actions and events, Devices and browsers, and Acquisition sources. All four retain the exact Hostname filter `sentzunhat.com`. Removed the unused Gender dimension from this exploration. The open date range is Last 28 days, Sep 5–Oct 2, 2026.
+
+Observed public-only totals in that window: 11 active users, 20 views, and 77 events. Routes shown were `/` (11 users, 18 views) and `/projects/mochilada/` (1 user, 2 views). Events included first_visit (10/10 users/events), session_start (10/18), page_view (7/20), scroll (5/14), user_engagement (4/10), and click (2/5). Device rows showed mobile Chrome/iOS (7 users, 41 events), desktop Chrome/Macintosh (3/33), mobile Safari/iOS (1/1), and a low-volume mobile Chrome/Macintosh row (0/2). Acquisition showed direct/(none) (10/57) and not set (3/20). Low volume and the last row's mixed device/platform fields limit interpretation.
+
+The exploration currently only reports generic click event totals. Click destinations are not exposed in this exploration, and section reach/action identifiers are not yet implemented/available. Section/action instrumentation is tracked in `b317af61-e501-476a-8c44-c88ccc78a358`.
+
+Looker Studio is the best fit for the requested host dropdown: Google's official controls can filter report data by dimension value, and its built-in Google Analytics connector can create a GA4 data source. The authenticated Data Studio tab currently shows an `Authorize Data Studio API` prompt stating it needs access to account data. I did not continue through that authorization screen. No paid connector was selected and no GA4 Admin setting was changed.
+
+Next: after the owner authorizes the Looker Studio connection, build one compact dashboard with date range and Hostname dropdown controls, overview metrics, routes, events/actions, device/browser/OS/platform, and traffic source. Add section/action breakdowns only after the event contract and required GA4 custom dimensions are approved and have data.
