@@ -2,7 +2,7 @@
 
 ID: e499ba73-5323-4284-a26d-f5caac7921df
 Type: improvement
-Status: plan-ready
+Status: in-progress
 Opened: 2026-10-02
 Updated: 2026-10-02
 
@@ -44,3 +44,13 @@ output: |
 - Desktop header layout remains intact. Run `npm run check`, then inspect rendered 320px, 390px, and desktop views and interactions in a browser. Record any public deployment check separately.
 
 Risk: medium because the shared header and booklet navigation meet at hash anchors. Planning only; no UI implementation or validation claimed here.
+
+## Implementation and verification — 2026-10-03
+
+**Theme check:** confirmed light, explicit dark, and system theme all provide the shared `--surface`, `--line`, `--ink`, `--elevated`, and `--focus-ring` tokens. The mobile panel uses those tokens for its fallback surface, translucent/blurred surface, borders, button states, and visible focus treatment. It follows the selected theme without defining fixed light/dark colors.
+
+**Changed:** `src/apps/frontend/src/components/header.tsx` now has a mobile menu toggle and one shared set of links/theme controls. The menu closes on Escape (returning focus to the toggle), link/theme selection, and desktop-width resize. `src/apps/frontend/src/app/app.css` styles a compact single-row header and the themed translucent panel at the existing 640px breakpoint. No new dependencies.
+
+**Locally verified:** `npm run check` completed successfully (19 existing lint warnings; the frontend retains its large solar-scene chunk warning). In the browser preview, the menu opened by pointer and keyboard, all four homepage anchors and GitHub/theme controls were present, Tab reached Projects, Escape closed and returned focus, theme selection changed Light/Dark and closed the panel, and System was restored. Anchor navigation from the homepage and a HAWP project page returned to the intended homepage hash and closed the menu. Rendered light and dark panel appearances were inspected.
+
+**Still pending:** production deployment/receipt and browser verification after deploy. The available browser preview did not allow exact 320px, 390px, or desktop viewport sizing in this pass; the CSS breakpoint keeps the existing desktop navigation layout outside 640px, but precise desktop rendering remains unverified. Close this item after post-push production check and record that limitation.
