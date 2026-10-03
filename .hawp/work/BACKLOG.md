@@ -26,7 +26,7 @@ Each row links to its plan file when one exists.
 
 | ID | Type | Title | Status | Detail | Updated | Next Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| `5ce19c15-fa9a-407c-ba3e-99a6fb86c818` | improvement | Center booklet arrows in the viewport | plan-ready | [plan](active/5ce19c15-fa9a-407c-ba3e-99a6fb86c818/plan.md) | 2026-10-03 | Adjust fixed arrow placement for desktop and mobile; verify no content or menu overlap |
+| `5ce19c15-fa9a-407c-ba3e-99a6fb86c818` | improvement | Center booklet arrows in the viewport | in-progress | [plan](active/5ce19c15-fa9a-407c-ba3e-99a6fb86c818/plan.md) | 2026-10-03 | Verify centered mobile position and desktop controls, then check production |
 | `b317af61-e501-476a-8c44-c88ccc78a358` | improvement | Measure marketing actions and homepage section reach | plan-ready | [plan](active/b317af61-e501-476a-8c44-c88ccc78a358/plan.md) | 2026-10-02 | Add lean events, verify consent and production receipt, then extend the GA4 overview |
 | `a1206037-b80f-409e-a394-fd38c0a4996b` | audit | GA4 routes, navigation, and device report | in-progress | [plan](active/a1206037-b80f-409e-a394-fd38c0a4996b/plan.md) | 2026-10-02 | Recheck fresh public data in the four-tab GA4 exploration |
 | `ce64effe-82ce-4182-9346-74c3df18d7a5` | improvement | Install detectable GA4 with navigation analytics | in-progress | [plan](active/ce64effe-82ce-4182-9346-74c3df18d7a5/plan.md) | 2026-10-02 | Push initial and virtual page-view fix; confirm live GA4 receipt |

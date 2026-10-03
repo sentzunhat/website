@@ -2,7 +2,7 @@
 
 ID: 5ce19c15-fa9a-407c-ba3e-99a6fb86c818
 Type: improvement
-Status: plan-ready
+Status: in-progress
 Opened: 2026-10-03
 Updated: 2026-10-03
 
@@ -27,4 +27,10 @@ output: |
 - The controls remain reachable without covering key text, the swipe hint, menu panel, or browser safe-area insets.
 - Existing navigation, disabled states, and keyboard focus behavior remain intact.
 
-Risk: low to medium because the arrows are fixed over interactive panel content. Planning only; no arrow code changed with this ticket.
+Risk: low to medium because the arrows are fixed over interactive panel content. Desktop is already centered at `50dvh`; keep that placement and bring mobile to the same safe-area-adjusted center.
+
+## Implementation — 2026-10-03
+
+Updated the mobile control position from the bottom hint row to the safe-area-adjusted `50dvh` center. The arrows now align vertically with the unchanged desktop placement. Added matching left/right safe-area offsets. Because fixed controls otherwise covered the Company heading at narrow widths, mobile booklet panels reserve a `2.75rem` side gutter, extended by device safe-area insets. This keeps panel copy outside the arrow hit areas while preserving the arrow size and swipe hint position.
+
+`npm run check` passed (19 existing lint warnings; existing solar-scene chunk and dynamic-import build warnings). Local narrow browser inspection showed the arrows centered and the Company heading clear of both controls. The Next arrow advanced the active-section indicator. Production deployment verification remains pending.

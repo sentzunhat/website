@@ -255,7 +255,15 @@ section[id], #founder-story { scroll-margin-top: 7rem; }
 @media (max-width: 640px) {
   .home-layout > footer { align-items: center; flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: .4rem .8rem; font-size: .6rem; }
   .section-booklet-rail > section { min-height: calc(100dvh - 10rem); padding: 1.4rem 1rem 3rem; }
-  .section-booklet-controls { top: auto; bottom: 5rem; }
+  .section-booklet-rail > section {
+    padding-inline: max(2.75rem, calc(env(safe-area-inset-left, 0px) + 2.75rem))
+      max(2.75rem, calc(env(safe-area-inset-right, 0px) + 2.75rem));
+  }
+  .section-booklet-controls {
+    top: calc(50dvh + (env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) / 2);
+    right: max(1rem, env(safe-area-inset-right, 0px));
+    left: max(1rem, env(safe-area-inset-left, 0px));
+  }
   .section-booklet-controls button { width: 2.5rem; height: 2.5rem; }
   .section-booklet-hint { bottom: 4.7rem; gap: .4rem; font-size: .52rem; }
   .projects-intro { align-items: start; flex-direction: column; gap: .5rem; }
