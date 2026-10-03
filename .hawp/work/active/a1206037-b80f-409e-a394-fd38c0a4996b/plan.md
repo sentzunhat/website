@@ -51,3 +51,7 @@ Risk: low for read-only report generation; medium if property Admin settings or 
 ## Verification
 
 Completed: confirmed property/stream identity; retrieved route, click, device, browser, and platform reports; separated public from local hosts; checked custom dimensions; saved the dated baseline. Pending: assess fresh public data after the Oct 2 instrumentation deployment and decide whether to register `link_url`/`link_domain` for destination reporting. No GA4 Admin setting was changed.
+
+## October 2 exploration update
+
+Created [Sentzunhat marketing overview](https://analytics.google.com/analytics/web/?authuser=5#/analysis/a410459516p557072524/edit/ORMDbY0mS0WRv_Zbzn3vuA) in the authenticated GA4 property. Its four tabs are Pages and traffic, Actions and events, Devices and browsers, and Acquisition sources. Each uses **Hostname exactly matches `sentzunhat.com`**; the viewed window was September 4–October 1, 2026. The browser showed the tab names, configured dimensions/metrics, and hostname filters. This is a public-only overview; the earlier baseline remains the source for a separate local/public comparison. New action, scroll-depth, and booklet reach measurement belongs to `b317af61-e501-476a-8c44-c88ccc78a358`. Fresh production receipt and destination-level reporting remain unverified.

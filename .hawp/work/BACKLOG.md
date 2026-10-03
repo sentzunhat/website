@@ -26,7 +26,9 @@ Each row links to its plan file when one exists.
 
 | ID | Type | Title | Status | Detail | Updated | Next Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| `a1206037-b80f-409e-a394-fd38c0a4996b` | audit | GA4 routes, navigation, and device report | in-progress | [plan](active/a1206037-b80f-409e-a394-fd38c0a4996b/plan.md) | 2026-10-02 | Baseline saved; review fresh public data and decide whether click destinations need custom dimensions |
+| `b317af61-e501-476a-8c44-c88ccc78a358` | improvement | Measure marketing actions and homepage section reach | plan-ready | [plan](active/b317af61-e501-476a-8c44-c88ccc78a358/plan.md) | 2026-10-02 | Add lean events, verify consent and production receipt, then extend the GA4 overview |
+| `e499ba73-5323-4284-a26d-f5caac7921df` | improvement | Put mobile header navigation in a translucent menu | plan-ready | [plan](active/e499ba73-5323-4284-a26d-f5caac7921df/plan.md) | 2026-10-02 | Implement menu and verify phone/desktop navigation |
+| `a1206037-b80f-409e-a394-fd38c0a4996b` | audit | GA4 routes, navigation, and device report | in-progress | [plan](active/a1206037-b80f-409e-a394-fd38c0a4996b/plan.md) | 2026-10-02 | Recheck fresh public data in the four-tab GA4 exploration |
 | `ce64effe-82ce-4182-9346-74c3df18d7a5` | improvement | Install detectable GA4 with navigation analytics | in-progress | [plan](active/ce64effe-82ce-4182-9346-74c3df18d7a5/plan.md) | 2026-10-02 | Push initial and virtual page-view fix; confirm live GA4 receipt |
 | `c4253e37-2d77-457b-afa8-2dfeb5887073` | investigation | Assess Turso database support in Zacatl | plan-ready | [plan](active/c4253e37-2d77-457b-afa8-2dfeb5887073/plan.md) | 2026-10-01 | Prototype a standalone Zacatl Turso module first; keep Sequelize as a conditional alternative |
 | `eb03bd96-c0df-4da0-821b-88717e414f94` | improvement | Move homepage and project page content into SQLite | plan-ready | [plan](active/eb03bd96-c0df-4da0-821b-88717e414f94/plan.md) | 2026-10-01 | Seed ordered pages/sections, then render them from SQLite through SSR |
