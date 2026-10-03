@@ -26,7 +26,6 @@ Each row links to its plan file when one exists.
 
 | ID | Type | Title | Status | Detail | Updated | Next Action |
 | --- | --- | --- | --- | --- | --- | --- |
-| `5ce19c15-fa9a-407c-ba3e-99a6fb86c818` | improvement | Center booklet arrows in the viewport | in-progress | [plan](active/5ce19c15-fa9a-407c-ba3e-99a6fb86c818/plan.md) | 2026-10-03 | Verify centered mobile position and desktop controls, then check production |
 | `b317af61-e501-476a-8c44-c88ccc78a358` | improvement | Measure marketing actions and homepage section reach | plan-ready | [plan](active/b317af61-e501-476a-8c44-c88ccc78a358/plan.md) | 2026-10-02 | Add lean events, verify consent and production receipt, then extend the GA4 overview |
 | `a1206037-b80f-409e-a394-fd38c0a4996b` | audit | GA4 routes, navigation, and device report | in-progress | [plan](active/a1206037-b80f-409e-a394-fd38c0a4996b/plan.md) | 2026-10-02 | Recheck fresh public data in the four-tab GA4 exploration |
 | `ce64effe-82ce-4182-9346-74c3df18d7a5` | improvement | Install detectable GA4 with navigation analytics | in-progress | [plan](active/ce64effe-82ce-4182-9346-74c3df18d7a5/plan.md) | 2026-10-02 | Push initial and virtual page-view fix; confirm live GA4 receipt |
@@ -52,6 +51,7 @@ Keep this section short (for example last 5-10 items or last 14-30 days).
 
 | ID | Type | Title | Closed | Detail |
 | --- | --- | --- | --- | --- |
+| `5ce19c15-fa9a-407c-ba3e-99a6fb86c818` | improvement | Center booklet arrows in the viewport | 2026-10-03 | [plan](closed/2026/10/03/5ce19c15-fa9a-407c-ba3e-99a6fb86c818/plan.md) |
 | `e499ba73-5323-4284-a26d-f5caac7921df` | improvement | Put mobile header navigation in a translucent menu | 2026-10-03 | [plan](closed/2026/10/03/e499ba73-5323-4284-a26d-f5caac7921df/plan.md) |
 | `34397672-17e5-4db1-94fa-4a0466f08623` | improvement | Align backend with Zacatl layers and model structure | 2026-10-01 | [plan](closed/2026/10/01/34397672-17e5-4db1-94fa-4a0466f08623/plan.md) |
 | `327c8216-9cb7-468d-9d5b-769dea4e1ccd` | improvement | Give projects UUID identity and a page-content schema | 2026-10-01 | [plan](closed/2026/10/01/327c8216-9cb7-468d-9d5b-769dea4e1ccd/plan.md) |
@@ -61,7 +61,6 @@ Keep this section short (for example last 5-10 items or last 14-30 days).
 | `8c2e01f4` | improvement | Refine hero energy geometry | 2026-09-29 | [plan](closed/2026/09/29/8c2e01f4/plan.md) |
 | `9508bdf5` | improvement | Improve crawlability, project pages, and icon consistency | 2026-09-29 | [plan](closed/2026/09/29/9508bdf5/plan.md) |
 | `5f1b9849` | improvement | Project universe and container simplification | 2026-09-29 | [plan](closed/2026/09/29/5f1b9849/plan.md) |
-| `7b5feb25` | improvement | Repair frontend shape and redesign hero system | 2026-09-29 | [plan](closed/2026/09/29/7b5feb25/plan.md) |
 
 ---
 

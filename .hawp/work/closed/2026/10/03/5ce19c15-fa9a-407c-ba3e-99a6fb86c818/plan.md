@@ -2,7 +2,7 @@
 
 ID: 5ce19c15-fa9a-407c-ba3e-99a6fb86c818
 Type: improvement
-Status: in-progress
+Status: closed
 Opened: 2026-10-03
 Updated: 2026-10-03
 
@@ -33,4 +33,24 @@ Risk: low to medium because the arrows are fixed over interactive panel content.
 
 Updated the mobile control position from the bottom hint row to the safe-area-adjusted `50dvh` center. The arrows now align vertically with the unchanged desktop placement. Added matching left/right safe-area offsets. Because fixed controls otherwise covered the Company heading at narrow widths, mobile booklet panels reserve a `2.75rem` side gutter, extended by device safe-area insets. This keeps panel copy outside the arrow hit areas while preserving the arrow size and swipe hint position.
 
-`npm run check` passed (19 existing lint warnings; existing solar-scene chunk and dynamic-import build warnings). Local narrow browser inspection showed the arrows centered and the Company heading clear of both controls. The Next arrow advanced the active-section indicator. Production deployment verification remains pending.
+`npm run check` passed (19 existing lint warnings; existing solar-scene chunk and dynamic-import build warnings). Local narrow browser inspection showed the arrows centered and the Company heading clear of both controls. The Next arrow advanced the active-section indicator.
+
+Production verification on 2026-10-03 confirmed that the homepage serves `/assets/index-DBG_YeUT.js` and `/assets/index-DggAPqJu.css`, matching the latest local build. The live CSS contains the 50dvh desktop placement, safe-area-adjusted mobile center, and mobile side gutters. The production Next arrow advanced the section indicator to 02/06. The available narrow browser view showed the mobile homepage and controls; exact 320px and 390px device sizes were not separately measured. Desktop positioning remains the existing 50dvh rule and was not changed by this patch.
+
+## Outcome
+
+Mobile arrows now sit at the usable viewport midpoint, with safe-area offsets and panel gutters that keep key copy clear. Desktop arrows remain centered at 50dvh. Navigation behavior is unchanged.
+
+## Verification
+
+- `npm run check` passed with 19 existing lint warnings and existing frontend build warnings.
+- Local narrow browser check confirmed clear heading gutters and successful Next navigation.
+- Production asset hashes matched the local build; live CSS rules and Next navigation were confirmed.
+- Exact 320px/390px viewport dimensions were not available for measurement.
+
+## Close Checklist
+
+- [x] Center arrows on mobile and retain desktop midpoint placement.
+- [x] Preserve safe-area clearance and readable panel copy.
+- [x] Verify local and production navigation.
+- [x] Record viewport-size limitation.
