@@ -2,7 +2,7 @@
 
 ID: e499ba73-5323-4284-a26d-f5caac7921df
 Type: improvement
-Status: in-progress
+Status: done
 Opened: 2026-10-02
 Updated: 2026-10-02
 
@@ -43,7 +43,7 @@ output: |
 - `/#projects`, `/#about`, `/#opensource`, and `/#vision` still select and reveal the intended homepage sections beneath the sticky header, including when followed from a project page. GitHub and all three theme choices still work.
 - Desktop header layout remains intact. Run `npm run check`, then inspect rendered 320px, 390px, and desktop views and interactions in a browser. Record any public deployment check separately.
 
-Risk: medium because the shared header and booklet navigation meet at hash anchors. Planning only; no UI implementation or validation claimed here.
+Risk: medium because the shared header and booklet navigation meet at hash anchors.
 
 ## Implementation and verification — 2026-10-03
 
@@ -53,4 +53,23 @@ Risk: medium because the shared header and booklet navigation meet at hash ancho
 
 **Locally verified:** `npm run check` completed successfully (19 existing lint warnings; the frontend retains its large solar-scene chunk warning). In the browser preview, the menu opened by pointer and keyboard, all four homepage anchors and GitHub/theme controls were present, Tab reached Projects, Escape closed and returned focus, theme selection changed Light/Dark and closed the panel, and System was restored. Anchor navigation from the homepage and a HAWP project page returned to the intended homepage hash and closed the menu. Rendered light and dark panel appearances were inspected.
 
-**Still pending:** production deployment/receipt and browser verification after deploy. The available browser preview did not allow exact 320px, 390px, or desktop viewport sizing in this pass; the CSS breakpoint keeps the existing desktop navigation layout outside 640px, but precise desktop rendering remains unverified. Close this item after post-push production check and record that limitation.
+## Outcome — 2026-10-03
+
+The mobile header now uses a single-row logo and toggle with a translucent, theme-aware navigation panel. It retains all homepage section anchors, GitHub, and Light/Dark/System controls. The panel uses existing theme variables and requires no new dependency. Commit `6c3017f` was pushed to `origin/main`.
+
+## Verification
+
+- `npm run check` passed typecheck, lint (zero errors; 19 existing warnings), frontend build/static rendering, and backend build. The existing solar-scene chunk-size and ineffective dynamic-import build warnings remain.
+- Local narrow preview: menu opens by pointer and keyboard; links/theme options are present; Tab enters the links; Escape closes and returns focus; theme changes apply and close the panel; System was restored. Homepage and project-page anchor navigation returned to the expected homepage hash and closed the menu.
+- Production after the requested two-minute deploy window: homepage returns HTTP 200, and its JS/CSS asset names match the built output (`index-CB62D2IK.js`, `index-DagiAZoH.css`). The narrow preview displayed the hamburger and opened panel; the 1280px production view showed the desktop navigation intact. No horizontal overflow was visible in the narrow preview.
+- `git diff --check` passed before commit. HAWP backlog, evidence, and dead-link checks pass; the validator's only failure is three older closed plans missing required closeout sections (`7b5feb25`, `8c2e01f4`, `9508bdf5`).
+
+The browser control did not provide exact 320px and 390px viewport selection, so those exact widths were not separately measured. The production checks confirm deploy and responsive breakpoint behavior in the available narrow and desktop views. See the [status report](../../../../../status/2026/10/03/e499ba73-5323-4284-a26d-f5caac7921df/status.md).
+
+## Close Checklist
+
+- [x] Outcome recorded.
+- [x] Typecheck, lint, production build, and local menu interactions verified.
+- [x] Production deployment and live assets verified after the deploy window.
+- [x] Exact viewport-size limitation stated.
+- [x] Backlog row moved to Recently Closed.
