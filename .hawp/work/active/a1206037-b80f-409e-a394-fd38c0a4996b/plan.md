@@ -69,3 +69,7 @@ The exploration currently only reports generic click event totals. Click destina
 Looker Studio is the best fit for the requested host dropdown: Google's official controls can filter report data by dimension value, and its built-in Google Analytics connector can create a GA4 data source. The authenticated Data Studio tab currently shows an `Authorize Data Studio API` prompt stating it needs access to account data. I did not continue through that authorization screen. No paid connector was selected and no GA4 Admin setting was changed.
 
 Next: after the owner authorizes the Looker Studio connection, build one compact dashboard with date range and Hostname dropdown controls, overview metrics, routes, events/actions, device/browser/OS/platform, and traffic source. Add section/action breakdowns only after the event contract and required GA4 custom dimensions are approved and have data.
+
+## October 3 — account onboarding handoff
+
+The owner redirected Data Studio to `/u/5/navigation/reporting`. The visible account panel confirms `sentzunhat@gmail.com`. Starting a new report opens first-use onboarding: country, company, and acceptance of the Data Studio Terms of Service and Google Ads Data Processing Terms. I stopped before submitting the onboarding form because accepting legal terms must be completed by the account owner. The dashboard remains uncreated. Resume after the owner finishes onboarding and Data Studio opens the report editor.
